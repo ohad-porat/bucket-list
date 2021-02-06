@@ -7,6 +7,7 @@ import "../assets/scss/main.scss";
 import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
+import IndexPage from "./layout/IndexPage.js"
 
 import underConstruction from "./layout/UnderConstruction.js"
 
@@ -25,7 +26,7 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
-        <Route exact path="/" component={underConstruction} />
+        <Route exact path="/" component={IndexPage} />
         <Route exact path="/all-tables" component={underConstruction}/>
         <Route exact path="/my-tables" component={underConstruction} />
         <Route exact path="/favorites" component={underConstruction} />
