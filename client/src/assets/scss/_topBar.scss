@@ -1,0 +1,43 @@
+.top-bar {
+  position: relative;
+}
+
+.top-bar-right .menu {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  right: 1.5%;
+}
+
+.top-bar-left .menu {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  left: 0;
+  margin-left: 25%;
+}
+
+.top-bar-logo {
+  box-sizing: content-box;
+  width: 25%;
+}
+
+.top-bar-left {
+  font-weight: bold;
+  font-size: 160%;
+}
+
+.top-bar-right {
+  font-size: 130%;
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 700px) {
+  .top-bar-left {
+    font-size: 120%;
+  }
+
+  .top-bar-right {
+    font-size: 90%;
+  }
+}

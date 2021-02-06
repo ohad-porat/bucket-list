@@ -12,3 +12,18 @@
   -moz-tab-size: 4;
   tab-size: 4;
 }
+
+$lightBlue: #edf6f9;
+$navyBlue: #3d5a80;
+$orange: #ee6c4d;
+
+@import "./topBar";
+
+body {
+  background-color: $lightBlue;
+}
+
+.under-construction {
+display: block;
+margin: 0 auto;
+}
