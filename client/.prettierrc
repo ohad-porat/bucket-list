@@ -1,4 +1,4 @@
 {
-  "printWidth": 100,
-  "semi": true
+  "printWidth": 80,
+  "semi": false
 }
