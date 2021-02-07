@@ -76,6 +76,7 @@ const IndexPage = (props) => {
     fetchedPlayerData.stats = fetchedStatsData
     let newPlayers = selectedPlayers.concat(fetchedPlayerData)
     setSelectedPlayers(newPlayers)
+    setPlayer({ name: "", season: "" })
   }
 
   const handlePlayerInputChange = (event) => {
