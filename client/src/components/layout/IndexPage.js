@@ -73,7 +73,7 @@ const IndexPage = (props) => {
     event.preventDefault()
     let fetchedPlayerData = await fetchPlayer()
     const fetchedStatsData = await fetchStats(fetchedPlayerData.id)
-    fetchedPlayerData.stats = fetchedStatsData.data[0]
+    fetchedPlayerData.stats = fetchedStatsData
     let newPlayers = selectedPlayers.concat(fetchedPlayerData)
     setSelectedPlayers(newPlayers)
   }
@@ -85,9 +85,14 @@ const IndexPage = (props) => {
     })
   }
 
-  const handleStatsInputChange = async (event) => {
+  const handleStatsInputChange = (event) => {
     let newStats = selectedStats.concat(event.currentTarget.value)
     setSelectedStats(newStats)
+  }
+
+  const handleClearTable = (event) => {
+    setSelectedPlayers([])
+    setSelectedStats([])
   }
 
   const playerTiles = selectedPlayers.map((player) => {
@@ -139,7 +144,7 @@ const IndexPage = (props) => {
             id="season"
             name="season"
             type="text"
-            placeholder="season"
+            placeholder="Season"
             onChange={handlePlayerInputChange}
             value={player.season}
           />
@@ -149,6 +154,7 @@ const IndexPage = (props) => {
           <select
             id="stat"
             name="stat"
+            placeholder="Stats"
             onChange={handleStatsInputChange}
             value=""
           >
@@ -156,6 +162,7 @@ const IndexPage = (props) => {
           </select>
         </label>
         <input type="submit" value="Add Player" />
+        <input type="button" value="Clear Table" onClick={handleClearTable} />
       </form>
       {table}
     </div>
