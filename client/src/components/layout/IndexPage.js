@@ -54,9 +54,8 @@ const IndexPage = (props) => {
 
   const fetchStats = async (playerId) => {
     try {
-      let season = player.season
       const response = await fetch(
-        `api/v1/stats/playerId=${playerId}&season=${season}`
+        `api/v1/stats/playerId=${playerId}&season=${player.season}`
       )
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
