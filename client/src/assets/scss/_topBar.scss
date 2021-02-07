@@ -1,5 +1,7 @@
 .top-bar {
   position: relative;
+  font-family: 'Yusei Magic', sans-serif;
+  letter-spacing: .1rem;
 }
 
 .top-bar-right .menu {
@@ -29,15 +31,14 @@
 
 .top-bar-right {
   font-size: 130%;
-  font-weight: 500;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 780px) {
   .top-bar-left {
-    font-size: 120%;
+    font-size: 100%;
   }
 
   .top-bar-right {
-    font-size: 90%;
+    font-size: 100%;
   }
 }

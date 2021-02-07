@@ -1,6 +1,8 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
 // place global css here
 *,
 *::before,
@@ -21,6 +23,10 @@ $orange: #ee6c4d;
 
 body {
   background-color: $lightBlue;
+}
+
+.page-body {
+  margin: 0 10rem;
 }
 
 .under-construction {
