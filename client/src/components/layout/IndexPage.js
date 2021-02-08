@@ -31,7 +31,13 @@ const IndexPage = (props) => {
     let newStats = selectedStats.concat(event.currentTarget.value)
     setSelectedStats(newStats)
   }
-
+  
+    const handleClearTable = (event) => {
+      event.preventDefault()
+      setSelectedPlayers([])
+      setSelectedStats([])
+    }
+  
   const validateInput = (payload) => {
     setErrors({})
     const { name, season } = payload
@@ -68,12 +74,6 @@ const IndexPage = (props) => {
       setSelectedPlayers(newPlayers)
       setPlayer({ name: "", season: "" })
     }
-  }
-
-  const handleClearTable = (event) => {
-    event.preventDefault()
-    setSelectedPlayers([])
-    setSelectedStats([])
   }
 
   const playerTiles = selectedPlayers.map((player) => {
