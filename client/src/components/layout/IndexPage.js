@@ -1,37 +1,18 @@
 import React, { useState } from "react"
-import PlayerTile from "./PlayerTile.js"
-import StatTile from "./StatTile.js"
 import fetchPlayer from "../fetchRequests/fetchPlayer.js"
 import fetchStats from "../fetchRequests/fetchStats.js"
+import FormError from "./FormError.js"
+import statsList from "../../constants/statsList.js"
+import PlayerTile from "./PlayerTile.js"
+import StatTile from "./StatTile.js"
 
 const IndexPage = (props) => {
   const [player, setPlayer] = useState({ name: "", season: "" })
   const [selectedPlayers, setSelectedPlayers] = useState([])
   const [selectedStats, setSelectedStats] = useState([])
+  const [errors, setErrors] = useState({})
 
-  const stats = [
-    "games_played",
-    "min",
-    "fgm",
-    "fga",
-    "fg3m",
-    "fg3a",
-    "ftm",
-    "fta",
-    "oreb",
-    "dreb",
-    "reb",
-    "ast",
-    "stl",
-    "blk",
-    "turnover",
-    "pf",
-    "pts",
-    "fg_pct",
-    "fg3_pct",
-    "ft_pct",
-  ]
-  const statsOptions = [""].concat(stats).map((stat) => {
+  const statsOptions = [""].concat(statsList).map((stat) => {
     return (
       <option key={stat} value={stat}>
         {stat}
@@ -45,20 +26,48 @@ const IndexPage = (props) => {
       [event.currentTarget.name]: event.currentTarget.value,
     })
   }
-  
+
   const handleStatsInputChange = (event) => {
     let newStats = selectedStats.concat(event.currentTarget.value)
     setSelectedStats(newStats)
   }
-  
+
+  const validateInput = (payload) => {
+    setErrors({})
+    const { name, season } = payload
+    let newErrors = {}
+    if (season.trim() === "") {
+      newErrors = {
+        ...newErrors,
+        season: "is required",
+      }
+    }
+
+    if (name.trim() === "") {
+      newErrors = {
+        ...newErrors,
+        name: "is required",
+      }
+    }
+
+    setErrors(newErrors)
+    return newErrors
+  }
+
   const handlePlayerSubmit = async (event) => {
     event.preventDefault()
-    let fetchedPlayerData = await fetchPlayer(player.name)
-    const fetchedStatsData = await fetchStats(fetchedPlayerData.id, player.season)
-    fetchedPlayerData.stats = fetchedStatsData
-    let newPlayers = selectedPlayers.concat(fetchedPlayerData)
-    setSelectedPlayers(newPlayers)
-    setPlayer({ name: "", season: "" })
+    const validationErrors = validateInput(player)
+    if (Object.keys(validationErrors).length === 0) {
+      let fetchedPlayerData = await fetchPlayer(player.name)
+      const fetchedStatsData = await fetchStats(
+        fetchedPlayerData.id,
+        player.season
+      )
+      fetchedPlayerData.stats = fetchedStatsData
+      let newPlayers = selectedPlayers.concat(fetchedPlayerData)
+      setSelectedPlayers(newPlayers)
+      setPlayer({ name: "", season: "" })
+    }
   }
 
   const handleClearTable = (event) => {
@@ -109,6 +118,7 @@ const IndexPage = (props) => {
             onChange={handlePlayerInputChange}
             value={player.name}
           />
+          <FormError error={errors.name} />
         </label>
 
         <label htmlFor="season">
@@ -120,6 +130,7 @@ const IndexPage = (props) => {
             onChange={handlePlayerInputChange}
             value={player.season}
           />
+          <FormError error={errors.season} />
         </label>
 
         <label htmlFor="stat">
