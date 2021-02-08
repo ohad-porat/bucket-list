@@ -33,9 +33,6 @@ const TopBar = ({ user }) => {
           <li>
             <Link to="/my-tables">My Tables</Link>
           </li>
-          <li>
-            <Link to="/favorites">Favorites</Link>
-          </li>
         </ul>
       </div>
       <div className="top-bar-right">
