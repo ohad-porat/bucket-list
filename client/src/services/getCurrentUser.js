@@ -7,14 +7,14 @@ const getCurrentUser = () => {
   }).then((resp) => {
     if (resp.ok) {
       return resp.json().then((user) => {
-        return user;
-      });
+        return user
+      })
     } else {
-      const errorMessage = `${resp.status} (${resp.statusText})`;
-      const error = new Error(errorMessage);
-      throw error;
+      const errorMessage = `${resp.status} (${resp.statusText})`
+      const error = new Error(errorMessage)
+      throw error
     }
-  });
-};
+  })
+}
 
-export default getCurrentUser;
+export default getCurrentUser

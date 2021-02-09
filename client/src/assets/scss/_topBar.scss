@@ -1,5 +1,7 @@
 .top-bar {
   position: relative;
+  font-family: 'Hammersmith One', sans-serif;
+  background-image: url("../topBarBackground.png");
 }
 
 .top-bar-right .menu {
@@ -23,21 +25,20 @@
 }
 
 .top-bar-left {
-  font-weight: bold;
-  font-size: 160%;
+  font-weight: 600;
+  font-size: 170%;
 }
 
 .top-bar-right {
   font-size: 130%;
-  font-weight: 500;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 780px) {
   .top-bar-left {
-    font-size: 120%;
+    font-size: 100%;
   }
 
   .top-bar-right {
-    font-size: 90%;
+    font-size: 100%;
   }
 }
