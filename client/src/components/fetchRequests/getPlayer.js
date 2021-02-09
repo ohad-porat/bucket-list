@@ -1,4 +1,4 @@
-const fetchPlayer = async (playerName) => {
+const getPlayer = async (playerName) => {
   try {
     const response = await fetch(`/api/v1/players3rdParty?playerName=${playerName}`)
     if (!response.ok) {
@@ -13,4 +13,4 @@ const fetchPlayer = async (playerName) => {
   }
 }
 
-export default fetchPlayer
+export default getPlayer

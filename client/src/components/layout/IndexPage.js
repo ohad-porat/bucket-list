@@ -1,10 +1,11 @@
 import React, { useState } from "react"
-import fetchPlayer from "../fetchRequests/fetchPlayer.js"
-import fetchStats from "../fetchRequests/fetchStats.js"
+import getPlayer from "../fetchRequests/getPlayer.js"
+import getStats from "../fetchRequests/getStats.js"
 import FormError from "./FormError.js"
 import statsList from "../../constants/statsList.js"
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
+import SaveTableForm from "./SaveTableForm.js"
 
 const IndexPage = (props) => {
   const [player, setPlayer] = useState({ name: "", season: "" })
@@ -64,8 +65,8 @@ const IndexPage = (props) => {
     event.preventDefault()
     const validationErrors = validateInput(player)
     if (Object.keys(validationErrors).length === 0) {
-      let fetchedPlayerData = await fetchPlayer(player.name)
-      const fetchedStatsData = await fetchStats(
+      let fetchedPlayerData = await getPlayer(player.name)
+      const fetchedStatsData = await getStats(
         fetchedPlayerData.id,
         player.season
       )
@@ -108,7 +109,7 @@ const IndexPage = (props) => {
 
   return (
     <div className="page-body">
-      <form onSubmit={handlePlayerSubmit} className="player-form">
+      <form onSubmit={handlePlayerSubmit} className="add-player-form">
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
             <div className="medium-4 cell">
@@ -165,6 +166,7 @@ const IndexPage = (props) => {
         </div>
       </form>
       {table}
+      <SaveTableForm selectedPlayers={selectedPlayers} />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-const fetchStats = async (playerId, season) => {
+const getStats = async (playerId, season) => {
   try {
     const response = await fetch(
       `/api/v1/stats3rdParty/playerId=${playerId}&season=${season}`
@@ -15,4 +15,4 @@ const fetchStats = async (playerId, season) => {
   }
 }
 
-export default fetchStats
+export default getStats
