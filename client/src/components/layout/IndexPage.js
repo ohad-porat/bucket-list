@@ -154,10 +154,11 @@ const IndexPage = (props) => {
             </div>
           </div>
           <div className="button-group">
-            <input type="submit" value="Add Player" />
+            <input type="submit" value="Add Player" className="button" />
             <input
               type="button"
               value="Clear Table"
+              className="button"
               onClick={handleClearTable}
             />
           </div>
