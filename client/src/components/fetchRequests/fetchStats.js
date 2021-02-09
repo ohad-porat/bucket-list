@@ -1,7 +1,7 @@
 const fetchStats = async (playerId, season) => {
   try {
     const response = await fetch(
-      `/api/v1/stats/playerId=${playerId}&season=${season}`
+      `/api/v1/stats3rdParty/playerId=${playerId}&season=${season}`
     )
     if (!response.ok) {
       const errorMessage = `${response.status} (${response.statusText})`
