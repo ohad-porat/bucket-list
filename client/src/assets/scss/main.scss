@@ -2,7 +2,7 @@
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
 
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
 *,
 *::before,
 *::after {
@@ -14,14 +14,14 @@
   tab-size: 4;
 }
 
-$lightBlue: #edf6f9;
-$navyBlue: #3d5a80;
-$orange: #ee6c4d;
-
 @import "./topBar";
 
 body {
-  background-color: $lightBlue;
+  background-color: #898989;
+  background-image: url("../background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
 }
 
 .page-body {
@@ -31,4 +31,12 @@ body {
 .under-construction {
 display: block;
 margin: 0 auto;
+}
+
+.player-form {
+  padding: 1rem 0;
+}
+
+.button {
+  font-family: 'Hammersmith One', sans-serif;
 }

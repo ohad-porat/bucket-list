@@ -31,13 +31,13 @@ const IndexPage = (props) => {
     let newStats = selectedStats.concat(event.currentTarget.value)
     setSelectedStats(newStats)
   }
-  
-    const handleClearTable = (event) => {
-      event.preventDefault()
-      setSelectedPlayers([])
-      setSelectedStats([])
-    }
-  
+
+  const handleClearTable = (event) => {
+    event.preventDefault()
+    setSelectedPlayers([])
+    setSelectedStats([])
+  }
+
   const validateInput = (payload) => {
     setErrors({})
     const { name, season } = payload
@@ -108,44 +108,60 @@ const IndexPage = (props) => {
 
   return (
     <div className="page-body">
-      <form onSubmit={handlePlayerSubmit}>
-        <label htmlFor="name">
-          <input
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Player Name"
-            onChange={handlePlayerInputChange}
-            value={player.name}
-          />
-          <FormError error={errors.name} />
-        </label>
+      <form onSubmit={handlePlayerSubmit} className="player-form">
+        <div className="grid-container">
+          <div className="grid-x grid-padding-x">
+            <div className="medium-4 cell">
+              <label htmlFor="name">
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Player Name"
+                  onChange={handlePlayerInputChange}
+                  value={player.name}
+                />
+                <FormError error={errors.name} />
+              </label>
+            </div>
 
-        <label htmlFor="season">
-          <input
-            id="season"
-            name="season"
-            type="text"
-            placeholder="Season"
-            onChange={handlePlayerInputChange}
-            value={player.season}
-          />
-          <FormError error={errors.season} />
-        </label>
+            <div className="medium-4 cell">
+              <label htmlFor="season">
+                <input
+                  id="season"
+                  name="season"
+                  type="text"
+                  placeholder="Season"
+                  onChange={handlePlayerInputChange}
+                  value={player.season}
+                />
+                <FormError error={errors.season} />
+              </label>
+            </div>
 
-        <label htmlFor="stat">
-          <select
-            id="stat"
-            name="stat"
-            placeholder="Stats"
-            onChange={handleStatsInputChange}
-            value=""
-          >
-            {statsOptions}
-          </select>
-        </label>
-        <input type="submit" value="Add Player" />
-        <input type="button" value="Clear Table" onClick={handleClearTable} />
+            <div className="medium-4 cell">
+              <label htmlFor="stat">
+                <select
+                  id="stat"
+                  name="stat"
+                  placeholder="Stats"
+                  onChange={handleStatsInputChange}
+                  value=""
+                >
+                  {statsOptions}
+                </select>
+              </label>
+            </div>
+          </div>
+          <div className="button-group">
+            <input type="submit" value="Add Player" />
+            <input
+              type="button"
+              value="Clear Table"
+              onClick={handleClearTable}
+            />
+          </div>
+        </div>
       </form>
       {table}
     </div>
