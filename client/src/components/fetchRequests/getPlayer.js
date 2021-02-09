@@ -1,6 +1,6 @@
 const getPlayer = async (playerName) => {
   try {
-    const response = await fetch(`/api/v1/players3rdParty?playerName=${playerName}`)
+    const response = await fetch(`/api/v1/players?playerName=${playerName}`)
     if (!response.ok) {
       const errorMessage = `${response.status} (${response.statusText})`
       const error = new Error(errorMessage)
