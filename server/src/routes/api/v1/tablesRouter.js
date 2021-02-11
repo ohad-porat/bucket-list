@@ -43,17 +43,15 @@ tablesRouter.post("/", async (req, res) => {
   try {
     const table = await Table.query().insertAndFetch(cleanedFormInput)
 
-    const allPlayers = await Promise.all(
-      body.players.map((player) => {
-        return findPlayer(player)
-      })
-    )
+    let allPlayers = []
+    for (let player of body.players) {
+      let foundPlayer = await findPlayer(player)
+      allPlayers.push(foundPlayer)
+    }
 
-    const allSeason = await Promise.all(
-      allPlayers.map((player) => {
-        return findSeason(player, table)
-      })
-    )
+    for (let player of allPlayers) {
+      await findSeason(player, table)
+    }
 
     return res.status(201).json({ table })
   } catch (error) {
