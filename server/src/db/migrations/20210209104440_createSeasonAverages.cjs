@@ -12,7 +12,7 @@ exports.up = async (knex) => {
       .notNullable()
       .unsigned()
       .index()
-      .references("players.id")
+      .references("players.apiPlayerId")
     t.integer("games_played").notNullable()
     t.integer("season").notNullable()
     t.time("min").notNullable()
