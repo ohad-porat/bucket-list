@@ -1,7 +1,6 @@
 import { Player } from "../models/index.js"
 
 const findPlayer = async (player) => {
-  debugger
   let currentPlayer = await Player.query().where({ apiPlayerId: player.id })
 
   if (currentPlayer.length === 0) {
