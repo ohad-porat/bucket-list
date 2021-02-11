@@ -17,7 +17,7 @@ class Player extends Model {
   }
 
   static get relationMappings() {
-    const { SeasonAverage, PlayerOfTable, Table } = require("./index.js")
+    const { SeasonAverage } = require("./index.js")
 
     return {
       seasonAverages: {
@@ -26,26 +26,6 @@ class Player extends Model {
         join: {
           from: "players.id",
           to: "seasonAverages.player_id",
-        },
-      },
-      playersOfTables: {
-        relation: Model.HasManyRelation,
-        modelClass: PlayerOfTable,
-        join: {
-          from: "players.id",
-          to: "playersOfTables.playerId",
-        },
-      },
-      tables: {
-        relation: Model.ManyToManyRelation,
-        modelClass: Table,
-        join: {
-          from: "players.id",
-          through: {
-            from: "playersOfTables.playerId",
-            to: "playersOfTables.tableId",
-          },
-          to: "tables.id",
         },
       },
     }

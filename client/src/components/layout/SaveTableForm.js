@@ -10,7 +10,8 @@ const SaveTableForm = ({ selectedPlayers }) => {
   })
   const [errors, setErrors] = useState([])
 
-  const saveTable = async () => {
+  const saveTable = async (event) => {
+    event.preventDefault()
     const formPayload = { ...form, players: selectedPlayers }
     
     try {

@@ -15,7 +15,7 @@ exports.up = async (knex) => {
       .references("players.id")
     t.integer("games_played").notNullable()
     t.integer("season").notNullable()
-    t.time("min").notNullable()
+    t.string("min").notNullable()
     t.float("fgm").notNullable()
     t.float("fga").notNullable()
     t.float("fg3m").notNullable()

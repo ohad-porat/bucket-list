@@ -1,19 +1,65 @@
 import express from "express"
 import cleanUserInput from "../../../services/cleanUserInput.js"
 import { ValidationError } from "objection"
-import { Table, Player, SeasonAverage } from "../../../models/index.js"
+import { Table } from "../../../models/index.js"
+import TableSerializer from "../../../serializers/TableSerializer.js"
+import findPlayer from "../../../services/findPlayer.js"
+import findSeason from "../../../services/findSeason.js"
 
 const tablesRouter = new express.Router()
 
-tablesRouter.post("/", async (req, res) => {
-  const { body } = req
-  const formInput = {title: body.title, notes: body.notes}
-  // const cleanFormInput = cleanUserInput(formInput)
-  debugger
+tablesRouter.get("/", async (req, res) => {
+  try {
+    const rawTables = await Table.query()
+    const tables = await Promise.all(
+      rawTables.map((table) => TableSerializer.getDetails(table))
+    )
+    return res.status(200).json({ tables })
+  } catch (error) {
+    return res.status(500).json({ errors: error })
+  }
+})
+
+tablesRouter.get("/currentUser", async (req, res) => {
+  const userId = req.user.id
 
   try {
-    
+    const rawTables = await Table.query().where({ userId: userId })
+    const tables = await Promise.all(
+      rawTables.map((table) => TableSerializer.getDetails(table))
+    )
+    return res.status(200).json({ tables })
   } catch (error) {
+    return res.status(500).json({ errors: error })
+  }
+})
+
+tablesRouter.post("/", async (req, res) => {
+  const userId = req.user.id
+  const { body } = req
+  const formInput = { title: body.title, notes: body.notes }
+  const cleanedFormInput = cleanUserInput({ ...formInput, userId })
+
+  try {
+    const table = await Table.query().insertAndFetch(cleanedFormInput)
+
+    const allPlayers = await Promise.all(
+      body.players.map((player) => {
+        debugger
+        return findPlayer(player)
+      })
+    )
+
+    await Promise.all(
+      allPlayers.forEach((player) => {
+        debugger
+        return findSeason(player, table)
+      })
+    )
+
+    return res.status(201).json({ table })
+  } catch (error) {
+    console.log(error)
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data })
     }
@@ -22,27 +68,3 @@ tablesRouter.post("/", async (req, res) => {
 })
 
 export default tablesRouter
-
-// pseudo code for the post:
-// for players I need to look if the player exists, if not then add to players table
-// for (const player of body.players) {
-//   const currentPlayer = await Player.query().where({playerId: player.id})
-//   if (!currentPlayer) {
-//     await Player.query().insert(currentPlayer)
-//   }
-// }
-
-// for seasonAverages I need to look the season exists for the specific player, if not then add to seasonAverages table
-// for (const player of body.players) {
-//   const currentSeason = await SeasonAverage.query().where({player_id: player.id}, {season: player.stats.season})
-//   if (!currentSeason) {
-//     await SeasonAverage.query().insert(currentSeason)
-//   }
-// }
-
-// for table I need to add the table to the tables table, and add the relations to the playersOfTables join table
-// await Table.query().insert(formInput)
-
-
-// look into seeders from week 6, there is a for of loop that checks if row exists, can I do it on the backend?
-// should I do all of this logic on the backend? if not then where?
