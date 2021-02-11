@@ -16,6 +16,7 @@ tablesRouter.get("/", async (req, res) => {
     )
     return res.status(200).json({ tables })
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ errors: error })
   }
 })
@@ -30,6 +31,7 @@ tablesRouter.get("/currentUser", async (req, res) => {
     )
     return res.status(200).json({ tables })
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ errors: error })
   }
 })
@@ -55,28 +57,24 @@ tablesRouter.post("/", async (req, res) => {
   try {
     const table = await Table.query().insertAndFetch(cleanedFormInput)
 
-    const allPlayers = await Promise.all(
-      body.players.map((player) => {
-        debugger
-        return findPlayer(player)
-      })
-    )
+    let allPlayers = []
+    for (let player of body.players) {
+      let foundPlayer = await findPlayer(player)
+      allPlayers.push(foundPlayer)
+    }
 
-    await Promise.all(
-      allPlayers.forEach((player) => {
-        debugger
-        return findSeason(player, table)
-      })
-    )
+    for (let player of allPlayers) {
+      await findSeason(player, table)
+    }
 
     return res.status(201).json({ table })
   } catch (error) {
-    console.log(error)
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data })
     }
     return res.status(500).json({ errors: error })
   }
 })
+
 
 export default tablesRouter

@@ -32,7 +32,7 @@ class SeasonAverage extends Model {
         "ft_pct",
       ],
       properties: {
-        player_id: { type: ["integer", "string"] },
+        playerId: { type: ["integer", "string"] },
         games_played: { type: ["integer", "string"] },
         season: { type: ["integer", "string"] },
         min: { type: ["string"] },
@@ -66,8 +66,8 @@ class SeasonAverage extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: Player,
         join: {
-          from: "seasonAverages.player_id",
-          to: "players.id",
+          from: "seasonAverages.playerId",
+          to: "players.apiPlayerId",
         },
       },
       seasonsOfTables: {

@@ -26,8 +26,8 @@ class Table extends Model {
         modelClass: User,
         join: {
           from: "tables.userId",
-          to: "users.id"
-        }
+          to: "users.id",
+        },
       },
       seasonsOfTables: {
         relation: Model.HasManyRelation,
