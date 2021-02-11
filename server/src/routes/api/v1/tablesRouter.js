@@ -45,14 +45,12 @@ tablesRouter.post("/", async (req, res) => {
 
     const allPlayers = await Promise.all(
       body.players.map((player) => {
-        debugger
         return findPlayer(player)
       })
     )
 
-    await Promise.all(
-      allPlayers.forEach((player) => {
-        debugger
+    const allSeason = await Promise.all(
+      allPlayers.map((player) => {
         return findSeason(player, table)
       })
     )

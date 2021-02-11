@@ -65,7 +65,7 @@ class StatsSerializer {
     }
 
     const player = await stats.$relatedQuery("player")
-    const serializedPlayer = PlayerSerializer.getSummary(player)
+    const serializedPlayer = PlayerSerializer.getDetails(player)
     serializedStats.player = serializedPlayer
 
     return serializedStats
