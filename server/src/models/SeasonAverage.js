@@ -32,42 +32,62 @@ class SeasonAverage extends Model {
         "ft_pct",
       ],
       properties: {
-        player_id: { type: ["integer", "string"] },
+        playerId: { type: ["integer", "string"] },
         games_played: { type: ["integer", "string"] },
         season: { type: ["integer", "string"] },
-        min: { type: ["time", "string"] },
-        fgm: { type: ["float", "string"] },
-        fga: { type: ["float", "string"] },
-        fg3m: { type: ["float", "string"] },
-        fg3a: { type: ["float", "string"] },
-        ftm: { type: ["float", "string"] },
-        fta: { type: ["float", "string"] },
-        oreb: { type: ["float", "string"] },
-        dreb: { type: ["float", "string"] },
-        reb: { type: ["float", "string"] },
-        ast: { type: ["float", "string"] },
-        stl: { type: ["float", "string"] },
-        blk: { type: ["float", "string"] },
-        turnover: { type: ["float", "string"] },
-        pf: { type: ["float", "string"] },
-        pts: { type: ["float", "string"] },
-        fg_pct: { type: ["float", "string"] },
-        fg3_pct: { type: ["float", "string"] },
-        ft_pct: { type: ["float", "string"] },
+        min: { type: ["string"] },
+        fgm: { type: ["number", "string"] },
+        fga: { type: ["number", "string"] },
+        fg3m: { type: ["number", "string"] },
+        fg3a: { type: ["number", "string"] },
+        ftm: { type: ["number", "string"] },
+        fta: { type: ["number", "string"] },
+        oreb: { type: ["number", "string"] },
+        dreb: { type: ["number", "string"] },
+        reb: { type: ["number", "string"] },
+        ast: { type: ["number", "string"] },
+        stl: { type: ["number", "string"] },
+        blk: { type: ["number", "string"] },
+        turnover: { type: ["number", "string"] },
+        pf: { type: ["number", "string"] },
+        pts: { type: ["number", "string"] },
+        fg_pct: { type: ["number", "string"] },
+        fg3_pct: { type: ["number", "string"] },
+        ft_pct: { type: ["number", "string"] },
       },
     }
   }
 
   static get relationMappings() {
-    const { Player } = require("./index.js")
+    const { Player, Table, SeasonOfTable } = require("./index.js")
 
     return {
       player: {
         relation: Model.BelongsToOneRelation,
         modelClass: Player,
         join: {
-          from: "seasonAverages.player_id",
-          to: "players.id",
+          from: "seasonAverages.playerId",
+          to: "players.apiPlayerId",
+        },
+      },
+      seasonsOfTables: {
+        relation: Model.HasManyRelation,
+        modelClass: SeasonOfTable,
+        join: {
+          from: "seasonAverages.id",
+          to: "seasonsOfTables.seasonId",
+        },
+      },
+      tables: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Table,
+        join: {
+          from: "seasonAverages.id",
+          through: {
+            from: "seasonsOfTables.seasonId",
+            to: "seasonsOfTables.tableId",
+          },
+          to: "tables.id",
         },
       },
     }

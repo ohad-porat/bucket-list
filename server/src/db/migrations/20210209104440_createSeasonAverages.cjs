@@ -8,14 +8,14 @@
 exports.up = async (knex) => {
   return knex.schema.createTable("seasonAverages", (t) => {
     t.bigIncrements("id")
-    t.bigInteger("player_id")
+    t.bigInteger("playerId")
       .notNullable()
       .unsigned()
       .index()
       .references("players.apiPlayerId")
     t.integer("games_played").notNullable()
     t.integer("season").notNullable()
-    t.time("min").notNullable()
+    t.string("min").notNullable()
     t.float("fgm").notNullable()
     t.float("fga").notNullable()
     t.float("fg3m").notNullable()

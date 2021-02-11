@@ -7,7 +7,7 @@ import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 import SaveTableForm from "./SaveTableForm.js"
 
-const IndexPage = (props) => {
+const IndexPage = ({ user }) => {
   const [player, setPlayer] = useState({ name: "", season: "" })
   const [selectedPlayers, setSelectedPlayers] = useState([])
   const [selectedStats, setSelectedStats] = useState([])
@@ -80,7 +80,7 @@ const IndexPage = (props) => {
   const playerTiles = selectedPlayers.map((player) => {
     return (
       <PlayerTile
-        key={player.id}
+        key={`${player.id}_${player.stats.season}`}
         player={player}
         selectedStats={selectedStats}
       />
@@ -106,6 +106,11 @@ const IndexPage = (props) => {
       </table>
     )
   }
+
+  const authenticatedUserSaveTable = (
+    <SaveTableForm selectedPlayers={selectedPlayers} />
+  )
+  const unauthenticatedUser = ""
 
   return (
     <div className="page-body">
@@ -166,7 +171,7 @@ const IndexPage = (props) => {
         </div>
       </form>
       {table}
-      <SaveTableForm selectedPlayers={selectedPlayers} />
+      {user ? authenticatedUserSaveTable : unauthenticatedUser}
     </div>
   )
 }

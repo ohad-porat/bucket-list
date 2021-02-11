@@ -1,8 +1,8 @@
 const Model = require("./Model.js")
 
-class PlayerOfTable extends Model {
+class SeasonOfTable extends Model {
   static get tableName() {
-    return "playersOfTables"
+    return "seasonsOfTables"
   }
 
   static get jsonSchema() {
@@ -10,29 +10,29 @@ class PlayerOfTable extends Model {
       type: "object",
       required: [],
       properties: {
-        playerId: { type: ["integer", "string"] },
+        seasonId: { type: ["integer", "string"] },
         tableId: { type: ["integer", "string"] },
       },
     }
   }
 
   static get relationMappings() {
-    const { Player, Table } = require("./index.js")
+    const { SeasonAverage, Table } = require("./index.js")
 
     return {
-      player: {
+      season: {
         relation: Model.BelongsToOneRelation,
-        modelClass: Player,
+        modelClass: SeasonAverage,
         join: {
-          from: "playersOfTables.playerId",
-          to: "players.id",
+          from: "seasonsOfTables.seasonId",
+          to: "seasonAverages.id",
         },
       },
       table: {
         relation: Model.BelongsToOneRelation,
         modelClass: Table,
         join: {
-          from: "playersOfTables.tableId",
+          from: "seasonsOfTables.tableId",
           to: "tables.id",
         },
       },
@@ -40,4 +40,4 @@ class PlayerOfTable extends Model {
   }
 }
 
-module.exports = PlayerOfTable
+module.exports = SeasonOfTable

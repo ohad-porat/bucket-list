@@ -6,15 +6,18 @@
  * @param {Knex} knex
  */
 exports.up = async (knex) => {
-  return knex.schema.createTable("tables", (t) => {
+  return knex.schema.createTable("seasonsOfTables", (t) => {
     t.bigIncrements("id")
-    t.bigInteger("userId")
+    t.bigInteger("seasonId")
       .notNullable()
       .unsigned()
       .index()
-      .references("users.id")
-    t.string("title").notNullable()
-    t.text("notes")
+      .references("seasonAverages.id")
+    t.bigInteger("tableId")
+      .notNullable()
+      .unsigned()
+      .index()
+      .references("tables.id")
     t.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())
     t.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now())
   })
@@ -24,5 +27,5 @@ exports.up = async (knex) => {
  * @param {Knex} knex
  */
 exports.down = (knex) => {
-  return knex.schema.dropTableIfExists("tables")
+  return knex.schema.dropTableIfExists("seasonsOfTables")
 }

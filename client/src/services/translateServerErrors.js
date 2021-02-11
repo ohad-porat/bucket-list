@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from "lodash"
 let translateServerErrors = (errors) => {
   let serializedErrors = {}
 
@@ -7,11 +7,11 @@ let translateServerErrors = (errors) => {
       const field = _.startCase(key)
       serializedErrors = {
         ...serializedErrors,
-        [field]: error.message
+        [field]: error.message,
       }
     })
-  });
+  })
   return serializedErrors
-};
+}
 
-export default translateServerErrors;
+export default translateServerErrors

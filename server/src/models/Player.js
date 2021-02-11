@@ -1,6 +1,12 @@
 const Model = require("./Model.js")
+const uniqueFactory = require("objection-unique")
 
-class Player extends Model {
+const unique = uniqueFactory({
+  fields: ["apiPlayerId"],
+  identifiers: ["id"],
+})
+
+class Player extends unique(Model) {
   static get tableName() {
     return "players"
   }
@@ -8,44 +14,25 @@ class Player extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["first_name", "last_name"],
+      required: ["first_name", "last_name", "apiPlayerId"],
       properties: {
         first_name: { type: "string" },
         last_name: { type: "string" },
+        apiPlayerId: { type: ["integer", "string"] },
       },
     }
   }
 
   static get relationMappings() {
-    const { SeasonAverage, PlayerOfTable, Table } = require("./index.js")
+    const { SeasonAverage } = require("./index.js")
 
     return {
       seasonAverages: {
         relation: Model.HasManyRelation,
         modelClass: SeasonAverage,
         join: {
-          from: "players.id",
-          to: "seasonAverages.player_id",
-        },
-      },
-      playersOfTables: {
-        relation: Model.HasManyRelation,
-        modelClass: PlayerOfTable,
-        join: {
-          from: "players.id",
-          to: "playersOfTables.playerId",
-        },
-      },
-      tables: {
-        relation: Model.ManyToManyRelation,
-        modelClass: Table,
-        join: {
-          from: "players.id",
-          through: {
-            from: "playersOfTables.playerId",
-            to: "playersOfTables.tableId",
-          },
-          to: "tables.id",
+          from: "players.apiPlayerId",
+          to: "seasonAverages.playerId",
         },
       },
     }
