@@ -27,7 +27,7 @@ const MyTablesList = (props) => {
     return <TableTile key={table.id} table={table} />
   })
 
-  return <>{tableTiles}</>
+  return <div className="page-body">{tableTiles}</div>
 }
 
 export default MyTablesList

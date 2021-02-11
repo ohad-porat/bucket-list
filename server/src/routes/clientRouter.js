@@ -9,6 +9,7 @@ const clientRoutes = [
   "/users/new",
   "/my-tables",
   "/all-tables",
+  "/tables/:tableId"
 ]
 router.get(clientRoutes, (req, res) => {
   res.sendFile(getClientIndexPath())

@@ -9,17 +9,19 @@ const PlayerTile = ({ player, selectedStats }) => {
 
   let playerStats = []
   selectedStats.forEach((stat) => {
+    let statObject = {name: stat}
     let stringedStat = player.stats[stat].toString()
     if (stat.includes("pct")) {
-      playerStats.push(stringedStat.substring(1))
+      statObject.value = stringedStat.substring(1)
+      playerStats.push(statObject)
     } else {
-      playerStats.push(stringedStat)
+      statObject.value = stringedStat
+      playerStats.push(statObject)
     }
   })
 
-  let statId = 0
   const playerStatsTiles = playerStats.map((stat) => {
-    return <PlayerStatTile key={statId++} stat={stat} />
+    return <PlayerStatTile key={stat.name} stat={stat.value} />
   })
 
   return (

@@ -34,6 +34,18 @@ tablesRouter.get("/currentUser", async (req, res) => {
   }
 })
 
+tablesRouter.get("/:tableId", async (req, res) => {
+  const id = req.params.tableId
+
+  try {
+    const rawTable = await Table.query().findById(id)
+    const table = await TableSerializer.getDetails(rawTable)
+    return res.status(200).json({ table })
+  } catch (error) {
+    return res.status(500).json({ errors: error })
+  }
+})
+
 tablesRouter.post("/", async (req, res) => {
   const userId = req.user.id
   const { body } = req

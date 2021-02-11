@@ -2,7 +2,7 @@ import StatsSerializer from "./StatsSerializer.js"
 
 class TableSerializer {
   static async getDetails(table) {
-    const allowedAttributes = ["id", "title", "notes"]
+    const allowedAttributes = ["id", "title", "notes", "userId"]
 
     let serializedTable = {}
     for (const attribute of allowedAttributes) {
