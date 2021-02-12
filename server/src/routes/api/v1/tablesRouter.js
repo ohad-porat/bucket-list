@@ -38,10 +38,12 @@ tablesRouter.post("/", async (req, res) => {
   const userId = req.user.id
   const { body } = req
   const formInput = { title: body.title, notes: body.notes }
-  const cleanedFormInput = cleanUserInput({ ...formInput, userId })
 
   try {
-    const table = await Table.query().insertAndFetch(cleanedFormInput)
+    const table = await Table.query().insertAndFetch({
+      ...formInput,
+      userId,
+    })
 
     let allPlayers = []
     for (let player of body.players) {
