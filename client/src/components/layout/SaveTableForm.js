@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 import translateServerErrors from "../../services/translateServerErrors.js"
+
 import ErrorList from "./ErrorList.js"
 
 const SaveTableForm = ({ selectedPlayers }) => {
   const [form, setForm] = useState({
     title: "",
     notes: "",
-    players: [],
   })
   const [errors, setErrors] = useState([])
 

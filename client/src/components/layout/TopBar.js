@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import SignOutButton from "../authentication/SignOutButton"
 
+import SignOutButton from "../authentication/SignOutButton"
 import Logo from "../../assets/logo.png"
 
 const TopBar = ({ user }) => {
@@ -50,4 +50,8 @@ const TopBar = ({ user }) => {
   )
 }
 
+<<<<<<< HEAD
 export default TopBar
+=======
+export default TopBar
+>>>>>>> 91c35d56c069a49fb47510e14ca2efbf54f824e2

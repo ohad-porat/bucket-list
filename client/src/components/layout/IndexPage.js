@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import validateInput from "../../services/validateInput.js"
+
 import getPlayer from "../fetchRequests/getPlayer.js"
 import getStats from "../fetchRequests/getStats.js"
 import FormError from "./FormError.js"
@@ -39,31 +41,12 @@ const IndexPage = ({ user }) => {
     setSelectedStats([])
   }
 
-  const validateInput = (payload) => {
-    setErrors({})
-    const { name, season } = payload
-    let newErrors = {}
-    if (season.trim() === "") {
-      newErrors = {
-        ...newErrors,
-        season: "is required",
-      }
-    }
-
-    if (name.trim() === "") {
-      newErrors = {
-        ...newErrors,
-        name: "is required",
-      }
-    }
-
-    setErrors(newErrors)
-    return newErrors
-  }
+  const errorValidationOutput = validateInput(player)
 
   const handlePlayerSubmit = async (event) => {
     event.preventDefault()
-    const validationErrors = validateInput(player)
+    setErrors(errorValidationOutput)
+    const validationErrors = errorValidationOutput
     if (Object.keys(validationErrors).length === 0) {
       let fetchedPlayerData = await getPlayer(player.name)
       const fetchedStatsData = await getStats(
