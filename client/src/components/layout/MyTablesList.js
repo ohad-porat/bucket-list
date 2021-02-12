@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
 import TableTile from "./TableTile.js"
 
-const MyTablesList = (props) => {
+const MyTablesList = ({ user }) => {
   const [tables, setTables] = useState([])
 
   const getTables = async () => {
     try {
-      const response = await fetch("/api/v1/tables/currentUser")
+      const response = await fetch(`/api/v1/users/${user.id}/tables`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)

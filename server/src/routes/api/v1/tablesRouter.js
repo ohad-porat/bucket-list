@@ -1,31 +1,17 @@
 import express from "express"
+
 import cleanUserInput from "../../../services/cleanUserInput.js"
 import { ValidationError } from "objection"
 import { Table, SeasonOfTable } from "../../../models/index.js"
 import TableSerializer from "../../../serializers/TableSerializer.js"
 import findPlayer from "../../../services/findPlayer.js"
-import findSeason from "../../../services/findSeason.js"
+import findSeasonAndRelateToTable from "../../../services/findSeasonAndRelateToTable.js"
 
 const tablesRouter = new express.Router()
 
 tablesRouter.get("/", async (req, res) => {
   try {
     const rawTables = await Table.query()
-    const tables = await Promise.all(
-      rawTables.map((table) => TableSerializer.getDetails(table))
-    )
-    return res.status(200).json({ tables })
-  } catch (error) {
-    console.log(error)
-    return res.status(500).json({ errors: error })
-  }
-})
-
-tablesRouter.get("/currentUser", async (req, res) => {
-  const userId = req.user.id
-
-  try {
-    const rawTables = await Table.query().where({ userId: userId })
     const tables = await Promise.all(
       rawTables.map((table) => TableSerializer.getDetails(table))
     )
@@ -53,10 +39,12 @@ tablesRouter.post("/", async (req, res) => {
   const userId = req.user.id
   const { body } = req
   const formInput = { title: body.title, notes: body.notes }
-  const cleanedFormInput = cleanUserInput({ ...formInput, userId })
-
+  const cleanFormInput = cleanUserInput(formInput)
   try {
-    const table = await Table.query().insertAndFetch(cleanedFormInput)
+    const table = await Table.query().insertAndFetch({
+      ...cleanFormInput,
+      userId,
+    })
 
     let allPlayers = []
     for (let player of body.players) {
@@ -65,7 +53,7 @@ tablesRouter.post("/", async (req, res) => {
     }
 
     for (let player of allPlayers) {
-      await findSeason(player, table)
+      await findSeasonAndRelateToTable(player, table)
     }
 
     return res.status(201).json({ table })
