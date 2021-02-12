@@ -26,7 +26,9 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
-        <Route exact path="/" component={IndexPage} />
+        <Route exact path="/">
+          <IndexPage user={currentUser} />
+        </Route>
         <Route exact path="/all-tables" component={underConstruction} />
         <Route exact path="/my-tables" component={underConstruction} />
         <Route exact path="/users/new" component={RegistrationForm} />

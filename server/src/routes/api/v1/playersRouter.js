@@ -14,10 +14,7 @@ playersRouter.get("/", (req, res) => {
     } else {
       const parsedResponse = JSON.parse(data)
       const player = PlayerSerializer.getSummary(parsedResponse.data[0])
-      res
-        .set({ "Content-Type": "application/json" })
-        .status(200)
-        .json(player)
+      return res.status(200).json(player)
     }
   })
 })

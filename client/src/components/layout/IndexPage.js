@@ -1,12 +1,15 @@
 import React, { useState } from "react"
-import fetchPlayer from "../fetchRequests/fetchPlayer.js"
-import fetchStats from "../fetchRequests/fetchStats.js"
+import validateInput from "../../services/validateInput.js"
+
+import getPlayer from "../fetchRequests/getPlayer.js"
+import getStats from "../fetchRequests/getStats.js"
 import FormError from "./FormError.js"
 import statsList from "../../constants/statsList.js"
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
+import SaveTableForm from "./SaveTableForm.js"
 
-const IndexPage = (props) => {
+const IndexPage = ({ user }) => {
   const [player, setPlayer] = useState({ name: "", season: "" })
   const [selectedPlayers, setSelectedPlayers] = useState([])
   const [selectedStats, setSelectedStats] = useState([])
@@ -38,34 +41,15 @@ const IndexPage = (props) => {
     setSelectedStats([])
   }
 
-  const validateInput = (payload) => {
-    setErrors({})
-    const { name, season } = payload
-    let newErrors = {}
-    if (season.trim() === "") {
-      newErrors = {
-        ...newErrors,
-        season: "is required",
-      }
-    }
-
-    if (name.trim() === "") {
-      newErrors = {
-        ...newErrors,
-        name: "is required",
-      }
-    }
-
-    setErrors(newErrors)
-    return newErrors
-  }
+  const errorValidationOutput = validateInput(player)
 
   const handlePlayerSubmit = async (event) => {
     event.preventDefault()
-    const validationErrors = validateInput(player)
+    setErrors(errorValidationOutput)
+    const validationErrors = errorValidationOutput
     if (Object.keys(validationErrors).length === 0) {
-      let fetchedPlayerData = await fetchPlayer(player.name)
-      const fetchedStatsData = await fetchStats(
+      let fetchedPlayerData = await getPlayer(player.name)
+      const fetchedStatsData = await getStats(
         fetchedPlayerData.id,
         player.season
       )
@@ -79,7 +63,7 @@ const IndexPage = (props) => {
   const playerTiles = selectedPlayers.map((player) => {
     return (
       <PlayerTile
-        key={player.id}
+        key={`${player.id}_${player.stats.season}`}
         player={player}
         selectedStats={selectedStats}
       />
@@ -106,9 +90,14 @@ const IndexPage = (props) => {
     )
   }
 
+  const authenticatedUserSaveTable = (
+    <SaveTableForm selectedPlayers={selectedPlayers} />
+  )
+  const unauthenticatedUser = ""
+
   return (
     <div className="page-body">
-      <form onSubmit={handlePlayerSubmit} className="player-form">
+      <form onSubmit={handlePlayerSubmit} className="add-player-form">
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
             <div className="medium-4 cell">
@@ -165,6 +154,7 @@ const IndexPage = (props) => {
         </div>
       </form>
       {table}
+      {user ? authenticatedUserSaveTable : unauthenticatedUser}
     </div>
   )
 }

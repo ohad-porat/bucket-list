@@ -1,5 +1,5 @@
 class StatsSerializer {
-  static getSummary (stats) {
+  static getSummary(stats) {
     const allowedAttributes = [
       "games_played",
       "season",

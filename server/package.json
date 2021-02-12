@@ -53,6 +53,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
     "knex": "^0.21.17",
+    "lodash": "^4.17.20",
     "morgan": "^1.10.0",
     "objection": "^2.2.14",
     "objection-unique": "^1.2.1",
