@@ -8,8 +8,8 @@ import RegistrationForm from "./registration/RegistrationForm"
 import SignInForm from "./authentication/SignInForm"
 import TopBar from "./layout/TopBar"
 import IndexPage from "./layout/IndexPage.js"
-
-import underConstruction from "./layout/UnderConstruction.js"
+import AllTablesList from "./layout/AllTablesList.js"
+import MyTablesList from "./layout/MyTablesList.js"
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined)
@@ -29,8 +29,8 @@ const App = (props) => {
         <Route exact path="/">
           <IndexPage user={currentUser} />
         </Route>
-        <Route exact path="/all-tables" component={underConstruction} />
-        <Route exact path="/my-tables" component={underConstruction} />
+        <Route exact path="/all-tables" component={AllTablesList} />
+        <Route exact path="/my-tables" component={MyTablesList} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
       </Switch>
