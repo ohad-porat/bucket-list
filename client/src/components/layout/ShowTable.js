@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Redirect, Link } from "react-router-dom"
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 
@@ -7,8 +7,10 @@ const ShowTable = ({ user }) => {
   const [table, setTable] = useState({
     title: "",
     notes: "",
+    userId: "",
     stats: [],
   })
+  const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const { tableId } = useParams()
   const selectedStats = ["pts", "ast", "reb"]
@@ -71,6 +73,45 @@ const ShowTable = ({ user }) => {
     return <StatTile key={stat} stat={stat} />
   })
 
+  const handleDeleteTable = async () => {
+    try {
+      const response = await fetch(`/api/v1/tables/${tableId}`, {
+        method: "DELETE",
+        headers: new Headers({
+          "content-Type": "application/json",
+        }),
+      })
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      }
+      setShouldRedirect(true)
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
+  if (shouldRedirect) {
+    return <Redirect to={`/my-tables`} />
+  }
+
+  let editDeleteButtons
+  if (user === null || user.id !== table.userId) {
+    editDeleteButtons = ""
+  } else {
+    editDeleteButtons = (
+      <div className="button-group">
+        <button className="button">
+          <Link to={`/tables/${tableId}/edit`}>Edit</Link>
+        </button>
+        <button className="button" onClick={handleDeleteTable}>
+          Delete
+        </button>
+      </div>
+    )
+  }
+
   return (
     <div className="page-body">
       <h1>{table.title}</h1>
@@ -85,6 +126,7 @@ const ShowTable = ({ user }) => {
         <tbody>{playerTiles}</tbody>
       </table>
       <p>{table.notes}</p>
+      {editDeleteButtons}
     </div>
   )
 }
