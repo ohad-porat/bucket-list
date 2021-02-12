@@ -3,7 +3,7 @@ import { useParams, Redirect, Link } from "react-router-dom"
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 
-const ShowTable = ({ user }) => {
+const ShowTable = (props) => {
   const [table, setTable] = useState({
     title: "",
     notes: "",
