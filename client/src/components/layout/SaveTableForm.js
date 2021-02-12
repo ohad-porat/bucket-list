@@ -1,13 +1,13 @@
 import React, { useState } from "react"
 import { Redirect } from "react-router-dom"
 import translateServerErrors from "../../services/translateServerErrors.js"
+
 import ErrorList from "./ErrorList.js"
 
 const SaveTableForm = ({ selectedPlayers }) => {
   const [form, setForm] = useState({
     title: "",
     notes: "",
-    players: [],
   })
   const [errors, setErrors] = useState([])
   const [tableId, setTableId] = useState()
