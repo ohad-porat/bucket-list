@@ -11,8 +11,9 @@ import IndexPage from "./layout/IndexPage.js"
 import AllTablesList from "./layout/AllTablesList.js"
 import MyTablesList from "./layout/MyTablesList.js"
 import ShowTable from "./layout/ShowTable.js"
+import EditTableForm from "./layout/EditTableForm.js"
 
-import UnderConstruction from "./layout/UnderConstruction.js"
+// import UnderConstruction from "./layout/UnderConstruction.js"
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined)
@@ -37,11 +38,7 @@ const App = (props) => {
         <Route exact path="/tables/:tableId">
           <ShowTable user={currentUser} />
         </Route>
-        <Route
-          exact
-          path="/tables/:tableId/edit"
-          component={UnderConstruction}
-        />
+        <Route exact path="/tables/:tableId/edit" component={EditTableForm} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
       </Switch>

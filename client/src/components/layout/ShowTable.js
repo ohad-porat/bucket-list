@@ -10,6 +10,7 @@ const ShowTable = ({ user }) => {
     userId: "",
     stats: [],
   })
+  const [currentUserId, setCurrentUserId] = useState(null)
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const { tableId } = useParams()
@@ -24,6 +25,7 @@ const ShowTable = ({ user }) => {
         throw error
       }
       const responseBody = await response.json()
+      setCurrentUserId(responseBody.userId)
       setTable(responseBody.table)
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
@@ -97,7 +99,7 @@ const ShowTable = ({ user }) => {
   }
 
   let editDeleteButtons
-  if (user === null || user.id !== table.userId) {
+  if (currentUserId !== table.userId) {
     editDeleteButtons = ""
   } else {
     editDeleteButtons = (
