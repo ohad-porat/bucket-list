@@ -4,9 +4,16 @@ import TableTile from "./TableTile.js"
 const MyTablesList = ({ user }) => {
   const [tables, setTables] = useState([])
 
+  const getUserId = async () => {
+    return await user.id
+  }
+
+  const userId = getUserId()
+// figure out how to make this work
+
   const getTables = async () => {
     try {
-      const response = await fetch(`/api/v1/users/${user.id}/tables`)
+      const response = await fetch(`/api/v1/users/${userId}/tables`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)
