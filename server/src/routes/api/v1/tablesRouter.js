@@ -1,9 +1,10 @@
 import express from "express"
+
 import cleanUserInput from "../../../services/cleanUserInput.js"
 import { ValidationError } from "objection"
 import { Table } from "../../../models/index.js"
 import findPlayer from "../../../services/findPlayer.js"
-import findSeason from "../../../services/findSeason.js"
+import findSeasonAndRelateToTable from "../../../services/findSeasonAndRelateToTable.js"
 
 const tablesRouter = new express.Router()
 
@@ -23,7 +24,7 @@ tablesRouter.post("/", async (req, res) => {
     }
 
     for (let player of allPlayers) {
-      await findSeason(player, table)
+      await findSeasonAndRelateToTable(player, table)
     }
 
     return res.status(201).json({ table })

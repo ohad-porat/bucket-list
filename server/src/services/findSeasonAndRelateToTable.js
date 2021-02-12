@@ -1,6 +1,6 @@
 import { SeasonAverage } from "../models/index.js"
 
-const findSeason = async (player, table) => {
+const findSeasonAndRelateToTable = async (player, table) => {
   let currentSeason = await SeasonAverage.query().where({
     season: player.stats.season,
     playerId: player.id,
@@ -12,4 +12,4 @@ const findSeason = async (player, table) => {
   await table.$relatedQuery("seasonAverages").relate(currentSeason)
 }
 
-export default findSeason
+export default findSeasonAndRelateToTable
