@@ -21,26 +21,11 @@ tablesRouter.get("/", async (req, res) => {
   }
 })
 
-tablesRouter.get("/currentUser", async (req, res) => {
-  const userId = req.user.id
-
-  try {
-    const rawTables = await Table.query().where({ userId: userId })
-    const tables = await Promise.all(
-      rawTables.map((table) => TableSerializer.getDetails(table))
-    )
-    return res.status(200).json({ tables })
-  } catch (error) {
-    console.log(error)
-    return res.status(500).json({ errors: error })
-  }
-})
-
 tablesRouter.get("/:tableId", async (req, res) => {
-  const id = req.params.tableId
+  const { tableId } = req.params
 
   try {
-    const rawTable = await Table.query().findById(id)
+    const rawTable = await Table.query().findById(tableId)
     const table = await TableSerializer.getDetails(rawTable)
     return res.status(200).json({ table })
   } catch (error) {
@@ -75,6 +60,5 @@ tablesRouter.post("/", async (req, res) => {
     return res.status(500).json({ errors: error })
   }
 })
-
 
 export default tablesRouter
