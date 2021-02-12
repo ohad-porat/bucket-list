@@ -50,8 +50,4 @@ const TopBar = ({ user }) => {
   )
 }
 
-<<<<<<< HEAD
 export default TopBar
-=======
-export default TopBar
->>>>>>> 91c35d56c069a49fb47510e14ca2efbf54f824e2
