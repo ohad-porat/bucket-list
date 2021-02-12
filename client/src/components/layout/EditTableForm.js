@@ -23,7 +23,8 @@ const EditTableForm = (props) => {
         throw error
       }
       const responseBody = await response.json()
-      // debugger
+      const { title, notes, stats} = responseBody.table
+      setForm({title, notes, stats})
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
     }
