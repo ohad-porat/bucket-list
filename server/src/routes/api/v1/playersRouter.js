@@ -8,15 +8,20 @@ const playersRouter = new express.Router()
 playersRouter.get("/", (req, res) => {
   const playerName = req.query.playerName
 
-  PlayersClient.getPlayer(playerName).then((data) => {
-    if (data.error) {
-      console.log(`Error from balldontlie api: ${data.error}`)
-    } else {
-      const parsedResponse = JSON.parse(data)
-      const player = PlayerSerializer.getSummary(parsedResponse.data[0])
-      res.set({ "Content-Type": "application/json" }).status(200).json(player)
-    }
-  })
+  PlayersClient.getPlayer(playerName)
+    .then((data) => {
+      if (data.error) {
+        console.log(`Error from balldontlie api: ${data.error}`)
+      } else {
+        const parsedResponse = JSON.parse(data)
+        const player = PlayerSerializer.getSummary(parsedResponse.data[0])
+        res.set({ "Content-Type": "application/json" }).status(200).json(player)
+      }
+    })
+    .catch((error) => {
+      console.log("Something went wrong.")
+      console.log(error)
+    })
 })
 
 export default playersRouter
