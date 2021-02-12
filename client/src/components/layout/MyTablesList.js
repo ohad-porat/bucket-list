@@ -7,9 +7,7 @@ const MyTablesList = ({ user }) => {
   const getUserId = async () => {
     return await user.id
   }
-
   const userId = getUserId()
-// figure out how to make this work
 
   const getTables = async () => {
     try {
