@@ -10,6 +10,7 @@ import TopBar from "./layout/TopBar"
 import IndexPage from "./layout/IndexPage.js"
 import AllTablesList from "./layout/AllTablesList.js"
 import MyTablesList from "./layout/MyTablesList.js"
+import ShowTable from "./layout/ShowTable.js"
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined)
@@ -30,7 +31,10 @@ const App = (props) => {
           <IndexPage user={currentUser} />
         </Route>
         <Route exact path="/all-tables" component={AllTablesList} />
-        <Route exact path="/my-tables" component={MyTablesList} />
+        <Route exact path="/my-tables">
+          <MyTablesList user={currentUser} />
+        </Route>
+        <Route exact path="/tables/:tableId" component={ShowTable} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
       </Switch>

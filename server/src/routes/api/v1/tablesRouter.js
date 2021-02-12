@@ -17,19 +17,18 @@ tablesRouter.get("/", async (req, res) => {
     )
     return res.status(200).json({ tables })
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ errors: error })
   }
 })
 
-tablesRouter.get("/currentUser", async (req, res) => {
-  const userId = req.user.id
+tablesRouter.get("/:tableId", async (req, res) => {
+  const { tableId } = req.params
 
   try {
-    const rawTables = await Table.query().where({ userId: userId })
-    const tables = await Promise.all(
-      rawTables.map((table) => TableSerializer.getDetails(table))
-    )
-    return res.status(200).json({ tables })
+    const rawTable = await Table.query().findById(tableId)
+    const table = await TableSerializer.getDetails(rawTable)
+    return res.status(200).json({ table })
   } catch (error) {
     return res.status(500).json({ errors: error })
   }

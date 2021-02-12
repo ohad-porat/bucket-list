@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Redirect } from "react-router-dom"
 import translateServerErrors from "../../services/translateServerErrors.js"
 
 import ErrorList from "./ErrorList.js"
@@ -9,11 +10,13 @@ const SaveTableForm = ({ selectedPlayers }) => {
     notes: "",
   })
   const [errors, setErrors] = useState([])
+  const [tableId, setTableId] = useState()
+  const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const saveTable = async (event) => {
     event.preventDefault()
     const formPayload = { ...form, players: selectedPlayers }
-    
+
     try {
       const response = await fetch(`/api/v1/tables`, {
         method: "POST",
@@ -33,11 +36,17 @@ const SaveTableForm = ({ selectedPlayers }) => {
           throw error
         }
       } else {
-        const body = await response.json()
+        const responseBody = await response.json()
+        setTableId(responseBody.table.id)
+        setShouldRedirect(true)
       }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
     }
+  }
+
+  if (shouldRedirect) {
+    return <Redirect to={`/tables/${tableId}`} />
   }
 
   const handleInputChange = (event) => {
