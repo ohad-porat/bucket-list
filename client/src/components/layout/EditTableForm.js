@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom"
 import translateServerErrors from "../../services/translateServerErrors.js"
 import nestStatsUnderPlayer from "../../services/nestStatsUnderPlayer.js"
 import ErrorList from "./ErrorList.js"
-import PlayerTile from "./PlayerTile.js"
+import PlayerTileEdit from "./PlayerTileEdit.js"
 import StatTile from "./StatTile.js"
 
 const EditTableForm = (props) => {
@@ -12,6 +12,7 @@ const EditTableForm = (props) => {
     title: "",
     notes: "",
     stats: [],
+    seasonsToRemove: [],
   })
   const [errors, setErrors] = useState([])
   const [shouldRedirect, setShouldRedirect] = useState(false)
@@ -28,8 +29,8 @@ const EditTableForm = (props) => {
         throw error
       }
       const responseBody = await response.json()
-      const { title, notes, stats} = responseBody.table
-      setForm({title, notes, stats})
+      const { title, notes, stats } = responseBody.table
+      setForm({ ...form, title, notes, stats })
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
     }
@@ -43,14 +44,22 @@ const EditTableForm = (props) => {
     setForm({ ...form, [event.currentTarget.name]: event.currentTarget.value })
   }
 
+  const removePlayer = (seasonId) => {
+    let playerIndex = form.stats.findIndex((season) => season.id === seasonId)
+    form.stats.splice(playerIndex, 1)
+    let seasonsToRemove = form.seasonsToRemove.concat(seasonId)
+    setForm({ ...form, seasonsToRemove })
+  }
+
   const playerTiles = form.stats.map((stat) => {
     let player = nestStatsUnderPlayer(stat)
 
     return (
-      <PlayerTile
+      <PlayerTileEdit
         key={`${player.id}_${player.stats.season}`}
         player={player}
         selectedStats={selectedStats}
+        removePlayer={removePlayer}
       />
     )
   })
@@ -63,7 +72,7 @@ const EditTableForm = (props) => {
     try {
       const response = await fetch(`/api/v1/tables/${tableId}`, {
         method: "PATCH",
-        header: new Headers({
+        headers: new Headers({
           "Content-Type": "application/json",
         }),
         body: JSON.stringify(form),
@@ -85,23 +94,29 @@ const EditTableForm = (props) => {
     }
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    editTable()
+  }
+
   if (shouldRedirect) {
     return <Redirect to={`/tables/${tableId}`} />
   }
 
   return (
     <div className="page-body">
-      <form className="save-table-form">
-      <table className="hover unstriped table-scroll">
-        <thead>
-          <tr>
-            <th width="200">Player</th>
-            <th width="60">Season</th>
-            {statsTiles}
-          </tr>
-        </thead>
-        <tbody>{playerTiles}</tbody>
-      </table>
+      <form className="save-table-form" onSubmit={handleSubmit}>
+        <table className="hover unstriped table-scroll">
+          <thead>
+            <tr>
+              <th width="30"> </th>
+              <th width="200">Player</th>
+              <th width="60">Season</th>
+              {statsTiles}
+            </tr>
+          </thead>
+          <tbody>{playerTiles}</tbody>
+        </table>
         <ErrorList errors={errors} />
         <label htmlFor="title">
           <input
@@ -120,7 +135,7 @@ const EditTableForm = (props) => {
             name="notes"
             placeholder="Notes"
             onChange={handleInputChange}
-            value={form.notes}
+            value={form.notes || ""}
           />
         </label>
         <input type="submit" value="Save Table" className="button" />

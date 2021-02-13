@@ -83,6 +83,9 @@ const ShowTable = (props) => {
   } else {
     editDeleteButtons = (
       <div className="button-group">
+        <button className="button">
+          <Link to={`/tables/${tableId}/edit`}>Edit</Link>
+        </button>
         <button className="button" onClick={handleDeleteTable}>
           Delete
         </button>

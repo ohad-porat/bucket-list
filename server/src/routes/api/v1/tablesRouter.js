@@ -29,7 +29,7 @@ tablesRouter.get("/:tableId", async (req, res) => {
   try {
     const rawTable = await Table.query().findById(tableId)
     const table = await TableSerializer.getDetails(rawTable)
-    return res.status(200).json({ table, userId})
+    return res.status(200).json({ table, userId })
   } catch (error) {
     return res.status(500).json({ errors: error })
   }
@@ -38,11 +38,11 @@ tablesRouter.get("/:tableId", async (req, res) => {
 tablesRouter.post("/", async (req, res) => {
   const userId = req.user.id
   const { body } = req
-  const formInput = { title: body.title, notes: body.notes }
-  const cleanFormInput = cleanUserInput(formInput)
+  const cleanForm = cleanUserInput({ title: body.title, notes: body.notes })
+
   try {
     const table = await Table.query().insertAndFetch({
-      ...cleanFormInput,
+      ...cleanForm,
       userId,
     })
 
@@ -57,6 +57,30 @@ tablesRouter.post("/", async (req, res) => {
     }
 
     return res.status(201).json({ table })
+  } catch (error) {
+    if (error instanceof ValidationError) {
+      return res.status(422).json({ errors: error.data })
+    }
+    return res.status(500).json({ errors: error })
+  }
+})
+
+tablesRouter.patch("/:tableId", async (req, res) => {
+  const { body } = req
+  const { tableId } = req.params
+  const cleanForm = cleanUserInput({ title: body.title })
+  const formInput = { title: cleanForm.title, notes: body.notes }
+
+  try {
+    const updateInput = await Table.query().findById(tableId).update(formInput)
+
+    for (let season of body.seasonsToRemove) {
+      await SeasonOfTable.query()
+        .delete()
+        .where({ tableId: tableId, seasonId: season })
+    }
+
+    return res.status(200).json({ updateInput })
   } catch (error) {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data })

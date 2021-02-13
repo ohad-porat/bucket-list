@@ -1,6 +1,7 @@
 const nestStatsUnderPlayer = (stat) => {
   let player = stat.player
   player.stats = {
+    id: stat.id,
     games_played: stat.games_played,
     season: stat.season,
     min: stat.min,
