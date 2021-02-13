@@ -1,4 +1,3 @@
-// include all of your models here using CommonJS requires
 const User = require("./User.js")
 const Player = require("./Player.js")
 const SeasonAverage = require("./SeasonAverage.js")
