@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"
-import { useParams, Redirect, Link } from "react-router-dom"
+import { Redirect, Link } from "react-router-dom"
+
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
+import nestStatsUnderPlayer from "../../services/nestStatsUnderPlayer.js"
 
 const ShowTable = (props) => {
   const [table, setTable] = useState({
@@ -13,7 +15,7 @@ const ShowTable = (props) => {
   const [currentUserId, setCurrentUserId] = useState(null)
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
-  const { tableId } = useParams()
+  const { tableId } = props.match.params
   const selectedStats = ["pts", "ast", "reb"]
 
   const getTable = async () => {
@@ -37,30 +39,7 @@ const ShowTable = (props) => {
   }, [])
 
   const playerTiles = table.stats.map((stat) => {
-    let player = stat.player
-    player.stats = {
-      games_played: stat.games_played,
-      season: stat.season,
-      min: stat.min,
-      fgm: stat.fgm,
-      fga: stat.fga,
-      fg3m: stat.fg3m,
-      fg3a: stat.fg3a,
-      ftm: stat.ftm,
-      fta: stat.fta,
-      oreb: stat.oreb,
-      dreb: stat.dreb,
-      reb: stat.reb,
-      ast: stat.ast,
-      stl: stat.stl,
-      blk: stat.blk,
-      turnover: stat.turnover,
-      pf: stat.pf,
-      pts: stat.pts,
-      fg_pct: stat.fg_pct,
-      fg3_pct: stat.fg3_pct,
-      ft_pct: stat.ft_pct,
-    }
+    let player = nestStatsUnderPlayer(stat)
 
     return (
       <PlayerTile
