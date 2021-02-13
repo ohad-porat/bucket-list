@@ -70,6 +70,7 @@ tablesRouter.patch("/:tableId", async (req, res) => {
   const { tableId } = req.params
   const cleanForm = cleanUserInput({ title: body.title })
   const formInput = { title: cleanForm.title, notes: body.notes }
+  debugger
 
   try {
     const updateInput = await Table.query().findById(tableId).update(formInput)
@@ -80,11 +81,25 @@ tablesRouter.patch("/:tableId", async (req, res) => {
         .where({ tableId: tableId, seasonId: season })
     }
 
+    const table = await Table.query().findById(tableId)
+    debugger
+
+    let addPlayers = []
+    for (let player of body.seasonsToAdd) {
+      let foundPlayer = await findPlayer(player)
+      addPlayers.push(foundPlayer)
+    }
+
+    for (let player of addPlayers) {
+      await findSeasonAndRelateToTable(player, table)
+    }
+
     return res.status(200).json({ updateInput })
   } catch (error) {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data })
     }
+    console.log(error)
     return res.status(500).json({ errors: error })
   }
 })
@@ -97,7 +112,6 @@ tablesRouter.delete("/:tableId", async (req, res) => {
     await Table.query().deleteById(tableId)
     return res.status(204).json({ message: "Table has been deleted" })
   } catch (error) {
-    console.log(error)
     return res.status(500).json({ errors: error })
   }
 })

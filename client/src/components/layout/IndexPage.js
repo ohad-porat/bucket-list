@@ -1,8 +1,7 @@
 import React, { useState } from "react"
-import validateInput from "../../services/validateInput.js"
 
-import getPlayer from "../fetchRequests/getPlayer.js"
-import getStats from "../fetchRequests/getStats.js"
+import validateInput from "../../services/validateInput.js"
+import fetchPlayerAndStats from "../../services/fetchPlayerAndStats.js"
 import FormError from "./FormError.js"
 import statsList from "../../constants/statsList.js"
 import PlayerTile from "./PlayerTile.js"
@@ -39,21 +38,16 @@ const IndexPage = ({ user }) => {
     event.preventDefault()
     setSelectedPlayers([])
     setSelectedStats([])
+    setErrors({})
   }
 
-  const errorValidationOutput = validateInput(player)
+  const validationErrors = validateInput(player)
 
   const handlePlayerSubmit = async (event) => {
     event.preventDefault()
-    setErrors(errorValidationOutput)
-    const validationErrors = errorValidationOutput
+    setErrors(validationErrors)
     if (Object.keys(validationErrors).length === 0) {
-      let fetchedPlayerData = await getPlayer(player.name)
-      const fetchedStatsData = await getStats(
-        fetchedPlayerData.id,
-        player.season
-      )
-      fetchedPlayerData.stats = fetchedStatsData
+      const fetchedPlayerData = await fetchPlayerAndStats(player)
       let newPlayers = selectedPlayers.concat(fetchedPlayerData)
       setSelectedPlayers(newPlayers)
       setPlayer({ name: "", season: "" })

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
-import { Redirect } from "react-router-dom"
+import { Redirect, Link } from "react-router-dom"
 
+import validateInput from "../../services/validateInput.js"
+import fetchPlayerAndStats from "../../services/fetchPlayerAndStats.js"
 import translateServerErrors from "../../services/translateServerErrors.js"
 import nestStatsUnderPlayer from "../../services/nestStatsUnderPlayer.js"
 import ErrorList from "./ErrorList.js"
@@ -8,11 +10,13 @@ import PlayerTileEdit from "./PlayerTileEdit.js"
 import StatTile from "./StatTile.js"
 
 const EditTableForm = (props) => {
+  const [player, setPlayer] = useState({ name: "", season: "" })
   const [form, setForm] = useState({
     title: "",
     notes: "",
     stats: [],
     seasonsToRemove: [],
+    seasonsToAdd: [],
   })
   const [errors, setErrors] = useState([])
   const [shouldRedirect, setShouldRedirect] = useState(false)
@@ -44,15 +48,59 @@ const EditTableForm = (props) => {
     setForm({ ...form, [event.currentTarget.name]: event.currentTarget.value })
   }
 
-  const removePlayer = (seasonId) => {
-    let playerIndex = form.stats.findIndex((season) => season.id === seasonId)
-    form.stats.splice(playerIndex, 1)
-    let seasonsToRemove = form.seasonsToRemove.concat(seasonId)
-    setForm({ ...form, seasonsToRemove })
+  const handlePlayerInputChange = (event) => {
+    setPlayer({
+      ...player,
+      [event.currentTarget.name]: event.currentTarget.value,
+    })
+  }
+
+  const validationErrors = validateInput(player)
+
+  const handlePlayerSubmit = async (event) => {
+    event.preventDefault()
+    setErrors(validationErrors)
+    if (Object.keys(validationErrors).length === 0) {
+      const fetchedPlayerData = await fetchPlayerAndStats(player)
+      const seasonsToAdd = form.seasonsToAdd.concat(fetchedPlayerData)
+      const stats = form.stats.concat(fetchedPlayerData)
+      setForm({ ...form, seasonsToAdd, stats })
+      setPlayer({ name: "", season: "" })
+    }
+  }
+
+  const removePlayer = (playerId, season, seasonId) => {
+    if (seasonId) {
+      const playerIndex = form.stats.findIndex(
+        (stats) =>
+          stats.player.apiPlayerId === playerId && stats.season === season
+      )
+      form.stats.splice(playerIndex, 1)
+      const seasonsToRemove = form.seasonsToRemove.concat(seasonId)
+      setForm({ ...form, seasonsToRemove })
+    } else {
+      const playerIndex = form.stats.findIndex(
+        (player) => player.id === playerId && player.stats.season === season
+      )
+      let stats = form.stats
+      stats.splice(playerIndex, 1)
+      setForm({ ...form, stats })
+      const addPlayerIndex = form.seasonsToAdd.findIndex(
+        (player) => player.id === playerId && player.stats.season === season
+      )
+      let seasonsToAdd = form.seasonsToAdd
+      seasonsToAdd.splice(addPlayerIndex, 1)
+      setForm({ ...form, seasonsToAdd })
+    }
   }
 
   const playerTiles = form.stats.map((stat) => {
-    let player = nestStatsUnderPlayer(stat)
+    let player
+    if (stat.player) {
+      player = nestStatsUnderPlayer(stat)
+    } else {
+      player = stat
+    }
 
     return (
       <PlayerTileEdit
@@ -105,7 +153,41 @@ const EditTableForm = (props) => {
 
   return (
     <div className="page-body">
+      <Link to={`/tables/${tableId}`}>Back To Table</Link>
+      <form onSubmit={handlePlayerSubmit} className="add-player-form">
+        <div className="grid-container">
+          <div className="grid-x grid-padding-x">
+            <div className="medium-4 cell">
+              <label htmlFor="name">
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Player Name"
+                  onChange={handlePlayerInputChange}
+                  value={player.name}
+                />
+              </label>
+            </div>
+
+            <div className="medium-4 cell">
+              <label htmlFor="season">
+                <input
+                  id="season"
+                  name="season"
+                  type="text"
+                  placeholder="Season"
+                  onChange={handlePlayerInputChange}
+                  value={player.season}
+                />
+              </label>
+            </div>
+            <input type="submit" value="Add Player" className="button" />
+          </div>
+        </div>
+      </form>
       <form className="save-table-form" onSubmit={handleSubmit}>
+        <ErrorList errors={errors} />
         <table className="hover unstriped table-scroll">
           <thead>
             <tr>
@@ -117,7 +199,6 @@ const EditTableForm = (props) => {
           </thead>
           <tbody>{playerTiles}</tbody>
         </table>
-        <ErrorList errors={errors} />
         <label htmlFor="title">
           <input
             id="title"

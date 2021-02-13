@@ -21,11 +21,17 @@ const PlayerTileEdit = ({ player, selectedStats, removePlayer }) => {
       playerStats.push(statObject)
     }
   })
+  let playerIdToRemove 
+  if (player.apiPlayerId) {
+    playerIdToRemove = player.apiPlayerId
+  } else {
+    playerIdToRemove = player.id
+  }
 
-const handleRemove = (event) => {
-  event.preventDefault()
-  removePlayer(player.stats.id)
-}
+  const handleRemove = (event) => {
+    event.preventDefault()
+    removePlayer(playerIdToRemove, player.stats.season, player.stats.id)
+  }
 
   const playerStatsTiles = playerStats.map((stat) => {
     return <PlayerStatTile key={stat.name} stat={stat.value} />
@@ -33,7 +39,7 @@ const handleRemove = (event) => {
 
   return (
     <tr>
-      <td onClick={handleRemove}>X</td>
+      <td onClick={handleRemove} className="remove-button">X</td>
       <td>
         {player.first_name} {player.last_name}
       </td>
