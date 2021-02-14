@@ -120,8 +120,17 @@ const IndexPage = ({ user }) => {
             </div>
 
             <div className="medium-4 cell">
-                <DropdownExampleSearchSelection />
-
+              <label htmlFor="stat">
+                <select
+                  id="stat"
+                  name="stat"
+                  placeholder="Stats"
+                  onChange={handleStatsInputChange}
+                  value=""
+                >
+                  {statsOptions}
+                </select>
+              </label>
             </div>
           </div>
           <div className="button-group">
