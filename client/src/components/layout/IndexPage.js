@@ -2,7 +2,7 @@ import React, { useState } from "react"
 
 import validateInput from "../../services/validateInput.js"
 import fetchPlayerAndStats from "../../services/fetchPlayerAndStats.js"
-import DropdownExampleSearchSelection from "../../constants/statsList.js"
+import statsList from "../../constants/statsList.js"
 import FormError from "./FormError.js"
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
