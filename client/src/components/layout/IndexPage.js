@@ -14,6 +14,14 @@ const IndexPage = ({ user }) => {
   const [selectedStats, setSelectedStats] = useState([])
   const [errors, setErrors] = useState({})
 
+  const statsOptions = [""].concat(statsList).map((stat) => {
+    return (
+      <option key={stat} value={stat}>
+        {stat}
+      </option>
+    )
+  })
+
   const handlePlayerInputChange = (event) => {
     setPlayer({
       ...player,
