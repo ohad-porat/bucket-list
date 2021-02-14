@@ -11,9 +11,15 @@ const PlayerTile = ({ player, selectedStats }) => {
 
   let playerStats = []
   selectedStats.forEach((stat) => {
-    let statObject = { name: stat }
-    let stringedStat = player.stats[stat].toString()
-    if (stat.includes("pct")) {
+    let statValue
+    if (stat.value) {
+      statValue = stat.value
+    } else {
+      statValue = stat
+    }
+    let statObject = { name: statValue }
+    let stringedStat = player.stats[statValue].toString()
+    if (statValue.includes("pct")) {
       statObject.value = stringedStat.substring(1)
       playerStats.push(statObject)
     } else {

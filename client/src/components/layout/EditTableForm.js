@@ -4,7 +4,7 @@ import { Redirect, Link } from "react-router-dom"
 import validateInput from "../../services/validateInput.js"
 import fetchPlayerAndStats from "../../services/fetchPlayerAndStats.js"
 import translateServerErrors from "../../services/translateServerErrors.js"
-import nestStatsUnderPlayer from "../../services/nestStatsUnderPlayer.js"
+import nestSeasonUnderPlayer from "../../services/nestSeasonUnderPlayer.js"
 import ErrorList from "./ErrorList.js"
 import PlayerTileEdit from "./PlayerTileEdit.js"
 import StatTile from "./StatTile.js"
@@ -14,6 +14,7 @@ const EditTableForm = (props) => {
   const [form, setForm] = useState({
     title: "",
     notes: "",
+    seasons: [],
     stats: [],
     seasonsToRemove: [],
     seasonsToAdd: [],
@@ -22,7 +23,6 @@ const EditTableForm = (props) => {
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const { tableId } = props.match.params
-  const selectedStats = ["pts", "ast", "reb"]
 
   const getTable = async () => {
     try {
@@ -33,8 +33,8 @@ const EditTableForm = (props) => {
         throw error
       }
       const responseBody = await response.json()
-      const { title, notes, stats } = responseBody.table
-      setForm({ ...form, title, notes, stats })
+      const { title, notes, seasons, stats } = responseBody.table
+      setForm({ ...form, title, notes, seasons, stats })
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
     }
@@ -63,28 +63,28 @@ const EditTableForm = (props) => {
     if (Object.keys(validationErrors).length === 0) {
       const fetchedPlayerData = await fetchPlayerAndStats(player)
       const seasonsToAdd = form.seasonsToAdd.concat(fetchedPlayerData)
-      const stats = form.stats.concat(fetchedPlayerData)
-      setForm({ ...form, seasonsToAdd, stats })
+      const seasons = form.seasons.concat(fetchedPlayerData)
+      setForm({ ...form, seasonsToAdd, seasons })
       setPlayer({ name: "", season: "" })
     }
   }
 
-  const removePlayer = (playerId, season, seasonId) => {
+  const removePlayer = (playerId, playerSeason, seasonId) => {
     if (seasonId) {
-      const playerIndex = form.stats.findIndex(
-        (stats) =>
-          stats.player.apiPlayerId === playerId && stats.season === season
+      const playerIndex = form.seasons.findIndex(
+        (season) =>
+          season.player.apiPlayerId === playerId && season.season === playerSeason
       )
-      form.stats.splice(playerIndex, 1)
+      form.seasons.splice(playerIndex, 1)
       const seasonsToRemove = form.seasonsToRemove.concat(seasonId)
       setForm({ ...form, seasonsToRemove })
     } else {
-      const playerIndex = form.stats.findIndex(
+      const playerIndex = form.seasons.findIndex(
         (player) => player.id === playerId && player.stats.season === season
       )
-      let stats = form.stats
-      stats.splice(playerIndex, 1)
-      setForm({ ...form, stats })
+      let seasons = form.seasons
+      seasons.splice(playerIndex, 1)
+      setForm({ ...form, seasons })
       const addPlayerIndex = form.seasonsToAdd.findIndex(
         (player) => player.id === playerId && player.stats.season === season
       )
@@ -94,26 +94,26 @@ const EditTableForm = (props) => {
     }
   }
 
-  const playerTiles = form.stats.map((stat) => {
+  const playerTiles = form.seasons.map((stats) => {
     let player
-    if (stat.player) {
-      player = nestStatsUnderPlayer(stat)
+    if (stats.player) {
+      player = nestSeasonUnderPlayer(stats)
     } else {
-      player = stat
+      player = stats
     }
 
     return (
       <PlayerTileEdit
         key={`${player.id}_${player.stats.season}`}
         player={player}
-        selectedStats={selectedStats}
+        selectedStats={form.stats}
         removePlayer={removePlayer}
       />
     )
   })
 
-  const statsTiles = selectedStats.map((stat) => {
-    return <StatTile key={stat} stat={stat} />
+  const statsTiles = form.stats.map((stat) => {
+    return <StatTile key={stat.value} stat={stat.value} />
   })
 
   const editTable = async () => {

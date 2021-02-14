@@ -85,7 +85,10 @@ const IndexPage = ({ user }) => {
   }
 
   const authenticatedUserSaveTable = (
-    <SaveTableForm selectedPlayers={selectedPlayers} />
+    <SaveTableForm
+      selectedPlayers={selectedPlayers}
+      selectedStats={selectedStats}
+    />
   )
   const unauthenticatedUser = ""
 

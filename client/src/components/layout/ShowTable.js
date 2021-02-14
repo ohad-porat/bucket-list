@@ -3,20 +3,20 @@ import { Redirect, Link } from "react-router-dom"
 
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
-import nestStatsUnderPlayer from "../../services/nestStatsUnderPlayer.js"
+import nestSeasonUnderPlayer from "../../services/nestSeasonUnderPlayer.js"
 
 const ShowTable = (props) => {
   const [table, setTable] = useState({
     title: "",
     notes: "",
     userId: "",
+    seasons: [],
     stats: [],
   })
   const [currentUserId, setCurrentUserId] = useState(null)
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const { tableId } = props.match.params
-  const selectedStats = ["pts", "ast", "reb"]
 
   const getTable = async () => {
     try {
@@ -37,21 +37,21 @@ const ShowTable = (props) => {
   useEffect(() => {
     getTable()
   }, [])
-
-  const playerTiles = table.stats.map((stat) => {
-    let player = nestStatsUnderPlayer(stat)
+  
+  const playerTiles = table.seasons.map((stats) => {
+    let player = nestSeasonUnderPlayer(stats)
 
     return (
       <PlayerTile
         key={`${player.id}_${player.stats.season}`}
         player={player}
-        selectedStats={selectedStats}
+        selectedStats={table.stats}
       />
     )
   })
 
-  const statsTiles = selectedStats.map((stat) => {
-    return <StatTile key={stat} stat={stat} />
+  const statsTiles = table.stats.map((stat) => {
+    return <StatTile key={stat.value} stat={stat.value} />
   })
 
   const handleDeleteTable = async () => {

@@ -2,10 +2,11 @@ import express from "express"
 
 import cleanUserInput from "../../../services/cleanUserInput.js"
 import { ValidationError } from "objection"
-import { Table, SeasonOfTable } from "../../../models/index.js"
+import { Table, SeasonOfTable, StatOfTable } from "../../../models/index.js"
 import TableSerializer from "../../../serializers/TableSerializer.js"
 import findPlayer from "../../../services/findPlayer.js"
 import findSeasonAndRelateToTable from "../../../services/findSeasonAndRelateToTable.js"
+import findStatAndRelateToTable from "../../../services/findStatAndRelateToTable.js"
 
 const tablesRouter = new express.Router()
 
@@ -56,6 +57,10 @@ tablesRouter.post("/", async (req, res) => {
       await findSeasonAndRelateToTable(player, table)
     }
 
+    for (let stat of body.stats) {
+      await findStatAndRelateToTable(stat, table)
+    }
+
     return res.status(201).json({ table })
   } catch (error) {
     if (error instanceof ValidationError) {
@@ -70,7 +75,6 @@ tablesRouter.patch("/:tableId", async (req, res) => {
   const { tableId } = req.params
   const cleanForm = cleanUserInput({ title: body.title })
   const formInput = { title: cleanForm.title, notes: body.notes }
-  debugger
 
   try {
     const updateInput = await Table.query().findById(tableId).update(formInput)
@@ -82,7 +86,6 @@ tablesRouter.patch("/:tableId", async (req, res) => {
     }
 
     const table = await Table.query().findById(tableId)
-    debugger
 
     let addPlayers = []
     for (let player of body.seasonsToAdd) {
@@ -109,6 +112,7 @@ tablesRouter.delete("/:tableId", async (req, res) => {
 
   try {
     await SeasonOfTable.query().delete().where({ tableId: tableId })
+    await StatOfTable.query().delete().where({ tableId: tableId })
     await Table.query().deleteById(tableId)
     return res.status(204).json({ message: "Table has been deleted" })
   } catch (error) {
