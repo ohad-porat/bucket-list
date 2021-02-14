@@ -30,7 +30,6 @@ const IndexPage = ({ user }) => {
   }
 
   const handleStatsInputChange = (event) => {
-    debugger
     let newStats = selectedStats.concat(event.currentTarget.value)
     setSelectedStats(newStats)
   }
