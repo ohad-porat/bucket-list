@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { Dropdown } from "semantic-ui-react"
 
 import validateInput from "../../services/validateInput.js"
 import fetchPlayerAndStats from "../../services/fetchPlayerAndStats.js"
