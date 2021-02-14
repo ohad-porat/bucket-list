@@ -1,9 +1,10 @@
 import React, { useState } from "react"
+import { Dropdown } from "semantic-ui-react"
 
 import validateInput from "../../services/validateInput.js"
 import fetchPlayerAndStats from "../../services/fetchPlayerAndStats.js"
+import DropdownExampleSearchSelection from "../../constants/statsList.js"
 import FormError from "./FormError.js"
-import statsList from "../../constants/statsList.js"
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 import SaveTableForm from "./SaveTableForm.js"
@@ -14,14 +15,6 @@ const IndexPage = ({ user }) => {
   const [selectedStats, setSelectedStats] = useState([])
   const [errors, setErrors] = useState({})
 
-  const statsOptions = [""].concat(statsList).map((stat) => {
-    return (
-      <option key={stat} value={stat}>
-        {stat}
-      </option>
-    )
-  })
-
   const handlePlayerInputChange = (event) => {
     setPlayer({
       ...player,
@@ -30,6 +23,7 @@ const IndexPage = ({ user }) => {
   }
 
   const handleStatsInputChange = (event) => {
+    debugger
     let newStats = selectedStats.concat(event.currentTarget.value)
     setSelectedStats(newStats)
   }
@@ -126,17 +120,8 @@ const IndexPage = ({ user }) => {
             </div>
 
             <div className="medium-4 cell">
-              <label htmlFor="stat">
-                <select
-                  id="stat"
-                  name="stat"
-                  placeholder="Stats"
-                  onChange={handleStatsInputChange}
-                  value=""
-                >
-                  {statsOptions}
-                </select>
-              </label>
+                <DropdownExampleSearchSelection />
+
             </div>
           </div>
           <div className="button-group">
