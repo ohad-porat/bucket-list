@@ -1,4 +1,5 @@
-## Welcome to Bucket List, the one place to compare NBA players and stats with ease and efficiency.
+## Welcome to Bucket List ## 
+the one place to compare NBA players and stats with ease and efficiency.
 
 ## description ##
 The Bucket List app enables users to choose specific players and desired stats and compare them in one table, without the distraction of unnecessary information and the hassle of jumping from one tab to the other on your browser.
