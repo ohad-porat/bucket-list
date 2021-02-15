@@ -10,11 +10,11 @@ a.top-bar-link {
 }
 
 a.top-bar-link:hover {
-  color: scale-color(#c7513a, $lightness: -14%);
+  color: scale-color($orange, $lightness: -14%);
 }
 
 a.top-bar-link:active {
-  color: #c7513a;
+  color: $orange;
 }
 
 .top-bar-right .menu {

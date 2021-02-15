@@ -2,8 +2,8 @@
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
 
-@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
 *,
 *::before,
 *::after {
@@ -14,6 +14,11 @@
   -moz-tab-size: 4;
   tab-size: 4;
 }
+
+$dark-gray: #8a8a8a;
+$black: #212527;
+$orange: #c7513a;
+$white: #fefefe;
 
 @import "./topBar";
 @import "./listPages";
@@ -35,16 +40,20 @@ body {
 }
 
 .under-construction {
-display: block;
-margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .save-table-form {
   padding: 2.5rem 0;
 }
 
+.edit-table-form {
+  padding: 1.5rem 0;
+}
+
 .button {
-  font-family: 'Hammersmith One', sans-serif;
+  font-family: "Hammersmith One", sans-serif;
 }
 
 .remove-button {
@@ -52,5 +61,24 @@ margin: 0 auto;
 }
 
 .fa-times:hover {
-  color: scale-color(#c7513a, $lightness: -14%);
+  color: scale-color($orange, $lightness: -14%);
+}
+
+.back-to-table {
+  margin-left: 1rem;
+}
+
+a.back-to-table {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: $black;
+}
+
+a.back-to-table:hover {
+  color: scale-color($orange, $lightness: -14%);
+}
+
+.edit-add-player {
+  margin-top: 1rem;
 }
