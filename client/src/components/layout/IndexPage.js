@@ -1,9 +1,9 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import validateInput from "../../services/validateInput.js"
 import fetchPlayerAndStats from "../../services/fetchPlayerAndStats.js"
+import getStatsList from "../../services/getStatsList.js"
 import FormError from "./FormError.js"
-import statsList from "../../constants/statsList.js"
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 import SaveTableForm from "./SaveTableForm.js"
@@ -12,12 +12,23 @@ const IndexPage = ({ user }) => {
   const [player, setPlayer] = useState({ name: "", season: "" })
   const [selectedPlayers, setSelectedPlayers] = useState([])
   const [selectedStats, setSelectedStats] = useState([])
+  const [statsList, setStatsList] = useState([])
   const [errors, setErrors] = useState({})
+
+
+  const fetchStatsList = async () => {
+    const fetchedStatsList = await getStatsList()
+    setStatsList(fetchedStatsList)
+  }
+
+  useEffect(() => {
+    fetchStatsList()
+  }, [])
 
   const statsOptions = [""].concat(statsList).map((stat) => {
     return (
-      <option key={stat} value={stat}>
-        {stat}
+      <option key={stat.id} value={stat.value}>
+        {stat.name}
       </option>
     )
   })
@@ -30,7 +41,8 @@ const IndexPage = ({ user }) => {
   }
 
   const handleStatsInputChange = (event) => {
-    let newStats = selectedStats.concat(event.currentTarget.value)
+    const statObject = statsList.find(stat => stat.value === event.currentTarget.value)
+    let newStats = selectedStats.concat(statObject)
     setSelectedStats(newStats)
   }
 
@@ -65,7 +77,7 @@ const IndexPage = ({ user }) => {
   })
 
   const statsTiles = selectedStats.map((stat) => {
-    return <StatTile key={stat} stat={stat} />
+    return <StatTile key={stat.id} abbreviation={stat.abbreviation} />
   })
 
   let table = ""

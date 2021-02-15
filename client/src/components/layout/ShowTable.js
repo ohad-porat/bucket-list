@@ -51,7 +51,7 @@ const ShowTable = (props) => {
   })
 
   const statsTiles = table.stats.map((stat) => {
-    return <StatTile key={stat.value} stat={stat.value} />
+    return <StatTile key={stat.id} abbreviation={stat.abbreviation} />
   })
 
   const handleDeleteTable = async () => {

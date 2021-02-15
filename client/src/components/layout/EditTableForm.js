@@ -113,7 +113,7 @@ const EditTableForm = (props) => {
   })
 
   const statsTiles = form.stats.map((stat) => {
-    return <StatTile key={stat.value} stat={stat.value} />
+    return <StatTile key={stat.id} abbreviation={stat.abbreviation} />
   })
 
   const editTable = async () => {
