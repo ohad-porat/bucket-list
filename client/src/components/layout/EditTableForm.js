@@ -153,10 +153,9 @@ const EditTableForm = (props) => {
 
   return (
     <div className="page-body">
-      <Link to={`/tables/${tableId}`}>Back To Table</Link>
       <form onSubmit={handlePlayerSubmit} className="add-player-form">
         <div className="grid-container">
-          <div className="grid-x grid-padding-x">
+          <div className="grid-x grid-padding-x edit-add-player">
             <div className="medium-4 cell">
               <label htmlFor="name">
                 <input
@@ -186,7 +185,8 @@ const EditTableForm = (props) => {
           </div>
         </div>
       </form>
-      <form className="save-table-form" onSubmit={handleSubmit}>
+          <Link to={`/tables/${tableId}`} className="back-to-table">Back To Table</Link>
+      <form className="edit-table-form" onSubmit={handleSubmit}>
         <ErrorList errors={errors} />
         <table className="hover unstriped table-scroll">
           <thead>
