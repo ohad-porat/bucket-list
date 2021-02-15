@@ -27,7 +27,13 @@ const AllTablesList = (props) => {
     return <TableTile key={table.id} table={table} />
   })
 
-  return <div className="page-body">{tableTiles}</div>
+  return (
+    <div className="list-body">
+      <div className="grid-container">
+        <div className="grid-x grid-margin-x">{tableTiles}</div>
+      </div>
+    </div>
+  )
 }
 
 export default AllTablesList

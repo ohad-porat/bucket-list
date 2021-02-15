@@ -3,6 +3,7 @@
 @include foundation-everything;
 
 @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
 *,
 *::before,
 *::after {
@@ -15,6 +16,7 @@
 }
 
 @import "./topBar";
+@import "./listPages";
 
 body {
   background-color: #898989;
@@ -28,13 +30,13 @@ body {
   margin: 0 10rem;
 }
 
+.list-body {
+  margin: 0 2rem;
+}
+
 .under-construction {
 display: block;
 margin: 0 auto;
-}
-
-.add-player-form {
-  padding: 1rem 0;
 }
 
 .save-table-form {

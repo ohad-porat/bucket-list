@@ -12,10 +12,10 @@ const TableTile = ({ table }) => {
     }
   })
   return (
-    <div className="table-tile">
-      <h1><Link to={`/tables/${table.id}`}>{table.title}</Link></h1>
-      <h2>Players: {playerList}</h2>
-      <h3>Notes: {table.notes ? table.notes : emptyNotes}</h3>
+    <div className="table-tile callout cell medium-4">
+      <h1 className="table-title"><Link to={`/tables/${table.id}`}>{table.title}</Link></h1>
+      <h2 className="table-players">Players: {playerList}</h2>
+      <h3 className="table-notes">Notes: {table.notes ? table.notes : emptyNotes}</h3>
     </div>
   )
 }

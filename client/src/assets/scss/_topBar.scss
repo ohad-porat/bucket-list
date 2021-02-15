@@ -1,7 +1,20 @@
 .top-bar {
   position: relative;
-  font-family: 'Hammersmith One', sans-serif;
+  font-family: "Hammersmith One", sans-serif;
   background-image: url("https://i.ibb.co/6vXnNFY/top-Bar-Background.png");
+  margin-bottom: 1rem;
+}
+
+a.top-bar-link {
+  color: #212527;
+}
+
+a.top-bar-link:hover {
+  color: scale-color(#c7513a, $lightness: -14%);
+}
+
+a.top-bar-link:active {
+  color: #c7513a;
 }
 
 .top-bar-right .menu {

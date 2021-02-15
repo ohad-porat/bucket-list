@@ -32,7 +32,13 @@ const MyTablesList = ({ user }) => {
     return <TableTile key={table.id} table={table} />
   })
 
-  return <div className="page-body">{tableTiles}</div>
+  return (
+    <div className="list-body">
+      <div className="grid-container">
+        <div className="grid-x grid-padding-x">{tableTiles}</div>
+      </div>
+    </div>
+  )
 }
 
 export default MyTablesList
