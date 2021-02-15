@@ -25,6 +25,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.6.2",
+    "@fortawesome/fontawesome-free": "^5.15.2",
     "@types/react-router-dom": "^5.1.7",
     "babel-loader": "~8.1",
     "css-loader": "^5.0.0",

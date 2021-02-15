@@ -50,3 +50,7 @@ margin: 0 auto;
 .remove-button {
   cursor: pointer;
 }
+
+.fa-trash-alt:hover {
+  color: scale-color(#c7513a, $lightness: -14%);
+}
