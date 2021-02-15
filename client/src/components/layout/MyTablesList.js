@@ -35,7 +35,7 @@ const MyTablesList = ({ user }) => {
   return (
     <div className="list-body">
       <div className="grid-container">
-        <div className="grid-x grid-padding-x">{tableTiles}</div>
+        <div className="grid-x grid-margin-x">{tableTiles}</div>
       </div>
     </div>
   )

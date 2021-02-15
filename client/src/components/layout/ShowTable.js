@@ -37,7 +37,7 @@ const ShowTable = (props) => {
   useEffect(() => {
     getTable()
   }, [])
-  
+
   const playerTiles = table.seasons.map((stats) => {
     let player = nestSeasonUnderPlayer(stats)
 
@@ -83,12 +83,10 @@ const ShowTable = (props) => {
   } else {
     editDeleteButtons = (
       <div className="button-group">
-        <button className="button">
-          <Link to={`/tables/${tableId}/edit`}>Edit</Link>
-        </button>
-        <button className="button" onClick={handleDeleteTable}>
-          Delete
-        </button>
+        <Link to={`/tables/${tableId}/edit`}>
+          <button className="button">Edit</button>
+        </Link>
+        <input type="button" value="Delete" className="button delete-button" onClick={handleDeleteTable} />
       </div>
     )
   }

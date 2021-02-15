@@ -39,11 +39,6 @@ body {
   margin: 0 2rem;
 }
 
-.under-construction {
-  display: block;
-  margin: 0 auto;
-}
-
 .save-table-form {
   padding: 2.5rem 0;
 }
@@ -76,9 +71,13 @@ a.back-to-table {
 }
 
 a.back-to-table:hover {
-  color: scale-color($orange, $lightness: -14%);
+  color: scale-color($orange, $lightness: 0%);
 }
 
 .edit-add-player {
   margin-top: 1rem;
+}
+
+input.button.delete-button {
+  margin-left: 20px;
 }
