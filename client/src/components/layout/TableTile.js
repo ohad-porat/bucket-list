@@ -2,8 +2,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 const TableTile = ({ table }) => {
-  const emptyNotes = <i>Not Provided</i>
-
   const playerList = table.seasons.map((stat) => {
     if (stat === table.seasons[table.seasons.length -1]) {
       return `${stat.player.first_name} ${stat.player.last_name}`
@@ -15,7 +13,6 @@ const TableTile = ({ table }) => {
     <div className="table-tile callout cell medium-4">
       <h1 className="table-title"><Link to={`/tables/${table.id}`}>{table.title}</Link></h1>
       <h2 className="table-players">Players: {playerList}</h2>
-      <h3 className="table-notes">Notes: {table.notes ? table.notes : emptyNotes}</h3>
     </div>
   )
 }
