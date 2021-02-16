@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { Redirect, Link } from "react-router-dom"
 
+import nestSeasonUnderPlayer from "../../services/nestSeasonUnderPlayer.js"
+
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
-import nestSeasonUnderPlayer from "../../services/nestSeasonUnderPlayer.js"
 
 const ShowTable = (props) => {
   const [table, setTable] = useState({

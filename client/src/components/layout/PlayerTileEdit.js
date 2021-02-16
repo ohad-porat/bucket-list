@@ -1,6 +1,7 @@
 import React from "react"
 
 import getFullSeasonName from "../../services/getFullSeasonName.js"
+
 import PlayerStatTile from "./PlayerStatTile.js"
 
 const PlayerTileEdit = ({ player, selectedStats, removePlayer }) => {
