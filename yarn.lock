@@ -1026,11 +1026,14 @@
     "@babel/runtime" "^7.10.4"
     react-is "^16.6.3"
 
+<<<<<<< HEAD
 "@fortawesome/fontawesome-free@^5.15.2":
   version "5.15.2"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.2.tgz#218cd7276ab4f9ab57cc3d2efa2697e6a579f25d"
   integrity sha512-7l/AX41m609L/EXI9EKH3Vs3v0iA8tKlIOGtw+kgcoanI7p+e4I4GYLqW3UXWiTnjSFymKSmTTPKYrivzbxxqA==
 
+=======
+>>>>>>> 17bacf663cac05a387f25c140e09dda159c4578b
 "@hot-loader/react-dom@~16.13":
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/@hot-loader/react-dom/-/react-dom-16.13.0.tgz#de245b42358110baf80aaf47a0592153d4047997"
@@ -10167,7 +10170,11 @@ walker@^1.0.7, walker@~1.0.5:
   dependencies:
     makeerror "1.0.x"
 
+<<<<<<< HEAD
 warning@^4.0.2, warning@^4.0.3:
+=======
+warning@^4.0.2:
+>>>>>>> 17bacf663cac05a387f25c140e09dda159c4578b
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
   integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==

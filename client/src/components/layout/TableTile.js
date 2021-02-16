@@ -12,6 +12,7 @@ const TableTile = ({ table }) => {
   return (
     <div className="table-tile callout cell medium-4">
       <h1 className="table-title"><Link to={`/tables/${table.id}`}>{table.title}</Link></h1>
+      <p className="table-userName">By {table.user.userName}</p>
       <h2 className="table-players">Players: {playerList}</h2>
     </div>
   )

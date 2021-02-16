@@ -24,7 +24,10 @@ tablesRouter.get("/", async (req, res) => {
 
 tablesRouter.get("/:tableId", async (req, res) => {
   const { tableId } = req.params
-  const userId = req.user.id
+  let userId = ""
+  if (req.user) {
+    userId = req.user.id
+  }
 
   try {
     const rawTable = await Table.query().findById(tableId)
@@ -101,7 +104,6 @@ tablesRouter.patch("/:tableId", async (req, res) => {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data })
     }
-    console.log(error)
     return res.status(500).json({ errors: error })
   }
 })
