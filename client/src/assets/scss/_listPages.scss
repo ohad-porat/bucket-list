@@ -1,0 +1,19 @@
+$textColor: #eae7e2;
+
+.table-tile {
+  margin: 1rem;
+  background-color: rgba(47, 47, 47, 0.75);
+  border-radius: 30px;
+}
+
+.table-title {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.table-players {
+  font-family: "Source Sans Pro", sans-serif;
+  color: $textColor;
+  font-size: 20px;
+}

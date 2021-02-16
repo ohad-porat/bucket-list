@@ -6,10 +6,10 @@ import SignOutButton from "../authentication/SignOutButton"
 const TopBar = ({ user }) => {
   const unauthenticatedListItems = [
     <li key="sign-in">
-      <Link to="/user-sessions/new">Sign In</Link>
+      <Link to="/user-sessions/new"className="top-bar-link">Sign In</Link>
     </li>,
     <li key="sign-up">
-      <Link to="/users/new">Sign Up</Link>
+      <Link to="/users/new" className="top-bar-link">Sign Up</Link>
     </li>,
   ]
 
@@ -21,7 +21,7 @@ const TopBar = ({ user }) => {
 
   const authenticatedLeftNavbar = (
     <li>
-      <Link to="/my-tables">My Tables</Link>
+      <Link to="/my-tables" className="top-bar-link">My Tables</Link>
     </li>
   )
 
@@ -35,7 +35,7 @@ const TopBar = ({ user }) => {
       <div className="top-bar-left">
         <ul className="menu">
           <li>
-            <Link to="/all-tables">All Tables</Link>
+            <Link to="/all-tables" className="top-bar-link">All Tables</Link>
           </li>
           {user ? authenticatedLeftNavbar : unauthenticatedLeftNavBar}
         </ul>
