@@ -1,7 +1,7 @@
 import express from "express"
 
 import StatsClient from "../../../apiClient/StatsClient.js"
-import StatsSerializer from "../../../serializers/StatsSerializer.js"
+import SeasonAverageSerializer from "../../../serializers/SeasonAverageSerializer.js"
 
 const statsRouter = new express.Router()
 
@@ -14,7 +14,7 @@ statsRouter.get("/playerId=:playerId&season=:season", (req, res) => {
         console.log(`Error from balldontlie api: ${data.error}`)
       } else {
         const parsedResponse = JSON.parse(data)
-        const stats = StatsSerializer.getSummary(parsedResponse.data[0])
+        const stats = SeasonAverageSerializer.getSummary(parsedResponse.data[0])
         return res.status(200).json(stats)
       }
     })

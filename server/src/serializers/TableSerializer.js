@@ -1,4 +1,5 @@
-import StatsSerializer from "./StatsSerializer.js"
+import SeasonAverageSerializer from "./SeasonAverageSerializer.js"
+import StatSerializer from "./StatSerializer.js"
 
 class TableSerializer {
   static async getDetails(table) {
@@ -9,10 +10,17 @@ class TableSerializer {
       serializedTable[attribute] = table[attribute]
     }
 
-    const stats = await table.$relatedQuery("seasonAverages")
+    const seasons = await table.$relatedQuery("seasonAverages")
+    serializedTable.seasons = await Promise.all(
+      seasons.map((season) => {
+        return SeasonAverageSerializer.getDetails(season)
+      })
+    )
+
+    const stats = await table.$relatedQuery("stats")
     serializedTable.stats = await Promise.all(
       stats.map((stat) => {
-        return StatsSerializer.getDetails(stat)
+        return StatSerializer.getSummary(stat)
       })
     )
 

@@ -1,10 +1,11 @@
 import React, { useState } from "react"
 import { Redirect } from "react-router-dom"
+
 import translateServerErrors from "../../services/translateServerErrors.js"
 
 import ErrorList from "./ErrorList.js"
 
-const SaveTableForm = ({ selectedPlayers }) => {
+const SaveTableForm = ({ selectedPlayers, selectedStats }) => {
   const [form, setForm] = useState({
     title: "",
     notes: "",
@@ -15,7 +16,7 @@ const SaveTableForm = ({ selectedPlayers }) => {
 
   const saveTable = async (event) => {
     event.preventDefault()
-    const formPayload = { ...form, players: selectedPlayers }
+    const formPayload = { ...form, players: selectedPlayers, stats: selectedStats }
 
     try {
       const response = await fetch(`/api/v1/tables`, {

@@ -2,8 +2,10 @@ import React, { useState } from "react"
 
 import validateInput from "../../services/validateInput.js"
 import fetchPlayerAndStats from "../../services/fetchPlayerAndStats.js"
-import FormError from "./FormError.js"
+
 import statsList from "../../constants/statsList.js"
+
+import FormError from "./FormError.js"
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 import SaveTableForm from "./SaveTableForm.js"
@@ -85,7 +87,10 @@ const IndexPage = ({ user }) => {
   }
 
   const authenticatedUserSaveTable = (
-    <SaveTableForm selectedPlayers={selectedPlayers} />
+    <SaveTableForm
+      selectedPlayers={selectedPlayers}
+      selectedStats={selectedStats}
+    />
   )
   const unauthenticatedUser = ""
 
