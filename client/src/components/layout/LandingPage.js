@@ -8,7 +8,7 @@ import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 import SaveTableForm from "./SaveTableForm.js"
 
-const IndexPage = ({ user }) => {
+const LandingPage = ({ user }) => {
   const [player, setPlayer] = useState({ name: "", season: "" })
   const [selectedPlayers, setSelectedPlayers] = useState([])
   const [selectedStats, setSelectedStats] = useState([])
@@ -170,4 +170,4 @@ const IndexPage = ({ user }) => {
   )
 }
 
-export default IndexPage
+export default LandingPage

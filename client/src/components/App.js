@@ -8,7 +8,7 @@ import "../assets/scss/main.scss"
 import RegistrationForm from "./registration/RegistrationForm"
 import SignInForm from "./authentication/SignInForm"
 import TopBar from "./layout/TopBar"
-import IndexPage from "./layout/IndexPage.js"
+import LandingPage from "./layout/LandingPage.js"
 import AllTablesList from "./layout/AllTablesList.js"
 import MyTablesList from "./layout/MyTablesList.js"
 import ShowTable from "./layout/ShowTable.js"
@@ -30,7 +30,7 @@ const App = (props) => {
       <TopBar user={currentUser} />
       <Switch>
         <Route exact path="/">
-          <IndexPage user={currentUser} />
+          <LandingPage user={currentUser} />
         </Route>
         <Route exact path="/all-tables" component={AllTablesList} />
         <AuthenticatedRoute exact path="/:userId/my-tables" component={MyTablesList} user={currentUser} />
