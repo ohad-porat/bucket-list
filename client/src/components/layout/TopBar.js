@@ -2,7 +2,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 import SignOutButton from "../authentication/SignOutButton"
-import Logo from "../../assets/logo.png"
 
 const TopBar = ({ user }) => {
   const unauthenticatedListItems = [
@@ -31,7 +30,7 @@ const TopBar = ({ user }) => {
   return (
     <div className="top-bar">
       <Link to="/">
-        <img src={Logo} alt="Website Logo" className="top-bar-logo" />
+        <img src="https://i.ibb.co/r3DCrp4/logo.png" alt="Website Logo" className="top-bar-logo" />
       </Link>
       <div className="top-bar-left">
         <ul className="menu">
