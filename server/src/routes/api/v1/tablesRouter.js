@@ -24,7 +24,10 @@ tablesRouter.get("/", async (req, res) => {
 
 tablesRouter.get("/:tableId", async (req, res) => {
   const { tableId } = req.params
-  const userId = req.user.id
+  let userId = ""
+  if (req.user) {
+    userId = req.user.id
+  }
 
   try {
     const rawTable = await Table.query().findById(tableId)

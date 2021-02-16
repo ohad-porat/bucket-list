@@ -1,5 +1,6 @@
 import SeasonAverageSerializer from "./SeasonAverageSerializer.js"
 import StatSerializer from "./StatSerializer.js"
+import UserSerializer from "./UserSerializer.js"
 
 class TableSerializer {
   static async getDetails(table) {
@@ -23,6 +24,10 @@ class TableSerializer {
         return StatSerializer.getSummary(stat)
       })
     )
+
+    const user = await table.$relatedQuery("user")
+    const serializedUser = UserSerializer.getSummary(user)
+    serializedTable.user = serializedUser
 
     return serializedTable
   }

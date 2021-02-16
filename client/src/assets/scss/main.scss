@@ -22,6 +22,8 @@ $white: #fefefe;
 
 @import "./topBar";
 @import "./listPages";
+@import "./showPage";
+@import "./editPage";
 
 body {
   background-color: #898989;
@@ -43,41 +45,7 @@ body {
   padding: 2.5rem 0;
 }
 
-.edit-table-form {
-  padding: 1.5rem 0;
-}
-
 .button {
   font-family: "Hammersmith One", sans-serif;
 }
 
-.remove-button {
-  cursor: pointer;
-}
-
-.fa-times:hover {
-  color: scale-color($orange, $lightness: 0%);
-}
-
-.back-to-table {
-  margin-left: 1rem;
-}
-
-a.back-to-table {
-  font-family: "Source Sans Pro", sans-serif;
-  font-weight: 600;
-  font-size: 20px;
-  color: $black;
-}
-
-a.back-to-table:hover {
-  color: scale-color($orange, $lightness: 0%);
-}
-
-.edit-add-player {
-  margin-top: 1rem;
-}
-
-input.button.delete-button {
-  margin-left: 20px;
-}
