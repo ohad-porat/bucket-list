@@ -13,6 +13,9 @@ const ShowTable = (props) => {
     userId: "",
     seasons: [],
     stats: [],
+    user: {
+      userName: "",
+    },
   })
   const [currentUserId, setCurrentUserId] = useState(null)
   const [shouldRedirect, setShouldRedirect] = useState(false)
@@ -38,7 +41,7 @@ const ShowTable = (props) => {
   useEffect(() => {
     getTable()
   }, [])
-  
+
   const playerTiles = table.seasons.map((stats) => {
     let player = nestSeasonUnderPlayer(stats)
 
@@ -52,7 +55,7 @@ const ShowTable = (props) => {
   })
 
   const statsTiles = table.stats.map((stat) => {
-    return <StatTile key={stat.value} stat={stat.value} />
+    return <StatTile key={stat.id} abbreviation={stat.abbreviation} />
   })
 
   const handleDeleteTable = async () => {
@@ -84,19 +87,23 @@ const ShowTable = (props) => {
   } else {
     editDeleteButtons = (
       <div className="button-group">
-        <button className="button">
-          <Link to={`/tables/${tableId}/edit`}>Edit</Link>
-        </button>
-        <button className="button" onClick={handleDeleteTable}>
-          Delete
-        </button>
+        <Link to={`/tables/${tableId}/edit`}>
+          <button className="button">Edit</button>
+        </Link>
+        <input
+          type="button"
+          value="Delete"
+          className="button delete-button"
+          onClick={handleDeleteTable}
+        />
       </div>
     )
   }
 
   return (
     <div className="page-body">
-      <h1>{table.title}</h1>
+      <h1 className="title-show-page">{table.title}</h1>
+      <p className="userName-show-page">By {table.user.userName}</p>
       <table className="hover unstriped table-scroll">
         <thead>
           <tr>
@@ -107,7 +114,7 @@ const ShowTable = (props) => {
         </thead>
         <tbody>{playerTiles}</tbody>
       </table>
-      <p>{table.notes}</p>
+      <p className="notes-show-page">{table.notes}</p>
       {editDeleteButtons}
     </div>
   )

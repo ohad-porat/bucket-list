@@ -41,7 +41,7 @@ const PlayerTileEdit = ({ player, selectedStats, removePlayer }) => {
 
   return (
     <tr>
-      <td onClick={handleRemove} className="remove-button">X</td>
+      <td onClick={handleRemove} className="remove-button"><i className="fas fa-times"></i></td>
       <td>
         {player.first_name} {player.last_name}
       </td>
