@@ -33,10 +33,17 @@ const LandingPage = ({ user }) => {
     )
   })
 
-  const handlePlayerInputChange = (event) => {
+  const handlePlayerInputChange = (playerName) => {
     setPlayer({
       ...player,
-      [event.currentTarget.name]: event.currentTarget.value,
+      name: playerName,
+    })
+  }
+
+  const handleSeasonInputChange = (event) => {
+    setPlayer({
+      ...player,
+      season: event.currentTarget.value,
     })
   }
 
@@ -114,14 +121,7 @@ const LandingPage = ({ user }) => {
             <div className="medium-4 cell">
 
               <label htmlFor="name">
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Player Name"
-                  onChange={handlePlayerInputChange}
-                  value={player.name}
-                />
+                <PlayerSearch handlePlayerInputChange={handlePlayerInputChange} />
                 <FormError error={errors.name} />
               </label>
               
@@ -134,7 +134,7 @@ const LandingPage = ({ user }) => {
                   name="season"
                   type="text"
                   placeholder="Season"
-                  onChange={handlePlayerInputChange}
+                  onChange={handleSeasonInputChange}
                   value={player.season}
                 />
                 <FormError error={errors.season} />

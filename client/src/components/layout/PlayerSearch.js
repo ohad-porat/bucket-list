@@ -13,7 +13,7 @@ const PlayerSearch = () => {
     const [searchTerm, setSearchTerm] = useState("")
     const players = usePlayerSearch(searchTerm)
     const handleSearchTermChange = (event) => {
-      setSearchTerm(event.currentTarget.value)
+      setSearchTerm(event.target.value)
     }
     return (
       <Combobox aria-label="Players">
