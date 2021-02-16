@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Redirect, Link } from "react-router-dom"
+import { useParams } from "react-router"
+import _ from "lodash"
 
 import validateInput from "../../services/validateInput.js"
 import fetchPlayerAndStats from "../../services/fetchPlayerAndStats.js"
@@ -23,7 +25,7 @@ const EditTableForm = (props) => {
   const [errors, setErrors] = useState([])
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
-  const { tableId } = props.match.params
+  const { tableId } = useParams()
 
   const getTable = async () => {
     try {
@@ -74,7 +76,8 @@ const EditTableForm = (props) => {
     if (seasonId) {
       const playerIndex = form.seasons.findIndex(
         (season) =>
-          season.player.apiPlayerId === playerId && season.season === playerSeason
+          season.player.apiPlayerId === playerId &&
+          season.season === playerSeason
       )
       form.seasons.splice(playerIndex, 1)
       const seasonsToRemove = form.seasonsToRemove.concat(seasonId)
@@ -143,9 +146,31 @@ const EditTableForm = (props) => {
     }
   }
 
+  const validateTable = () => {
+    let submitErrors = {}
+    if (form.seasons.length < 1) {
+      submitErrors = {
+        ...submitErrors,
+        ["players"]: "should not be empty",
+      }
+    }
+
+    if (form.title.trim() === "") {
+      submitErrors = {
+        ...submitErrors,
+        ["title"]: "is a required property",
+      }
+    }
+
+    setErrors(submitErrors)
+    return _.isEmpty(submitErrors)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    editTable()
+    if (validateTable()) {
+      editTable()
+    }
   }
 
   if (shouldRedirect) {
@@ -186,7 +211,9 @@ const EditTableForm = (props) => {
           </div>
         </div>
       </form>
-          <Link to={`/tables/${tableId}`} className="back-to-table">Back To Table</Link>
+      <Link to={`/tables/${tableId}`} className="back-to-table">
+        Back To Table
+      </Link>
       <form className="edit-table-form" onSubmit={handleSubmit}>
         <ErrorList errors={errors} />
         <table className="hover unstriped table-scroll">
