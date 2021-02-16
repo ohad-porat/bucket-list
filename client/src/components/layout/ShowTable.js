@@ -12,6 +12,9 @@ const ShowTable = (props) => {
     userId: "",
     seasons: [],
     stats: [],
+    user: {
+      userName: "",
+    },
   })
   const [currentUserId, setCurrentUserId] = useState(null)
   const [shouldRedirect, setShouldRedirect] = useState(false)
@@ -86,14 +89,20 @@ const ShowTable = (props) => {
         <Link to={`/tables/${tableId}/edit`}>
           <button className="button">Edit</button>
         </Link>
-        <input type="button" value="Delete" className="button delete-button" onClick={handleDeleteTable} />
+        <input
+          type="button"
+          value="Delete"
+          className="button delete-button"
+          onClick={handleDeleteTable}
+        />
       </div>
     )
   }
 
   return (
     <div className="page-body">
-      <h1>{table.title}</h1>
+      <h1 className="title-show-page">{table.title}</h1>
+      <p className="userName-show-page">By {table.user.userName}</p>
       <table className="hover unstriped table-scroll">
         <thead>
           <tr>
@@ -104,7 +113,7 @@ const ShowTable = (props) => {
         </thead>
         <tbody>{playerTiles}</tbody>
       </table>
-      <p>{table.notes}</p>
+      <p className="notes-show-page">{table.notes}</p>
       {editDeleteButtons}
     </div>
   )
