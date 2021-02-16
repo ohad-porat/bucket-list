@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Redirect, Link } from "react-router-dom"
+import _ from "lodash"
 
 import validateInput from "../../services/validateInput.js"
 import fetchPlayerAndStats from "../../services/fetchPlayerAndStats.js"
@@ -142,9 +143,31 @@ const EditTableForm = (props) => {
     }
   }
 
+  const validateTable = () => {
+    let submitErrors = {}
+    if (form.seasons.length < 1) {
+      submitErrors = {
+        ...submitErrors,
+        ["players"]: "should not be empty",
+      }
+    }
+
+    if (form.title.trim() === "") {
+      submitErrors = {
+        ...submitErrors,
+        ["title"]: "is a required property",
+      }
+    }
+
+    setErrors(submitErrors)
+    return _.isEmpty(submitErrors)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    editTable()
+    if (validateTable()) {
+      editTable()
+    }
   }
 
   if (shouldRedirect) {

@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { Redirect } from "react-router-dom"
-import translateServerErrors from "../../services/translateServerErrors.js"
+import _ from "lodash"
 
+import translateServerErrors from "../../services/translateServerErrors.js"
 import ErrorList from "./ErrorList.js"
 
 const SaveTableForm = ({ selectedPlayers, selectedStats }) => {
@@ -13,35 +14,68 @@ const SaveTableForm = ({ selectedPlayers, selectedStats }) => {
   const [tableId, setTableId] = useState()
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
+  const validateTable = () => {
+    let submitErrors = {}
+    if (selectedPlayers.length < 1) {
+      submitErrors = {
+        ...submitErrors,
+        ["players"]: "should not be empty",
+      }
+    }
+
+    if (selectedStats.length < 1) {
+      submitErrors = {
+        ...submitErrors,
+        ["stats"]: "should not be empty",
+      }
+    }
+
+    if (form.title.trim() === "") {
+      submitErrors = {
+        ...submitErrors,
+        ["title"]: "is a required property",
+      }
+    }
+
+    setErrors(submitErrors)
+    return _.isEmpty(submitErrors)
+  }
+
   const saveTable = async (event) => {
     event.preventDefault()
-    const formPayload = { ...form, players: selectedPlayers, stats: selectedStats }
-
-    try {
-      const response = await fetch(`/api/v1/tables`, {
-        method: "POST",
-        headers: new Headers({
-          "content-Type": "application/json",
-        }),
-        body: JSON.stringify(formPayload),
-      })
-      if (!response.ok) {
-        if (response.status === 422) {
-          const body = await response.json()
-          const newErrors = translateServerErrors(body.errors)
-          return setErrors(newErrors)
-        } else {
-          const errorMessage = `${response.status} (${response.statusText})`
-          const error = new Error(errorMessage)
-          throw error
-        }
-      } else {
-        const responseBody = await response.json()
-        setTableId(responseBody.table.id)
-        setShouldRedirect(true)
+    if (validateTable()) {
+      const formPayload = {
+        ...form,
+        players: selectedPlayers,
+        stats: selectedStats,
       }
-    } catch (error) {
-      console.error(`Error in fetch: ${error.message}`)
+
+      try {
+        const response = await fetch(`/api/v1/tables`, {
+          method: "POST",
+          headers: new Headers({
+            "content-Type": "application/json",
+          }),
+          body: JSON.stringify(formPayload),
+        })
+        if (!response.ok) {
+          if (response.status === 422) {
+            const body = await response.json()
+            const newErrors = translateServerErrors(body.errors)
+            return setErrors(newErrors)
+          } else {
+            const errorMessage = `${response.status} (${response.statusText})`
+            const error = new Error(errorMessage)
+            throw error
+          }
+        } else {
+          const responseBody = await response.json()
+          setTableId(responseBody.table.id)
+          setShouldRedirect(true)
+        }
+      } catch (error) {
+        console.error(`Error in fetch: ${error.message}`)
+      }
     }
   }
 
