@@ -15,12 +15,6 @@ const PlayerSearch = () => {
     const handleSearchTermChange = (event) => {
       setSearchTerm(event.currentTarget.value)
     }
-    debugger
-    let foundPlayers = players.data.map((player) => {
-      debugger
-      const str = `${player.first_name} ${player.last_name}`
-      return <ComboboxOption key={str} value={str} />
-    })
     return (
       <Combobox aria-label="Players">
         <ComboboxInput
@@ -30,7 +24,12 @@ const PlayerSearch = () => {
         {players && (
           <ComboboxPopover className="shadow-popup">
             {players.length > 0 ? (
-              <ComboboxList>{foundPlayers}</ComboboxList>
+              <ComboboxList>
+                {players.map((player) => {
+                  const str = `${player.first_name} ${player.last_name}`
+                  return <ComboboxOption key={player.id} value={str} />
+                })}
+              </ComboboxList>
             ) : (
               <span style={{ display: "block", margin: 8 }}>
                 No results found
@@ -47,7 +46,7 @@ const PlayerSearch = () => {
       if (searchTerm.trim() !== "") {
         let isFresh = true
         fetchPlayers(searchTerm).then((players) => {
-          if (isFresh) setPlayers(players)
+          if (isFresh) setPlayers(players.data)
         })
         return () => (isFresh = false)
       }
@@ -59,7 +58,7 @@ const PlayerSearch = () => {
     if (cache[value]) {
       return Promise.resolve(cache[value])
     }
-    return fetch(`https://www.balldontlie.io/api/v1/players?search=${value}`)
+    return fetch(`https://www.balldontlie.io/api/v1/players?search=${value}&per_page=10`)
       .then((res) => res.json())
       .then((result) => {
         cache[value] = result

@@ -7,6 +7,7 @@ import FormError from "./FormError.js"
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 import SaveTableForm from "./SaveTableForm.js"
+import PlayerSearch from "./PlayerSearch.js"
 
 const LandingPage = ({ user }) => {
   const [player, setPlayer] = useState({ name: "", season: "" })
@@ -111,6 +112,7 @@ const LandingPage = ({ user }) => {
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
             <div className="medium-4 cell">
+
               <label htmlFor="name">
                 <input
                   id="name"
@@ -122,6 +124,7 @@ const LandingPage = ({ user }) => {
                 />
                 <FormError error={errors.name} />
               </label>
+              
             </div>
 
             <div className="medium-4 cell">
