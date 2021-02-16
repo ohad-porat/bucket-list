@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Redirect, Link } from "react-router-dom"
+import { useParams } from "react-router"
 import _ from "lodash"
 
 import validateInput from "../../services/validateInput.js"
@@ -23,7 +24,7 @@ const EditTableForm = (props) => {
   const [errors, setErrors] = useState([])
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
-  const { tableId } = props.match.params
+  const { tableId } = useParams()
 
   const getTable = async () => {
     try {
@@ -74,7 +75,8 @@ const EditTableForm = (props) => {
     if (seasonId) {
       const playerIndex = form.seasons.findIndex(
         (season) =>
-          season.player.apiPlayerId === playerId && season.season === playerSeason
+          season.player.apiPlayerId === playerId &&
+          season.season === playerSeason
       )
       form.seasons.splice(playerIndex, 1)
       const seasonsToRemove = form.seasonsToRemove.concat(seasonId)
@@ -208,7 +210,9 @@ const EditTableForm = (props) => {
           </div>
         </div>
       </form>
-          <Link to={`/tables/${tableId}`} className="back-to-table">Back To Table</Link>
+      <Link to={`/tables/${tableId}`} className="back-to-table">
+        Back To Table
+      </Link>
       <form className="edit-table-form" onSubmit={handleSubmit}>
         <ErrorList errors={errors} />
         <table className="hover unstriped table-scroll">

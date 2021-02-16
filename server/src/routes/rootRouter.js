@@ -9,13 +9,13 @@ import statsListRouter from "./api/v1/statsListRouter.js"
 
 const rootRouter = new express.Router()
 
-rootRouter.use("/", clientRouter)
-
 rootRouter.use("/api/v1/user-sessions", userSessionsRouter)
 rootRouter.use("/api/v1/users", usersRouter)
 rootRouter.use("/api/v1/players", playersRouter)
 rootRouter.use("/api/v1/stats", statsRouter)
 rootRouter.use("/api/v1/tables", tablesRouter)
 rootRouter.use("/api/v1/statsList", statsListRouter)
+
+rootRouter.use("/", clientRouter)
 
 export default rootRouter

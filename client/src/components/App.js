@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { hot } from "react-hot-loader/root"
 
+import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js"
 import getCurrentUser from "../services/getCurrentUser"
 import "../assets/scss/main.scss"
 import RegistrationForm from "./registration/RegistrationForm"
@@ -32,9 +33,7 @@ const App = (props) => {
           <IndexPage user={currentUser} />
         </Route>
         <Route exact path="/all-tables" component={AllTablesList} />
-        <Route exact path="/my-tables">
-          <MyTablesList user={currentUser} />
-        </Route>
+        <AuthenticatedRoute exact path="/:userId/my-tables" component={MyTablesList} user={currentUser} />
         <Route exact path="/tables/:tableId" component={ShowTable} />
         <Route exact path="/tables/:tableId/edit" component={EditTableForm} />
         <Route exact path="/users/new" component={RegistrationForm} />
