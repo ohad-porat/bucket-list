@@ -2,7 +2,7 @@ import express from "express"
 
 import cleanUserInput from "../../../services/cleanUserInput.js"
 import { ValidationError } from "objection"
-import { Table } from "../../../models/index.js"
+import { Table, SeasonOfTable } from "../../../models/index.js"
 import TableSerializer from "../../../serializers/TableSerializer.js"
 import findPlayer from "../../../services/findPlayer.js"
 import findSeasonAndRelateToTable from "../../../services/findSeasonAndRelateToTable.js"
@@ -24,11 +24,12 @@ tablesRouter.get("/", async (req, res) => {
 
 tablesRouter.get("/:tableId", async (req, res) => {
   const { tableId } = req.params
+  const userId = req.user.id
 
   try {
     const rawTable = await Table.query().findById(tableId)
     const table = await TableSerializer.getDetails(rawTable)
-    return res.status(200).json({ table })
+    return res.status(200).json({ table, userId})
   } catch (error) {
     return res.status(500).json({ errors: error })
   }
@@ -60,6 +61,19 @@ tablesRouter.post("/", async (req, res) => {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data })
     }
+    return res.status(500).json({ errors: error })
+  }
+})
+
+tablesRouter.delete("/:tableId", async (req, res) => {
+  const { tableId } = req.params
+
+  try {
+    await SeasonOfTable.query().delete().where({ tableId: tableId })
+    await Table.query().deleteById(tableId)
+    return res.status(204).json({ message: "Table has been deleted" })
+  } catch (error) {
+    console.log(error)
     return res.status(500).json({ errors: error })
   }
 })
