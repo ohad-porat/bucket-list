@@ -36,6 +36,7 @@ class StatsSerializer {
 
   static async getDetails(stats) {
     const allowedAttributes = [
+      "id",
       "games_played",
       "season",
       "min",
