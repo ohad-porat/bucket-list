@@ -70,7 +70,6 @@ tablesRouter.patch("/:tableId", async (req, res) => {
   const { tableId } = req.params
   const cleanForm = cleanUserInput({ title: body.title })
   const formInput = { title: cleanForm.title, notes: body.notes }
-  debugger
 
   try {
     const updateInput = await Table.query().findById(tableId).update(formInput)
@@ -82,7 +81,6 @@ tablesRouter.patch("/:tableId", async (req, res) => {
     }
 
     const table = await Table.query().findById(tableId)
-    debugger
 
     let addPlayers = []
     for (let player of body.seasonsToAdd) {
@@ -99,7 +97,6 @@ tablesRouter.patch("/:tableId", async (req, res) => {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data })
     }
-    console.log(error)
     return res.status(500).json({ errors: error })
   }
 })
