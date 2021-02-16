@@ -8,13 +8,12 @@ import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 import SaveTableForm from "./SaveTableForm.js"
 
-const IndexPage = ({ user }) => {
+const LandingPage = ({ user }) => {
   const [player, setPlayer] = useState({ name: "", season: "" })
   const [selectedPlayers, setSelectedPlayers] = useState([])
   const [selectedStats, setSelectedStats] = useState([])
   const [statsList, setStatsList] = useState([])
   const [errors, setErrors] = useState({})
-
 
   const fetchStatsList = async () => {
     const fetchedStatsList = await getStatsList()
@@ -25,7 +24,7 @@ const IndexPage = ({ user }) => {
     fetchStatsList()
   }, [])
 
-  const statsOptions = [""].concat(statsList).map((stat) => {
+  const statsOptions = statsList.map((stat) => {
     return (
       <option key={stat.id} value={stat.value}>
         {stat.name}
@@ -41,7 +40,9 @@ const IndexPage = ({ user }) => {
   }
 
   const handleStatsInputChange = (event) => {
-    const statObject = statsList.find(stat => stat.value === event.currentTarget.value)
+    const statObject = statsList.find(
+      (stat) => stat.value === event.currentTarget.value
+    )
     let newStats = selectedStats.concat(statObject)
     setSelectedStats(newStats)
   }
@@ -146,6 +147,7 @@ const IndexPage = ({ user }) => {
                   onChange={handleStatsInputChange}
                   value=""
                 >
+                  <option>Add a Stat</option>
                   {statsOptions}
                 </select>
               </label>
@@ -168,4 +170,4 @@ const IndexPage = ({ user }) => {
   )
 }
 
-export default IndexPage
+export default LandingPage

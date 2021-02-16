@@ -19,11 +19,14 @@ const TopBar = ({ user }) => {
     </li>,
   ]
 
-  const authenticatedLeftNavbar = (
-    <li>
-      <Link to="/my-tables" className="top-bar-link">My Tables</Link>
-    </li>
-  )
+  let authenticatedLeftNavbar
+  if (user) {
+    authenticatedLeftNavbar = (
+      <li>
+        <Link to={`/${user.id}/my-tables`} className="top-bar-link">My Tables</Link>
+      </li>
+    )
+  }
 
   const unauthenticatedLeftNavBar = ""
 

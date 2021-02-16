@@ -7,7 +7,7 @@ const clientRoutes = [
   "/",
   "/user-sessions/new",
   "/users/new",
-  "/my-tables",
+  "/:userId/my-tables",
   "/all-tables",
   "/tables/:tableId",
   "/tables/:tableId/edit",

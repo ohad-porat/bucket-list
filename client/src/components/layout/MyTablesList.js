@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react"
-
+import { useParams } from "react-router"
 import TableTile from "./TableTile.js"
 
-const MyTablesList = ({ user }) => {
+const MyTablesList = (props) => {
   const [tables, setTables] = useState([])
 
-  const getUserId = async () => {
-    return await user.id
-  }
-  const userId = getUserId()
-
+  const { userId } = useParams()
+  
   const getTables = async () => {
     try {
       const response = await fetch(`/api/v1/users/${userId}/tables`)
