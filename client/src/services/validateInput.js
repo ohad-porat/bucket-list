@@ -1,5 +1,5 @@
-const validateInput = (payload) => {
-  const { name, season } = payload
+const validateInput = (player) => {
+  const { name, season } = player
   let newErrors = {}
   if (season.trim() === "") {
     newErrors = {

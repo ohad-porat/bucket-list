@@ -3,7 +3,7 @@ import React from "react"
 import getFullSeasonName from "../../services/getFullSeasonName.js"
 import PlayerStatTile from "./PlayerStatTile.js"
 
-const PlayerTile = ({ player, selectedStats }) => {
+const PlayerTileEdit = ({ player, selectedStats, removePlayer }) => {
   let fullSeasonName = ""
   if (player.stats.season) {
     fullSeasonName = getFullSeasonName(player.stats.season)
@@ -21,6 +21,17 @@ const PlayerTile = ({ player, selectedStats }) => {
       playerStats.push(statObject)
     }
   })
+  let playerIdToRemove 
+  if (player.apiPlayerId) {
+    playerIdToRemove = player.apiPlayerId
+  } else {
+    playerIdToRemove = player.id
+  }
+
+  const handleRemove = (event) => {
+    event.preventDefault()
+    removePlayer(playerIdToRemove, player.stats.season, player.stats.id)
+  }
 
   const playerStatsTiles = playerStats.map((stat) => {
     return <PlayerStatTile key={stat.name} stat={stat.value} />
@@ -28,6 +39,7 @@ const PlayerTile = ({ player, selectedStats }) => {
 
   return (
     <tr>
+      <td onClick={handleRemove} className="remove-button">X</td>
       <td>
         {player.first_name} {player.last_name}
       </td>
@@ -37,4 +49,4 @@ const PlayerTile = ({ player, selectedStats }) => {
   )
 }
 
-export default PlayerTile
+export default PlayerTileEdit
