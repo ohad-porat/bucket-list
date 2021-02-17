@@ -10,6 +10,7 @@ On Bucket List you can also save your tables to show your friends or come back t
 - Run ```yarn install```
 - ```cd server```
 - ```createdb bucket-list_development```
+- ```yarn run migrate:latest```
 - ```yarn run db:seed```
 - ```yarn run dev```
 - navigate to ```localhost:3000``` in your web browser
