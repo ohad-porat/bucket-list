@@ -8,11 +8,10 @@ import {
 } from "@reach/combobox"
 import "@reach/combobox/styles.scss"
 
-const PlayerCombobox = ({ handlePlayerInputChange }) => {
-  const [searchTerm, setSearchTerm] = useState("")
-  const players = usePlayerSearch(searchTerm)
-  const handleSearchTermChange = (event) => {
-    setSearchTerm(event.currentTarget.value)
+const PlayerCombobox = ({ handlePlayerInputChange, player }) => {
+  const players = usePlayerSearch(player.name)
+  const handlePlayerNameChange = (event) => {
+    handlePlayerInputChange(event.currentTarget.value)
   }
 
   return (
@@ -20,7 +19,8 @@ const PlayerCombobox = ({ handlePlayerInputChange }) => {
       <ComboboxInput
         className="player-search-input"
         placeholder="Choose a Player"
-        onChange={handleSearchTermChange}
+        onChange={handlePlayerNameChange}
+        value={player.name}
       />
       {players && (
         <ComboboxPopover className="shadow-popup">

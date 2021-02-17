@@ -33,10 +33,10 @@ const LandingPage = ({ user }) => {
     )
   })
 
-  const handlePlayerInputChange = (event) => {
+  const handlePlayerInputChange = (nameString) => {
     setPlayer({
       ...player,
-      name: event,
+      name: nameString,
     })
   }
 
@@ -115,12 +115,15 @@ const LandingPage = ({ user }) => {
 
   return (
     <div className="page-body">
-      <form onSubmit={handlePlayerSubmit} className="add-player-form">
+      <form onSubmit={handlePlayerSubmit} className="add-player-form" autocomplete="off">
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
             <div className="medium-4 cell">
               <label htmlFor="name">
-                <PlayerCombobox handlePlayerInputChange={handlePlayerInputChange} />
+                <PlayerCombobox
+                  handlePlayerInputChange={handlePlayerInputChange} 
+                  player={player}
+                />
                 <FormError error={errors.name} />
               </label>
             </div>

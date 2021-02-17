@@ -11,6 +11,7 @@
 }
 
 :root {
+  --reach-combobox: 1;
   -moz-tab-size: 4;
   tab-size: 4;
 }
@@ -80,4 +81,10 @@ a.back-to-table:hover {
 
 input.button.delete-button {
   margin-left: 20px;
+}
+
+input.player-search-input {
+  line-height: 2.5;
+  background: #FEFEFE;
+  border: solid 1px #CACACA;
 }
