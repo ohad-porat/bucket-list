@@ -13,7 +13,6 @@ import AllTablesList from "./layout/AllTablesList.js"
 import MyTablesList from "./layout/MyTablesList.js"
 import ShowTable from "./layout/ShowTable.js"
 import EditTableForm from "./layout/EditTableForm.js"
-import PlayerSearch from "./layout/PlayerSearch.js"
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined)
@@ -39,7 +38,6 @@ const App = (props) => {
         <Route exact path="/tables/:tableId/edit" component={EditTableForm} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
-        <Route exact path="/test" component={PlayerSearch} />
       </Switch>
     </Router>
   )

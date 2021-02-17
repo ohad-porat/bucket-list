@@ -7,7 +7,7 @@ import FormError from "./FormError.js"
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 import SaveTableForm from "./SaveTableForm.js"
-import PlayerSearch from "./PlayerSearch.js"
+import PlayerCombobox from "./PlayerCombobox.js"
 
 const LandingPage = ({ user }) => {
   const [player, setPlayer] = useState({ name: "", season: "" })
@@ -33,10 +33,10 @@ const LandingPage = ({ user }) => {
     )
   })
 
-  const handlePlayerInputChange = (playerName) => {
+  const handlePlayerInputChange = (event) => {
     setPlayer({
       ...player,
-      name: playerName,
+      name: event,
     })
   }
 
@@ -119,12 +119,10 @@ const LandingPage = ({ user }) => {
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
             <div className="medium-4 cell">
-
               <label htmlFor="name">
-                <PlayerSearch handlePlayerInputChange={handlePlayerInputChange} />
+                <PlayerCombobox handlePlayerInputChange={handlePlayerInputChange} />
                 <FormError error={errors.name} />
               </label>
-              
             </div>
 
             <div className="medium-4 cell">
@@ -146,7 +144,6 @@ const LandingPage = ({ user }) => {
                 <select
                   id="stat"
                   name="stat"
-                  placeholder="Stats"
                   onChange={handleStatsInputChange}
                   value=""
                 >
