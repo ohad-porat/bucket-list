@@ -115,7 +115,7 @@ const LandingPage = ({ user }) => {
 
   return (
     <div className="page-body">
-      <form onSubmit={handlePlayerSubmit} className="add-player-form" autocomplete="off">
+      <form onSubmit={handlePlayerSubmit} className="add-player-form" autoComplete="off">
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
             <div className="medium-4 cell">
