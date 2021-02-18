@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { Redirect, Link } from "react-router-dom"
+import { useParams } from "react-router"
 
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 import nestSeasonUnderPlayer from "../../services/nestSeasonUnderPlayer.js"
 
-const ShowTable = (props) => {
+const ShowTable = ({ user }) => {
   const [table, setTable] = useState({
     title: "",
     notes: "",
@@ -13,10 +14,9 @@ const ShowTable = (props) => {
     seasons: [],
     stats: [],
   })
-  const [currentUserId, setCurrentUserId] = useState(null)
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
-  const { tableId } = props.match.params
+  const { tableId } = useParams()
 
   const getTable = async () => {
     try {
@@ -27,7 +27,6 @@ const ShowTable = (props) => {
         throw error
       }
       const responseBody = await response.json()
-      setCurrentUserId(responseBody.userId)
       setTable(responseBody.table)
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
@@ -55,40 +54,49 @@ const ShowTable = (props) => {
   })
 
   const handleDeleteTable = async () => {
-    try {
-      const response = await fetch(`/api/v1/tables/${tableId}`, {
-        method: "DELETE",
-        headers: new Headers({
-          "content-Type": "application/json",
-        }),
-      })
-      if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw error
+    if (confirm("Are you sure?")) {
+      try {
+        const response = await fetch(`/api/v1/tables/${tableId}`, {
+          method: "DELETE",
+          headers: new Headers({
+            "content-Type": "application/json",
+          }),
+        })
+        if (!response.ok) {
+          const errorMessage = `${response.status} (${response.statusText})`
+          const error = new Error(errorMessage)
+          throw error
+        }
+        setShouldRedirect(true)
+      } catch (error) {
+        console.error(`Error in fetch: ${error.message}`)
       }
-      setShouldRedirect(true)
-    } catch (error) {
-      console.error(`Error in fetch: ${error.message}`)
     }
   }
 
   if (shouldRedirect) {
-    return <Redirect to={`/my-tables`} />
+    return <Redirect to={`/${currentUserId}/my-tables`} />
   }
 
   let editDeleteButtons
-  if (currentUserId !== table.userId) {
-    editDeleteButtons = ""
-  } else {
-    editDeleteButtons = (
-      <div className="button-group">
-        <Link to={`/tables/${tableId}/edit`}>
-          <button className="button">Edit</button>
-        </Link>
-        <input type="button" value="Delete" className="button delete-button" onClick={handleDeleteTable} />
-      </div>
-    )
+  if (user) {
+    if (user.id !== table.userId) {
+      editDeleteButtons = ""
+    } else {
+      editDeleteButtons = (
+        <div className="button-group">
+          <Link to={`/tables/${tableId}/edit`}>
+            <button className="button">Edit</button>
+          </Link>
+          <input
+            type="button"
+            value="Delete"
+            className="button delete-button"
+            onClick={handleDeleteTable}
+          />
+        </div>
+      )
+    }
   }
 
   return (
