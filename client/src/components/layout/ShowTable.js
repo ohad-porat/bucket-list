@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react"
 import { Redirect, Link } from "react-router-dom"
 import { useParams } from "react-router"
 
+import nestSeasonUnderPlayer from "../../services/nestSeasonUnderPlayer.js"
+
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
-import nestSeasonUnderPlayer from "../../services/nestSeasonUnderPlayer.js"
 
 const ShowTable = ({ user }) => {
   const [table, setTable] = useState({
@@ -13,6 +14,9 @@ const ShowTable = ({ user }) => {
     userId: "",
     seasons: [],
     stats: [],
+    user: {
+      userName: "",
+    },
   })
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
@@ -101,7 +105,8 @@ const ShowTable = ({ user }) => {
 
   return (
     <div className="page-body">
-      <h1>{table.title}</h1>
+      <h1 className="title-show-page">{table.title}</h1>
+      <p className="userName-show-page">By {table.user.userName}</p>
       <table className="hover unstriped table-scroll">
         <thead>
           <tr>
@@ -112,7 +117,7 @@ const ShowTable = ({ user }) => {
         </thead>
         <tbody>{playerTiles}</tbody>
       </table>
-      <p>{table.notes}</p>
+      <p className="notes-show-page">{table.notes}</p>
       {editDeleteButtons}
     </div>
   )

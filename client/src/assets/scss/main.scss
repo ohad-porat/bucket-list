@@ -23,6 +23,8 @@ $white: #fefefe;
 
 @import "./topBar";
 @import "./listPages";
+@import "./showPage";
+@import "./editPage";
 
 body {
   background-color: #898989;
@@ -42,10 +44,6 @@ body {
 
 .save-table-form {
   padding: 2.5rem 0;
-}
-
-.edit-table-form {
-  padding: 1.5rem 0;
 }
 
 .button {
