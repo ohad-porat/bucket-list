@@ -6,7 +6,7 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox"
-import "@reach/combobox/styles.scss"
+import "@reach/combobox/styles.css"
 
 const SeasonCombobox =  ({ handleSeasonInputChange, player }) => {
   const seasons =  useSeasonSearch(player.id)
