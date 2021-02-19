@@ -48,26 +48,33 @@ body {
 
 .button {
   font-family: "Hammersmith One", sans-serif;
-}
-
-input.button.delete-button {
-  margin-left: 20px;
-}
-
-input.player-search-input {
-  line-height: 2.5;
-  background: #FEFEFE;
-  border: solid 1px #CACACA;
-}
-
-input.season-search-input {
-  line-height: 2.5;
-  background: #FEFEFE;
-  border: solid 1px #CACACA;
+  border-radius: 15px;
+  box-shadow: inset -3px -3px 10px #c24a32;
 }
 
 .form-field {
   border-radius: 15px;
+  box-shadow: inset -3px -3px 10px #eee;
+  font-size: 16px;
+}
+
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+input.search-input {
+  line-height: 2.2;
+  background: #fefefe;
+  border: solid 1px #cacaca;
+}
+
+.stat-form-field {
+  font-style: italic;
+  color: #cacaca;
+}
+
+input.button.delete-button {
+  margin-left: 20px;
 }
 
 @media only screen and (max-width: 780px) {

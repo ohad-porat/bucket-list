@@ -18,7 +18,7 @@ const SeasonCombobox =  ({ handleSeasonInputChange, player }) => {
   return (
     <Combobox aria-label="name" onSelect={handleSeasonInputChange}>
       <ComboboxInput
-        className="season-search-input medium-12 cell form-field"
+        className="search-input medium-12 cell form-field"
         placeholder="Choose a Season"
         onChange={handleSeasonChange}
         value={player.season}

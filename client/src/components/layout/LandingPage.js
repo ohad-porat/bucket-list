@@ -163,7 +163,7 @@ const LandingPage = ({ user }) => {
                 <select
                   id="stat"
                   name="stat"
-                  className="form-field"
+                  className="form-field stat-form-field"
                   onChange={handleStatsInputChange}
                   value=""
                 >
