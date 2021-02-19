@@ -28,7 +28,8 @@ const SeasonCombobox =  ({ handleSeasonInputChange, player }) => {
           {seasons.length > 0 ? (
             <ComboboxList>
               {seasons.map((season) => {
-                const str = `${season}`
+                const seasonPlusOne = season + 1
+                const str = `${season}-${seasonPlusOne.toString().substring(2)}`
                 return <ComboboxOption key={str} value={str} />
               })}
             </ComboboxList>
