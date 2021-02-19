@@ -13,7 +13,13 @@ const TopBar = ({ user }) => {
     </li>,
   ]
 
+  let username = ""
+if (user) {
+  username = user.userName
+}
   const authenticatedListItems = [
+    <li key="hello-user" className="hello-user">Hello, {username}
+    </li>,
     <li key="sign-out">
       <SignOutButton />
     </li>,
