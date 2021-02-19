@@ -7,13 +7,16 @@ import validateInput from "../../services/validateInput.js"
 import fetchPlayerAndStats from "../../services/fetchPlayerAndStats.js"
 import translateServerErrors from "../../services/translateServerErrors.js"
 import nestSeasonUnderPlayer from "../../services/nestSeasonUnderPlayer.js"
+import getPlayer from "../fetchRequests/getPlayer.js"
 
 import ErrorList from "./ErrorList.js"
 import PlayerTileEdit from "./PlayerTileEdit.js"
 import StatTile from "./StatTile.js"
+import PlayerCombobox from "./PlayerCombobox.js"
+import SeasonCombobox from "./SeasonCombobox.js"
 
 const EditTableForm = (props) => {
-  const [player, setPlayer] = useState({ name: "", season: "" })
+  const [player, setPlayer] = useState({ name: "", id: "", season: "" })
   const [form, setForm] = useState({
     title: "",
     notes: "",
@@ -51,10 +54,26 @@ const EditTableForm = (props) => {
     setForm({ ...form, [event.currentTarget.name]: event.currentTarget.value })
   }
 
-  const handlePlayerInputChange = (event) => {
+  const handlePlayerInputChange = async (nameString, eventType) => {
+    if (eventType === "change") {
+      setPlayer({
+        ...player,
+        name: nameString,
+      })
+    } else {
+      const playerData = await getPlayer(nameString)
+      setPlayer({
+        ...player,
+        id: playerData.id.toString(),
+        name: nameString,
+      })
+    }
+  }
+
+  const handleSeasonInputChange = (seasonString) => {
     setPlayer({
       ...player,
-      [event.currentTarget.name]: event.currentTarget.value,
+      season: seasonString,
     })
   }
 
@@ -184,26 +203,18 @@ const EditTableForm = (props) => {
           <div className="grid-x grid-padding-x edit-add-player">
             <div className="medium-4 cell">
               <label htmlFor="name">
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Player Name"
-                  onChange={handlePlayerInputChange}
-                  value={player.name}
+                <PlayerCombobox
+                  handlePlayerInputChange={handlePlayerInputChange}
+                  player={player}
                 />
               </label>
             </div>
 
             <div className="medium-4 cell">
               <label htmlFor="season">
-                <input
-                  id="season"
-                  name="season"
-                  type="text"
-                  placeholder="Season"
-                  onChange={handlePlayerInputChange}
-                  value={player.season}
+                <SeasonCombobox
+                  handleSeasonInputChange={handleSeasonInputChange}
+                  player={player}
                 />
               </label>
             </div>
