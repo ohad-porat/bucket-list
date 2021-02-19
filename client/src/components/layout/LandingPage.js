@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, Suspense } from "react"
 
+import getPlayer from "../fetchRequests/getPlayer.js"
 import validateInput from "../../services/validateInput.js"
 import fetchPlayerAndStats from "../../services/fetchPlayerAndStats.js"
 import getStatsList from "../../services/getStatsList.js"
+
 import FormError from "./FormError.js"
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 import SaveTableForm from "./SaveTableForm.js"
+import PlayerCombobox from "./PlayerCombobox.js"
+import SeasonCombobox from "./SeasonCombobox.js"
 
 const LandingPage = ({ user }) => {
-  const [player, setPlayer] = useState({ name: "", season: "" })
+  const [player, setPlayer] = useState({
+    name: "",
+    id: "",
+    season: "",
+  })
   const [selectedPlayers, setSelectedPlayers] = useState([])
   const [selectedStats, setSelectedStats] = useState([])
   const [statsList, setStatsList] = useState([])
@@ -32,10 +40,26 @@ const LandingPage = ({ user }) => {
     )
   })
 
-  const handlePlayerInputChange = (event) => {
+  const handlePlayerInputChange = async (nameString, eventType) => {
+    if (eventType === "change") {
+      setPlayer({
+        ...player,
+        name: nameString,
+      })
+    } else {
+      const playerData = await getPlayer(nameString)
+      setPlayer({
+        ...player,
+        id: playerData.id.toString(),
+        name: nameString,
+      })
+    }
+  }
+
+  const handleSeasonInputChange = (seasonString) => {
     setPlayer({
       ...player,
-      [event.currentTarget.name]: event.currentTarget.value,
+      season: seasonString,
     })
   }
 
@@ -63,7 +87,7 @@ const LandingPage = ({ user }) => {
       const fetchedPlayerData = await fetchPlayerAndStats(player)
       let newPlayers = selectedPlayers.concat(fetchedPlayerData)
       setSelectedPlayers(newPlayers)
-      setPlayer({ name: "", season: "" })
+      setPlayer({ name: "", season: "", isNameSelected: false })
     }
   }
 
@@ -107,18 +131,18 @@ const LandingPage = ({ user }) => {
 
   return (
     <div className="page-body">
-      <form onSubmit={handlePlayerSubmit} className="add-player-form">
+      <form
+        onSubmit={handlePlayerSubmit}
+        className="add-player-form"
+        autoComplete="off"
+      >
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
             <div className="medium-4 cell">
               <label htmlFor="name">
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Player Name"
-                  onChange={handlePlayerInputChange}
-                  value={player.name}
+                <PlayerCombobox
+                  handlePlayerInputChange={handlePlayerInputChange}
+                  player={player}
                 />
                 <FormError error={errors.name} />
               </label>
@@ -126,14 +150,10 @@ const LandingPage = ({ user }) => {
 
             <div className="medium-4 cell">
               <label htmlFor="season">
-                <input
-                  id="season"
-                  name="season"
-                  type="text"
-                  placeholder="Season"
-                  onChange={handlePlayerInputChange}
-                  value={player.season}
-                />
+                  <SeasonCombobox
+                    handleSeasonInputChange={handleSeasonInputChange}
+                    player={player}
+                  />
                 <FormError error={errors.season} />
               </label>
             </div>
@@ -143,7 +163,6 @@ const LandingPage = ({ user }) => {
                 <select
                   id="stat"
                   name="stat"
-                  placeholder="Stats"
                   onChange={handleStatsInputChange}
                   value=""
                 >

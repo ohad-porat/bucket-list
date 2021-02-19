@@ -11,6 +11,7 @@ const clientRoutes = [
   "/all-tables",
   "/tables/:tableId",
   "/tables/:tableId/edit",
+  "/test",
 ]
 router.get(clientRoutes, (req, res) => {
   res.sendFile(getClientIndexPath())

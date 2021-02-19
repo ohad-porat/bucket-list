@@ -34,7 +34,9 @@ const App = (props) => {
         </Route>
         <Route exact path="/all-tables" component={AllTablesList} />
         <AuthenticatedRoute exact path="/:userId/my-tables" component={MyTablesList} user={currentUser} />
-        <Route exact path="/tables/:tableId" component={ShowTable} />
+        <Route exact path="/tables/:tableId">
+          <ShowTable user={currentUser} />
+        </Route>
         <Route exact path="/tables/:tableId/edit" component={EditTableForm} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />

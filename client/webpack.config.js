@@ -45,7 +45,7 @@ module.exports = {
         loader: "file-loader",
       },
       {
-        test: /\.module\.s(a|c)ss$/,
+        test: /\.module\.(c|sa|sc)ss$/,
         use: [
           isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
           {
@@ -66,8 +66,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.s(a|c)ss$/,
-        exclude: /\.module.(s(a|c)ss)$/,
+        test: /\.(c|sa|sc)ss$/,
+        exclude: /\.module.((c|sa|sc)ss)$/,
         use: [
           isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
           "css-loader",
@@ -87,7 +87,7 @@ module.exports = {
       "@Components": path.resolve(__dirname, "src/components/"),
       "@Providers": path.resolve(__dirname, "src/providers/"),
     },
-    extensions: ["*", ".js", ".scss"],
+    extensions: ["*", ".js", ".scss", ".css"],
   },
   output: {
     path: path.resolve(__dirname, "../server/public/dist"),

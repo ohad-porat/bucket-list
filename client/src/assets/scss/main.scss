@@ -11,6 +11,7 @@
 }
 
 :root {
+  --reach-combobox: 1;
   -moz-tab-size: 4;
   tab-size: 4;
 }
@@ -49,3 +50,51 @@ body {
   font-family: "Hammersmith One", sans-serif;
 }
 
+.remove-button {
+  cursor: pointer;
+}
+
+.fa-times:hover {
+  color: scale-color($orange, $lightness: 0%);
+}
+
+.back-to-table {
+  margin-left: 1rem;
+}
+
+a.back-to-table {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: $black;
+}
+
+a.back-to-table:hover {
+  color: scale-color($orange, $lightness: 0%);
+}
+
+.edit-add-player {
+  margin-top: 1rem;
+}
+
+input.button.delete-button {
+  margin-left: 20px;
+}
+
+input.player-search-input {
+  line-height: 2.5;
+  background: #FEFEFE;
+  border: solid 1px #CACACA;
+}
+
+input.season-search-input {
+  line-height: 2.5;
+  background: #FEFEFE;
+  border: solid 1px #CACACA;
+}
+
+@media only screen and (max-width: 780px) {
+  .page-body {
+    margin: 0 5rem;
+  }
+}

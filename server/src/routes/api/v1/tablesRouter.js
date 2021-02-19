@@ -24,15 +24,11 @@ tablesRouter.get("/", async (req, res) => {
 
 tablesRouter.get("/:tableId", async (req, res) => {
   const { tableId } = req.params
-  let userId = ""
-  if (req.user) {
-    userId = req.user.id
-  }
 
   try {
     const rawTable = await Table.query().findById(tableId)
     const table = await TableSerializer.getDetails(rawTable)
-    return res.status(200).json({ table, userId })
+    return res.status(200).json({ table })
   } catch (error) {
     return res.status(500).json({ errors: error })
   }
