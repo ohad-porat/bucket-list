@@ -11,7 +11,7 @@ import "@reach/combobox/styles.scss"
 const PlayerCombobox = ({ handlePlayerInputChange, player }) => {
   const players = usePlayerSearch(player.name)
   const handlePlayerNameChange = (event) => {
-    handlePlayerInputChange(event.currentTarget.value)
+    handlePlayerInputChange(event.currentTarget.value, event.type)
   }
 
   return (

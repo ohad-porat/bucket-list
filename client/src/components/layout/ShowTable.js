@@ -79,7 +79,7 @@ const ShowTable = ({ user }) => {
   }
 
   if (shouldRedirect) {
-    return <Redirect to={`/${currentUserId}/my-tables`} />
+    return <Redirect to={`/${user.id}/my-tables`} />
   }
 
   let editDeleteButtons

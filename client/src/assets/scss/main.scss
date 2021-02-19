@@ -86,3 +86,15 @@ input.player-search-input {
   background: #FEFEFE;
   border: solid 1px #CACACA;
 }
+
+input.season-search-input {
+  line-height: 2.5;
+  background: #FEFEFE;
+  border: solid 1px #CACACA;
+}
+
+@media only screen and (max-width: 780px) {
+  .page-body {
+    margin: 0 5rem;
+  }
+}
