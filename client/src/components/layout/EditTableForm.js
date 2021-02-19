@@ -243,6 +243,7 @@ const EditTableForm = (props) => {
             id="title"
             name="title"
             type="text"
+            className="form-field"
             placeholder="Title"
             onChange={handleInputChange}
             value={form.title}
@@ -253,6 +254,7 @@ const EditTableForm = (props) => {
           <textarea
             id="notes"
             name="notes"
+            className="form-field"
             placeholder="Notes"
             onChange={handleInputChange}
             value={form.notes || ""}
