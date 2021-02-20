@@ -3,7 +3,7 @@
 @include foundation-everything;
 
 @import url("https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap");
 *,
 *::before,
 *::after {
@@ -25,6 +25,7 @@ $white: #fefefe;
 @import "./listPages";
 @import "./showPage";
 @import "./editPage";
+@import "./formsAndButtons";
 
 body {
   background-color: #898989;
@@ -39,38 +40,11 @@ body {
 }
 
 .list-body {
-  margin: 0 2rem;
+  margin: 0 3rem;
 }
 
 .save-table-form {
   padding: 2.5rem 0;
-}
-
-.button {
-  font-family: "Hammersmith One", sans-serif;
-  border-radius: 15px;
-  box-shadow: inset -3px -3px 10px #c24a32;
-}
-
-.form-field {
-  border-radius: 15px;
-  box-shadow: inset -3px -3px 10px #eee;
-  font-size: 16px;
-}
-
-::-webkit-input-placeholder {
-  font-style: italic;
-}
-
-input.search-input {
-  line-height: 2.2;
-  background: #fefefe;
-  border: solid 1px #cacaca;
-}
-
-.stat-form-field {
-  font-style: italic;
-  color: #cacaca;
 }
 
 input.button.delete-button {

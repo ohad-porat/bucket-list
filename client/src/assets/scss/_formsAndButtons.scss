@@ -1,0 +1,41 @@
+.button {
+  font-family: "Hammersmith One", sans-serif;
+  border-radius: 15px;
+  box-shadow: inset -3px -3px 10px #c24a32;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.form-field {
+  border-radius: 15px;
+  box-shadow: inset -3px -3px 10px #eee;
+  font-size: 16px;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+input.search-input {
+  line-height: 2.2;
+  background: #fefefe;
+  border: solid 1px #cacaca;
+}
+
+.stat-form-field {
+  font-style: italic;
+  color: #cacaca;
+}
+
+.sign-in-up-header {
+  font-family: "Hammersmith One", sans-serif;
+  margin-bottom: 1.2rem;
+}
+
+.sign-in-up-form {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}

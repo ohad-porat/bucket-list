@@ -106,7 +106,7 @@ const ShowTable = ({ user }) => {
   return (
     <div className="page-body">
       <h1 className="title-show-page">{table.title}</h1>
-      <p className="userName-show-page">By {table.user.userName}</p>
+      <p className="userName-show-page">Created by {table.user.userName}</p>
       <table className="hover unstriped table-scroll">
         <thead>
           <tr>
