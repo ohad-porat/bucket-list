@@ -2,20 +2,45 @@ input.button.delete-button {
   margin-left: 20px;
 }
 
+.title-box {
+  margin-bottom: 10px;
+}
+
 .title-show-page {
   font-family: "Source Sans Pro", sans-serif;
   color: $orange;
   font-weight: 600;
+  filter: drop-shadow(1px 1px 0.15rem $black);
 }
 
 .userName-show-page {
   font-family: "Source Sans Pro", sans-serif;
+  color: $black;
   font-size: 18.5px;
   font-weight: 600;
 }
 
-.notes-show-page {
+.notes-box.callout.medium-4 {
   font-family: "Source Sans Pro", sans-serif;
+  color: $textColor;
   font-size: 20px;
+  font-weight: 600;
+  background-color: rgba(47, 47, 47, 0.75);
+  border-radius: 30px;
+  height: 2.9rem;
+  width: 21.5rem;
+  padding-top: 0.5rem;
+  margin-top: 0.6rem;
+  overflow: hidden;
+  transition: height .3s;
+  
 }
 
+.notes-box.callout.medium-4:hover {
+  height: 6.5rem;
+  overflow: scroll;
+}
+
+.notes-show-page {
+  font-weight: 400;
+}

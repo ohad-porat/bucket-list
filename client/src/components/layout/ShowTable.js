@@ -105,20 +105,29 @@ const ShowTable = ({ user }) => {
 
   return (
     <div className="page-body">
-      <h1 className="title-show-page">{table.title}</h1>
-      <p className="userName-show-page">Created by {table.user.userName}</p>
-      <table className="hover unstriped table-scroll">
-        <thead>
-          <tr>
-            <th width="200">Player</th>
-            <th width="60">Season</th>
-            {statsTiles}
-          </tr>
-        </thead>
-        <tbody>{playerTiles}</tbody>
-      </table>
-      <p className="notes-show-page">{table.notes}</p>
-      {editDeleteButtons}
+      <div className="grid-container">
+        <div className="grid-x grid-margin-x">
+          <div className="title-box medium-8">
+            <h1 className="title-show-page">{table.title}</h1>
+            <p className="userName-show-page">By {table.user.userName}</p>
+          </div>
+          <div className="notes-box callout medium-4">
+            <div className="notes-header-show-page">Notes:</div>
+            <div className="notes-show-page">{table.notes ? table.notes : <i>Not Provided</i>}</div>
+          </div>
+          <table className="hover unstriped table-scroll">
+            <thead>
+              <tr>
+                <th width="200">Player</th>
+                <th width="100">Season</th>
+                {statsTiles}
+              </tr>
+            </thead>
+            <tbody>{playerTiles}</tbody>
+          </table>
+          {editDeleteButtons}
+        </div>
+      </div>
     </div>
   )
 }
