@@ -94,6 +94,7 @@ const SaveTableForm = ({ selectedPlayers, selectedStats }) => {
         <input
           id="title"
           name="title"
+          className="form-field"
           type="text"
           placeholder="Title"
           onChange={handleInputChange}
@@ -105,6 +106,7 @@ const SaveTableForm = ({ selectedPlayers, selectedStats }) => {
         <textarea
           id="notes"
           name="notes"
+          className="form-field"
           placeholder="Notes"
           onChange={handleInputChange}
           value={form.notes}

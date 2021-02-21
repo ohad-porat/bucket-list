@@ -9,7 +9,7 @@ const TopBar = ({ user }) => {
       <Link to="/user-sessions/new"className="top-bar-link">Sign In</Link>
     </li>,
     <li key="sign-up">
-      <Link to="/users/new" className="top-bar-link">Sign Up</Link>
+      <Link to="/users/new" className="button sign-up-button">Sign Up</Link>
     </li>,
   ]
 

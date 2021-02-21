@@ -3,7 +3,7 @@
 @include foundation-everything;
 
 @import url("https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap");
 *,
 *::before,
 *::after {
@@ -20,11 +20,13 @@ $dark-gray: #8a8a8a;
 $black: #212527;
 $orange: #c7513a;
 $white: #fefefe;
+$textColor: #eae7e2;
 
 @import "./topBar";
 @import "./listPages";
 @import "./showPage";
 @import "./editPage";
+@import "./formsAndButtons";
 
 body {
   background-color: #898989;
@@ -39,58 +41,15 @@ body {
 }
 
 .list-body {
-  margin: 0 2rem;
+  margin: 0 3rem;
 }
 
 .save-table-form {
   padding: 2.5rem 0;
 }
 
-.button {
-  font-family: "Hammersmith One", sans-serif;
-}
-
-.remove-button {
-  cursor: pointer;
-}
-
-.fa-times:hover {
-  color: scale-color($orange, $lightness: 0%);
-}
-
-.back-to-table {
-  margin-left: 1rem;
-}
-
-a.back-to-table {
-  font-family: "Source Sans Pro", sans-serif;
-  font-weight: 600;
-  font-size: 20px;
-  color: $black;
-}
-
-a.back-to-table:hover {
-  color: scale-color($orange, $lightness: 0%);
-}
-
-.edit-add-player {
-  margin-top: 1rem;
-}
-
 input.button.delete-button {
   margin-left: 20px;
-}
-
-input.player-search-input {
-  line-height: 2.5;
-  background: #FEFEFE;
-  border: solid 1px #CACACA;
-}
-
-input.season-search-input {
-  line-height: 2.5;
-  background: #FEFEFE;
-  border: solid 1px #CACACA;
 }
 
 @media only screen and (max-width: 780px) {

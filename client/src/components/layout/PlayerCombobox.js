@@ -6,7 +6,7 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox"
-import "@reach/combobox/styles.scss"
+import "@reach/combobox/styles.css"
 
 const PlayerCombobox = ({ handlePlayerInputChange, player }) => {
   const players = usePlayerSearch(player.name)
@@ -17,7 +17,7 @@ const PlayerCombobox = ({ handlePlayerInputChange, player }) => {
   return (
     <Combobox aria-label="name" onSelect={handlePlayerInputChange}>
       <ComboboxInput
-        className="player-search-input medium-12 cell"
+        className="search-input medium-12 cell form-field"
         placeholder="Choose a Player"
         onChange={handlePlayerNameChange}
         value={player.name}

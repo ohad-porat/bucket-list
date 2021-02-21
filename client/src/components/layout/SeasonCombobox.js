@@ -6,7 +6,7 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox"
-import "@reach/combobox/styles.scss"
+import "@reach/combobox/styles.css"
 
 const SeasonCombobox =  ({ handleSeasonInputChange, player }) => {
   const seasons =  useSeasonSearch(player.id)
@@ -18,7 +18,7 @@ const SeasonCombobox =  ({ handleSeasonInputChange, player }) => {
   return (
     <Combobox aria-label="name" onSelect={handleSeasonInputChange}>
       <ComboboxInput
-        className="season-search-input medium-12 cell"
+        className="search-input medium-12 cell form-field"
         placeholder="Choose a Season"
         onChange={handleSeasonChange}
         value={player.season}

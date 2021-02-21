@@ -1,9 +1,12 @@
-$textColor: #eae7e2;
-
 .table-tile {
   margin: 1rem;
   background-color: rgba(47, 47, 47, 0.75);
   border-radius: 30px;
+  transition: transform .3s
+}
+
+.table-tile:hover {
+  transform: scale(1.13);
 }
 
 .table-title {
