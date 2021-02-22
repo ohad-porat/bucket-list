@@ -198,7 +198,7 @@ const EditTableForm = (props) => {
 
   return (
     <div className="page-body">
-      <form onSubmit={handlePlayerSubmit} className="add-player-form">
+      <form onSubmit={handlePlayerSubmit} className="add-player-form" autoComplete="off">
         <div className="grid-container">
           <div className="grid-x grid-padding-x edit-add-player">
             <div className="medium-4 cell">

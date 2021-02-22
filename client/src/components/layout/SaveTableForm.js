@@ -88,7 +88,7 @@ const SaveTableForm = ({ selectedPlayers, selectedStats }) => {
   }
 
   return (
-    <form className="save-table-form" onSubmit={saveTable}>
+    <form className="save-table-form" onSubmit={saveTable} autoComplete="off">
       <ErrorList errors={errors} />
       <label htmlFor="title">
         <input
