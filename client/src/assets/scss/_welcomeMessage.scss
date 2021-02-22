@@ -1,0 +1,44 @@
+.welcome-box {
+  background-color: rgba(47, 47, 47, 0.75);
+  border-radius: 30px;
+  box-shadow: rgba(47, 47, 47, 0.75) 0 0 10px;
+  color: $textColor;
+  margin-bottom: 2rem;
+}
+
+.welcome-header {
+  font-family: "Hammersmith One", sans-serif;
+  color: $orange;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.welcome-subheader {
+  font-family: "Hammersmith One", sans-serif;
+  font-size: 1.8rem;
+  text-align: center;
+  padding: 0 8rem;
+}
+
+.welcome-body {
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+}
+
+.welcome-footer {
+  font-size: 0.93rem;
+  padding: 0 1rem;
+}
+
+a.api-link {
+  font-family: "Source Sans Pro", sans-serif;
+  color: $orange;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+a.api-link:hover {
+  color: $orange;
+  color: scale-color($orange, $lightness: -10%);
+}

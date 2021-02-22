@@ -1,4 +1,5 @@
-import React, { useEffect, useState, Suspense } from "react"
+import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 import getPlayer from "../fetchRequests/getPlayer.js"
 import validateInput from "../../services/validateInput.js"
@@ -104,10 +105,10 @@ const LandingPage = ({ user }) => {
   const statsTiles = selectedStats.map((stat) => {
     return <StatTile key={stat.id} abbreviation={stat.abbreviation} />
   })
-
-  let table = ""
+  // debugger
+  let showTable = ""
   if (selectedPlayers.length > 0 || selectedStats.length > 0) {
-    table = (
+    showTable = (
       <table className="hover unstriped table-scroll">
         <thead>
           <tr>
@@ -119,6 +120,56 @@ const LandingPage = ({ user }) => {
         <tbody>{playerTiles}</tbody>
       </table>
     )
+  } else if (
+    (user === null || user === undefined) &&
+    selectedPlayers.length === 0 &&
+    selectedStats.length === 0
+  ) {
+    showTable = (
+      <div className="callout welcome-box">
+        <h1 className="welcome-header">Welcome to Bucket List</h1>
+        <h2 className="welcome-subheader">
+          the place to compare NBA players and stats with ease and efficiency.
+        </h2>
+        <p className="welcome-body">
+          To compare players, enter a player name and season, and then select
+          stats to be displayed. You can also save your tables by signing up for
+          our website!
+        </p>
+        <ul className="fa-ul">
+          <li>
+            <span className="fa-li">
+              <i className="fas fa-basketball-ball"></i>
+            </span>
+            Stats will be displayed in season averages.
+          </li>
+          <li>
+            <span className="fa-li">
+              <i className="fas fa-basketball-ball"></i>
+            </span>
+            Seasons are represented by the year they began. For example, 2018
+            represents season 2018-2019.
+          </li>
+          <li>
+            <span className="fa-li">
+              <i className="fas fa-basketball-ball"></i>
+            </span>
+            Data is available from seasons 1979-present.
+          </li>
+        </ul>
+        <br />
+        <p className="welcome-footer">
+          Thank you to <Link to="http://balldontlie.io/" className="api-link">balldontlie API</Link> for supplying the data for this project!
+        </p>
+      </div>
+    )
+  } else if (
+    user !== undefined &&
+    user !== null &&
+    selectedPlayers.length === 0 &&
+    selectedStats.length === 0
+  ) {
+    showTable = ""
   }
 
   const authenticatedUserSaveTable = (
@@ -150,10 +201,10 @@ const LandingPage = ({ user }) => {
 
             <div className="medium-4 cell">
               <label htmlFor="season">
-                  <SeasonCombobox
-                    handleSeasonInputChange={handleSeasonInputChange}
-                    player={player}
-                  />
+                <SeasonCombobox
+                  handleSeasonInputChange={handleSeasonInputChange}
+                  player={player}
+                />
                 <FormError error={errors.season} />
               </label>
             </div>
@@ -184,7 +235,7 @@ const LandingPage = ({ user }) => {
           </div>
         </div>
       </form>
-      {table}
+      {showTable}
       {user ? authenticatedUserSaveTable : unauthenticatedUser}
     </div>
   )
