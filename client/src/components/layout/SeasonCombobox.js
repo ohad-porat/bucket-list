@@ -92,7 +92,6 @@ const fetchSeasons = async (value) => {
   const entireList = await getEntireStatsList(value)
   const rawSeasons = entireList.map((stat) => stat.game.season)
   const seasons = [...new Set(rawSeasons)]
-  debugger
 
   return seasons
 }
