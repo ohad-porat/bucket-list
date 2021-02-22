@@ -159,7 +159,7 @@ const LandingPage = ({ user }) => {
         </ul>
         <br />
         <p className="welcome-footer">
-          Thank you to <Link to="http://balldontlie.io/" className="api-link">balldontlie API</Link> for supplying the data for this project!
+          Thank you to <a href="http://balldontlie.io/" className="api-link">balldontlie API</a> for supplying the data for this project!
         </p>
       </div>
     )
