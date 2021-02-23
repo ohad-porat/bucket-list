@@ -45,6 +45,7 @@ const LandingPage = ({ user }) => {
     if (eventType === "change") {
       setPlayer({
         ...player,
+        id: "",
         name: nameString,
       })
     } else {
@@ -88,7 +89,7 @@ const LandingPage = ({ user }) => {
       const fetchedPlayerData = await fetchPlayerAndStats(player)
       let newPlayers = selectedPlayers.concat(fetchedPlayerData)
       setSelectedPlayers(newPlayers)
-      setPlayer({ name: "", season: "", isNameSelected: false })
+      setPlayer({ name: "", season: "", id: "" })
     }
   }
 
@@ -105,7 +106,7 @@ const LandingPage = ({ user }) => {
   const statsTiles = selectedStats.map((stat) => {
     return <StatTile key={stat.id} abbreviation={stat.abbreviation} />
   })
-  // debugger
+
   let showTable = ""
   if (selectedPlayers.length > 0 || selectedStats.length > 0) {
     showTable = (

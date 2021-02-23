@@ -8,17 +8,30 @@ import {
 } from "@reach/combobox"
 import "@reach/combobox/styles.css"
 
-const SeasonCombobox =  ({ handleSeasonInputChange, player }) => {
-  const seasons =  useSeasonSearch(player.id)
+const SeasonCombobox = ({ handleSeasonInputChange, player }) => {
+  let seasons = useSeasonSearch(player.id)
+  seasons.sort()
+
+  if (player.name === "") {
+    seasons.length = 0
+  }
 
   const handleSeasonChange = (event) => {
     handleSeasonInputChange(event.currentTarget.value)
   }
 
+  let loadingClass = ""
+
+  if (player.id !== "" && seasons.length === 0) {
+    loadingClass = "loading"
+  } else if (player.id !== "" && seasons.length > 0) {
+    loadingClass = ""
+  }
+
   return (
     <Combobox aria-label="name" onSelect={handleSeasonInputChange}>
       <ComboboxInput
-        className="search-input medium-12 cell form-field"
+        className={`search-input medium-12 cell form-field ${loadingClass}`}
         placeholder="Choose a Season"
         onChange={handleSeasonChange}
         value={player.season}
