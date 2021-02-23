@@ -12,7 +12,7 @@ const SeasonCombobox = ({ handleSeasonInputChange, player }) => {
   let seasons = useSeasonSearch(player.id)
   seasons.sort()
 
-  if (player.name === "") {
+  if (player.id === "") {
     seasons.length = 0
   }
 
