@@ -39,3 +39,16 @@ input.search-input {
   font-size: 18px;
   font-weight: 600;
 }
+
+input.loading {
+  background: url(https://i.ibb.co/X2V5Fb0/loader.gif);
+  background-color: #ffffff;
+  background-size: 60px;
+  background-position:right center;
+  background-repeat: no-repeat;
+}
+
+.form-error {
+  margin-top: 2px;
+  margin-left: 15px;
+}
