@@ -58,6 +58,7 @@ const EditTableForm = (props) => {
     if (eventType === "change") {
       setPlayer({
         ...player,
+        id: "",
         name: nameString,
       })
     } else {
@@ -87,7 +88,7 @@ const EditTableForm = (props) => {
       const seasonsToAdd = form.seasonsToAdd.concat(fetchedPlayerData)
       const seasons = form.seasons.concat(fetchedPlayerData)
       setForm({ ...form, seasonsToAdd, seasons })
-      setPlayer({ name: "", season: "" })
+      setPlayer({ name: "", season: "", id: "" })
     }
   }
 
