@@ -104,17 +104,17 @@ const EditTableForm = (props) => {
       setForm({ ...form, seasonsToRemove })
     } else {
       const playerIndex = form.seasons.findIndex(
-        (player) => player.id === playerId && player.stats.season === season
-      )
-      let seasons = form.seasons
-      seasons.splice(playerIndex, 1)
-      setForm({ ...form, seasons })
-      const addPlayerIndex = form.seasonsToAdd.findIndex(
-        (player) => player.id === playerId && player.stats.season === season
-      )
-      let seasonsToAdd = form.seasonsToAdd
-      seasonsToAdd.splice(addPlayerIndex, 1)
-      setForm({ ...form, seasonsToAdd })
+        (player) => player.id === playerId && player.stats.season === playerSeason
+        )
+        let seasons = form.seasons
+        seasons.splice(playerIndex, 1)
+        setForm({ ...form, seasons })
+        const addPlayerIndex = form.seasonsToAdd.findIndex(
+          (player) => player.id === playerId && player.stats.season === playerSeason
+          )
+          let seasonsToAdd = form.seasonsToAdd
+          seasonsToAdd.splice(addPlayerIndex, 1)
+          setForm({ ...form, seasonsToAdd })
     }
   }
 
