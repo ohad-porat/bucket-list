@@ -10,7 +10,9 @@ import "@reach/combobox/styles.css"
 
 const SeasonCombobox = ({ handleSeasonInputChange, player }) => {
   let seasons = useSeasonSearch(player.id)
-  seasons.sort()
+    seasons.sort(function (a, b) {
+    return b - a
+  })
 
   if (player.id === "") {
     seasons.length = 0
