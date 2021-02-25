@@ -17,7 +17,7 @@ const PlayerCombobox = ({ handlePlayerInputChange, player }) => {
   return (
     <Combobox aria-label="name" onSelect={handlePlayerInputChange}>
       <ComboboxInput
-        id="player"
+        id="name"
         className="search-input medium-12 cell form-field"
         placeholder="Choose a Player"
         onChange={handlePlayerNameChange}

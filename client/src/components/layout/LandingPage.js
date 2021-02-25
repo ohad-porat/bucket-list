@@ -190,7 +190,7 @@ const LandingPage = ({ user }) => {
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
             <div className="medium-4 cell">
-              <label htmlFor="player">
+              <label htmlFor="name">
                 <PlayerCombobox
                   handlePlayerInputChange={handlePlayerInputChange}
                   player={player}
