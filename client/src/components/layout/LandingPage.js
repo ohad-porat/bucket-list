@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 
 import getPlayer from "../fetchRequests/getPlayer.js"
 import validateInput from "../../services/validateInput.js"
@@ -191,7 +190,7 @@ const LandingPage = ({ user }) => {
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
             <div className="medium-4 cell">
-              <label htmlFor="name">
+              <label htmlFor="player">
                 <PlayerCombobox
                   handlePlayerInputChange={handlePlayerInputChange}
                   player={player}
@@ -226,11 +225,11 @@ const LandingPage = ({ user }) => {
             </div>
           </div>
           <div className="button-group">
-            <input type="submit" value="Add Player" className="button" />
+            <input type="submit" value="Add Player" className="button add-player" />
             <input
               type="button"
               value="Clear Table"
-              className="button"
+              className="button clear-button"
               onClick={handleClearTable}
             />
           </div>

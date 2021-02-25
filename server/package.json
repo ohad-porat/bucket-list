@@ -14,7 +14,8 @@
     "ci": "jest --coverage",
     "generate-secret": "./scripts/generate-secret.js",
     "dev:e2e": "NODE_ENV=e2e PORT=8765 nodemon src/app.js",
-    "db:seed": "node ./bin/seed.js"
+    "db:seed": "node ./bin/seed.js",
+    "db:e2e:seed": "NODE_ENV='e2e' yarn run db:seed"
   },
   "license": "UNLICENSED",
   "private": true,

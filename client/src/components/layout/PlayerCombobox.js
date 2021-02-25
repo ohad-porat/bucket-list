@@ -17,6 +17,7 @@ const PlayerCombobox = ({ handlePlayerInputChange, player }) => {
   return (
     <Combobox aria-label="name" onSelect={handlePlayerInputChange}>
       <ComboboxInput
+        id="player"
         className="search-input medium-12 cell form-field"
         placeholder="Choose a Player"
         onChange={handlePlayerNameChange}
@@ -59,7 +60,6 @@ const usePlayerSearch = (searchTerm) => {
 const cache = {}
 const fetchPlayers = (value) => {
   if (cache[value]) {
-
     return Promise.resolve(cache[value])
   }
 
@@ -69,7 +69,7 @@ const fetchPlayers = (value) => {
     .then((res) => res.json())
     .then((result) => {
       cache[value] = result
-      
+
       return result
     })
 }
