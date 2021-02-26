@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 describe("As a signed in user visiting the landing page", () => {
-  beforeEach(() => {
+  before(() => {
     cy.task("db:truncate", "SeasonOfTable");
     cy.task("db:truncate", "StatOfTable");
     cy.task("db:truncate", "Table");
@@ -12,19 +12,23 @@ describe("As a signed in user visiting the landing page", () => {
       modelName: "User",
       json: { email: "user@example.com", userName: "user", password: "password" },
     });
+  });
 
+  beforeEach(() => {
     cy.visit("/user-sessions/new");
     cy.get("#email").type("user@example.com");
     cy.get("#password").type("password");
 
     cy.get("form").submit();
-  });
+
+    cy.visit("/");
+  })
 
   it("doesn't have a welcome message", () => {
     cy.get(".welcome-box").should("not.exist");
   });
 
-  it("saves a table when form is submitted correctly", () => {
+  it("saves a table when form is submitted correctly and redirects to the show table page", () => {
     cy.get("input#name").type("Steve Nash");
     cy.get("input#season").type("2004");
 
@@ -43,6 +47,7 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("input#title").type("Test");
 
     cy.get("form.save-table-form").submit();
+    cy.wait(2000);
 
     cy.url().should("include", "http://localhost:8765/tables/");
 
@@ -61,6 +66,7 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("select").select("Free Throws Made");
 
     cy.get("form.save-table-form").submit();
+    cy.wait(2000);
 
     cy.get("ul.errors").find("li").first().should("have.text", "Title is a required property");
   });
@@ -70,8 +76,10 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("select").select("Free Throws Made");
 
     cy.get("input#title").type("Test");
+    cy.wait(2000);
 
     cy.get("form.save-table-form").submit();
+    cy.wait(2000);
 
     cy.get("ul.errors").find("li").first().should("have.text", "Players should not be empty");
   });
@@ -86,7 +94,17 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("input#title").type("Test");
 
     cy.get("form.save-table-form").submit();
+    cy.wait(2000);
 
     cy.get("ul.errors").find("li").first().should("have.text", "Stats should not be empty");
   });
+
+  after(() => {
+    cy.task("db:truncate", "SeasonOfTable");
+    cy.task("db:truncate", "StatOfTable");
+    cy.task("db:truncate", "Table");
+    cy.task("db:truncate", "SeasonAverage");
+    cy.task("db:truncate", "Player");
+    cy.task("db:truncate", "User");
+  })
 });

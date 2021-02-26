@@ -20,7 +20,7 @@ if (user) {
   const authenticatedListItems = [
     <li key="hello-user" className="hello-user">Hello, {username}
     </li>,
-    <li key="sign-out">
+    <li key="sign-out" id="sign-out">
       <SignOutButton />
     </li>,
   ]
@@ -44,7 +44,7 @@ if (user) {
       <div className="top-bar-left">
         <ul className="menu">
           <li>
-            <Link to="/all-tables" className="top-bar-link">All Tables</Link>
+            <Link to="/all-tables" className="top-bar-link" id="all-tables">All Tables</Link>
           </li>
           {user ? authenticatedLeftNavbar : unauthenticatedLeftNavBar}
         </ul>

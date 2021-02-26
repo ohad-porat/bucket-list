@@ -5,9 +5,11 @@ describe("As an unauthenticated user visiting the landing page", () => {
     cy.visit("/");
   });
 
-  it("has a welcome message header", () => {
+  it("has a welcome message", () => {
     cy.get(".welcome-box").should("exist");
+  });
 
+  it("has a welcome message header", () => {
     cy.get(".welcome-header").should("have.text", "Welcome to Bucket List");
   });
 
