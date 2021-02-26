@@ -53,7 +53,7 @@ describe("As a user visiting the 'my tables' page", () => {
   });
 
   it("displays the username of the user that created the table", () => {
-    cy.get(".table-userName").should("have.text", "By user");
+    cy.get(".table-userName").should("not.exist");
   });
 
   it("displays the names of the players in the table", () => {
