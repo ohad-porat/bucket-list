@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router"
-import TableTile from "./TableTile.js"
+import MyTableTile from "./MyTableTile.js"
 
 const MyTablesList = (props) => {
   const [tables, setTables] = useState([])
@@ -27,7 +27,7 @@ const MyTablesList = (props) => {
   }, [])
 
   const tableTiles = tables.map((table) => {
-    return <TableTile key={table.id} table={table} />
+    return <MyTableTile key={table.id} table={table} />
   })
 
   return (
