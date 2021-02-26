@@ -34,7 +34,7 @@ const PlayerTile = ({ player, selectedStats }) => {
   })
 
   return (
-    <tr>
+    <tr id={`${player.first_name}-${player.last_name}`}>
       <td id="player-name">
         {player.first_name} {player.last_name}
       </td>

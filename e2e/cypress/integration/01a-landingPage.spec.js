@@ -29,6 +29,7 @@ describe("As an unauthenticated user visiting the landing page", () => {
     cy.get("input#season").type("2004");
 
     cy.get("form.add-player-form").submit();
+    cy.wait(2000);
 
     cy.get("td#player-name").should("have.text", "Steve Nash");
     cy.get("td#season").should("have.text", "2004-05");
@@ -50,6 +51,7 @@ describe("As an unauthenticated user visiting the landing page", () => {
     cy.get("input#season").type("2004");
 
     cy.get("form.add-player-form").submit();
+    cy.wait(2000);
 
     cy.get("select").select("Assists");
     cy.get("select").select("Rebounds");
@@ -61,6 +63,7 @@ describe("As an unauthenticated user visiting the landing page", () => {
   it("doesn't add rows to the table and shows errors if form is submitted without a player", () => {
     cy.get("input#season").type("2004");
     cy.get("form.add-player-form").submit();
+    cy.wait(2000);
 
     cy.get(".form-error").should("have.text", "is required");
     cy.get("table").should("not.exist");
@@ -69,6 +72,7 @@ describe("As an unauthenticated user visiting the landing page", () => {
   it("doesn't add rows to the table and shows errors if form is submitted without a season", () => {
     cy.get("input#name").type("Steve Nash");
     cy.get("form.add-player-form").submit();
+    cy.wait(2000);
 
     cy.get(".form-error").should("have.text", "is required");
     cy.get("table").should("not.exist");
