@@ -1,7 +1,6 @@
 /// <reference types="Cypress" />
 
 describe("As a signed in user visiting the landing page", () => {
-  // seed a user
   beforeEach(() => {
     cy.task("db:truncate", "SeasonOfTable");
     cy.task("db:truncate", "StatOfTable");
