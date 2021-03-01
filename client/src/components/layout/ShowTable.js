@@ -90,7 +90,7 @@ const ShowTable = ({ user }) => {
       editDeleteButtons = (
         <div className="button-group">
           <Link to={`/tables/${tableId}/edit`}>
-            <button className="button">Edit</button>
+            <button className="button edit-button">Edit</button>
           </Link>
           <input
             type="button"
