@@ -20,6 +20,7 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("#password").type("password");
 
     cy.get("form").submit();
+    cy.wait(2000);
 
     cy.visit("/");
   });
