@@ -2,11 +2,6 @@
 
 describe("As a signed in user visiting the landing page", () => {
   before(() => {
-    cy.task("db:truncate", "SeasonOfTable");
-    cy.task("db:truncate", "StatOfTable");
-    cy.task("db:truncate", "Table");
-    cy.task("db:truncate", "SeasonAverage");
-    cy.task("db:truncate", "Player");
     cy.task("db:truncate", "User");
     cy.task("db:insert", {
       modelName: "User",
@@ -15,6 +10,11 @@ describe("As a signed in user visiting the landing page", () => {
   });
 
   beforeEach(() => {
+    cy.task("db:truncate", "SeasonOfTable");
+    cy.task("db:truncate", "StatOfTable");
+    cy.task("db:truncate", "Table");
+    cy.task("db:truncate", "SeasonAverage");
+    cy.task("db:truncate", "Player");
     cy.visit("/user-sessions/new");
     cy.get("#email").type("user@example.com");
     cy.get("#password").type("password");
@@ -22,7 +22,7 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("form").submit();
 
     cy.visit("/");
-  })
+  });
 
   it("doesn't have a welcome message", () => {
     cy.get(".welcome-box").should("not.exist");
@@ -53,6 +53,8 @@ describe("As a signed in user visiting the landing page", () => {
 
     cy.get("tr#Steve-Nash").find("td#player-name").should("have.text", "Steve Nash");
     cy.get("tr#Steve-Nash").find("td#season").should("have.text", "2004-05");
+    cy.get("th#PTS").should("have.text", "PTS");
+    cy.get("th#FTM").should("have.text", "FTM");
   });
 
   it("remains on form page and shows errors if form is submitted without a title", () => {
@@ -106,5 +108,5 @@ describe("As a signed in user visiting the landing page", () => {
     cy.task("db:truncate", "SeasonAverage");
     cy.task("db:truncate", "Player");
     cy.task("db:truncate", "User");
-  })
+  });
 });
