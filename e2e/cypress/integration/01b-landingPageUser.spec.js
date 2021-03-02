@@ -58,7 +58,7 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("th#FTM").should("have.text", "FTM");
   });
 
-  it("remains on form page and shows errors if form is submitted without a title", () => {
+  it("remains on the landing page and shows errors if form is submitted without a title", () => {
     cy.get("input#name").type("Steve Nash");
     cy.get("input#season").type("2004");
 
@@ -74,7 +74,7 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("ul.errors").find("li").first().should("have.text", "Title is a required property");
   });
 
-  it("remains on form page and shows errors if form is submitted without players", () => {
+  it("remains on the landing page and shows errors if form is submitted without players", () => {
     cy.get("select").select("Points");
     cy.get("select").select("Free Throws Made");
 
@@ -87,7 +87,7 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("ul.errors").find("li").first().should("have.text", "Players should not be empty");
   });
 
-  it("remains on form page and shows errors if form is submitted without players", () => {
+  it("remains on the landing page and shows errors if form is submitted without players", () => {
     cy.get("input#name").type("Steve Nash");
     cy.get("input#season").type("2004");
 
@@ -100,6 +100,15 @@ describe("As a signed in user visiting the landing page", () => {
     cy.wait(2000);
 
     cy.get("ul.errors").find("li").first().should("have.text", "Stats should not be empty");
+  });
+
+  it.only("does not add an empty table to the 'all tables' page if form is submitted incorrectly", () => {
+    cy.get("form.save-table-form").submit();
+    cy.wait(2000);
+
+    cy.get("a#all-tables").click();
+
+    cy.get(".table-tile").should("not.exist");
   });
 
   after(() => {
