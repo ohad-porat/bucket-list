@@ -52,6 +52,7 @@ describe("As a signed in user visiting the landing page", () => {
 
     cy.url().should("include", "http://localhost:8765/tables/");
 
+    cy.get("h1.title-show-page").should("have.text", "Test");
     cy.get("tr#Steve-Nash").find("td#player-name").should("have.text", "Steve Nash");
     cy.get("tr#Steve-Nash").find("td#season").should("have.text", "2004-05");
     cy.get("th#PTS").should("have.text", "PTS");
@@ -102,7 +103,7 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("ul.errors").find("li").first().should("have.text", "Stats should not be empty");
   });
 
-  it.only("does not add an empty table to the 'all tables' page if form is submitted incorrectly", () => {
+  it("does not add an empty table to the 'all tables' page if form is submitted incorrectly", () => {
     cy.get("form.save-table-form").submit();
     cy.wait(2000);
 
