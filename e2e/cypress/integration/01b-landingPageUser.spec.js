@@ -7,6 +7,7 @@ describe("As a signed in user visiting the landing page", () => {
       modelName: "User",
       json: { email: "user@example.com", userName: "user", password: "password" },
     });
+    cy.wait(10000);
   });
 
   beforeEach(() => {
@@ -20,7 +21,7 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("#password").type("password");
 
     cy.get("form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.visit("/");
   });
@@ -34,13 +35,13 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("input#season").type("2004");
 
     cy.get("form.add-player-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("input#name").type("Dirk Nowitzki");
     cy.get("input#season").type("2010");
 
     cy.get("form.add-player-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("select").select("Points");
     cy.get("select").select("Free Throws Made");
@@ -48,7 +49,7 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("input#title").type("Test");
 
     cy.get("form.save-table-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.url().should("include", "http://localhost:8765/tables/");
 
@@ -64,13 +65,13 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("input#season").type("2004");
 
     cy.get("form.add-player-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("select").select("Points");
     cy.get("select").select("Free Throws Made");
 
     cy.get("form.save-table-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("ul.errors").find("li").first().should("have.text", "Title is a required property");
   });
@@ -80,10 +81,10 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("select").select("Free Throws Made");
 
     cy.get("input#title").type("Test");
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("form.save-table-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("ul.errors").find("li").first().should("have.text", "Players should not be empty");
   });
@@ -98,14 +99,14 @@ describe("As a signed in user visiting the landing page", () => {
     cy.get("input#title").type("Test");
 
     cy.get("form.save-table-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("ul.errors").find("li").first().should("have.text", "Stats should not be empty");
   });
 
   it("does not add an empty table to the 'all tables' page if form is submitted incorrectly", () => {
     cy.get("form.save-table-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("a#all-tables").click();
 

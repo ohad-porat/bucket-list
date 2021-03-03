@@ -23,13 +23,13 @@ describe("As a user visiting a table's show page", () => {
     cy.get("input#season").type("2004");
 
     cy.get("form.add-player-form").submit();
-    cy.wait(2000);
+    cy.wait(7000);
 
     cy.get("input#name").type("Dirk Nowitzki");
     cy.get("input#season").type("2010");
 
     cy.get("form.add-player-form").submit();
-    cy.wait(2000);
+    cy.wait(7000);
 
     cy.get("select").select("Field Goals Made");
     cy.get("select").select("Turnovers");
@@ -38,10 +38,10 @@ describe("As a user visiting a table's show page", () => {
     cy.get("textarea#notes").type("The Best Duo");
 
     cy.get("form.save-table-form").submit();
-    cy.wait(2000);
+    cy.wait(4000);
 
     cy.get("li#sign-out").click();
-    cy.wait(2000);
+    cy.wait(10000);
   });
 
   beforeEach(() => {
@@ -88,7 +88,7 @@ describe("As a user visiting a table's show page", () => {
       cy.get("#password").type("password");
 
       cy.get("form").submit();
-      cy.wait(2000);
+      cy.wait(3000);
 
       cy.get("a#all-tables").click();
       cy.get(".table-title").find("a").click();
