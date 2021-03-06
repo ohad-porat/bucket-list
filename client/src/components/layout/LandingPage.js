@@ -138,7 +138,10 @@ const LandingPage = ({ user }) => {
           className="button"
           onClick={handleShowBarChart}
         />
-        <BarChart selectedPlayers={selectedPlayers} selectedStats={selectedStats} />
+        <BarChart
+          selectedPlayers={selectedPlayers}
+          selectedStats={selectedStats}
+        />
       </>
     )
   }
