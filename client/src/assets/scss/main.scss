@@ -28,6 +28,7 @@ $textColor: #eae7e2;
 @import "./editPage";
 @import "./formsAndButtons";
 @import "./welcomeMessage";
+@import "./charts";
 
 body {
   background-color: #898989;
@@ -57,4 +58,9 @@ input.button.delete-button {
   .page-body {
     margin: 0 5rem;
   }
+}
+
+.chart {
+  display: block;
+  margin: 0 auto;
 }

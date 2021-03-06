@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 
 import getPlayer from "../fetchRequests/getPlayer.js"
 import validateInput from "../../services/validateInput.js"
@@ -12,6 +11,7 @@ import StatTile from "./StatTile.js"
 import SaveTableForm from "./SaveTableForm.js"
 import PlayerCombobox from "./PlayerCombobox.js"
 import SeasonCombobox from "./SeasonCombobox.js"
+import MyChart from "./MyChart.js"
 
 const LandingPage = ({ user }) => {
   const [player, setPlayer] = useState({
@@ -23,6 +23,7 @@ const LandingPage = ({ user }) => {
   const [selectedStats, setSelectedStats] = useState([])
   const [statsList, setStatsList] = useState([])
   const [errors, setErrors] = useState({})
+  const [showChart, setShowChart] = useState(false)
 
   const fetchStatsList = async () => {
     const fetchedStatsList = await getStatsList()
@@ -107,19 +108,56 @@ const LandingPage = ({ user }) => {
     return <StatTile key={stat.id} abbreviation={stat.abbreviation} />
   })
 
+  const handleShowChart = (event) => {
+    event.preventDefault()
+    let visibility
+    if (showChart === false) {
+      visibility = true
+    } else {
+      visibility = false
+    }
+    setShowChart(visibility)
+  }
+
+  let chart = (
+    <input
+      type="submit"
+      value="Show Chart"
+      className="button"
+      onClick={handleShowChart}
+    />
+  )
+
+  if (showChart === true) {
+    chart = (
+      <>
+        <input
+          type="submit"
+          value="Hide Chart"
+          className="button"
+          onClick={handleShowChart}
+        />
+        <MyChart selectedPlayers={selectedPlayers} selectedStats={selectedStats} />
+      </>
+    )
+  }
+
   let showTable = ""
   if (selectedPlayers.length > 0 || selectedStats.length > 0) {
     showTable = (
-      <table className="hover unstriped table-scroll">
-        <thead>
-          <tr>
-            <th width="200">Player</th>
-            <th width="60">Season</th>
-            {statsTiles}
-          </tr>
-        </thead>
-        <tbody>{playerTiles}</tbody>
-      </table>
+      <>
+        <table className="hover unstriped table-scroll">
+          <thead>
+            <tr>
+              <th width="200">Player</th>
+              <th width="60">Season</th>
+              {statsTiles}
+            </tr>
+          </thead>
+          <tbody>{playerTiles}</tbody>
+        </table>
+        {chart}
+      </>
     )
   } else if (
     (user === null || user === undefined) &&
@@ -160,7 +198,11 @@ const LandingPage = ({ user }) => {
         </ul>
         <br />
         <p className="welcome-footer">
-          Thank you to <a href="http://balldontlie.io/" className="api-link" target="_blank">balldontlie API</a> for supplying the data for this project!
+          Thank you to{" "}
+          <a href="http://balldontlie.io/" className="api-link" target="_blank">
+            balldontlie API
+          </a>{" "}
+          for supplying the data for this project!
         </p>
       </div>
     )
