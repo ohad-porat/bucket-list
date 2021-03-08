@@ -23,13 +23,13 @@ describe("As the user that created the table visiting the edit page", () => {
     cy.get("input#season").type("2004");
 
     cy.get("form.add-player-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("input#name").type("Dirk Nowitzki");
     cy.get("input#season").type("2010");
 
     cy.get("form.add-player-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("select").select("Offensive Rebounds");
     cy.get("select").select("Blocks");
@@ -37,12 +37,12 @@ describe("As the user that created the table visiting the edit page", () => {
     cy.get("input#title").type("Dirk and Steve");
 
     cy.get("form.save-table-form").submit();
-    cy.wait(2000);
+    cy.wait(10000);
   });
 
   beforeEach(() => {
     cy.get("a#all-tables").click();
-    cy.wait(2000);
+    cy.wait(3000);
     cy.get(".table-title").find("a").click();
     cy.get("button.edit-button").click();
   });
@@ -52,13 +52,13 @@ describe("As the user that created the table visiting the edit page", () => {
     cy.get("input#season").type("2006");
 
     cy.get("form.add-player-form").submit();
-    cy.wait(2000);
+    cy.wait(4000);
 
     cy.get("tr#Tim-Duncan").find("td#player-name").should("have.text", "Tim Duncan");
     cy.get("tr#Tim-Duncan").find("td#season").should("have.text", "2006-07");
 
     cy.get("form.edit-table-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("tr#Tim-Duncan").find("td#player-name").should("have.text", "Tim Duncan");
     cy.get("tr#Tim-Duncan").find("td#season").should("have.text", "2006-07");
@@ -70,7 +70,7 @@ describe("As the user that created the table visiting the edit page", () => {
     cy.get("tr#Steve-Nash").should("not.exist");
 
     cy.get("form.edit-table-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("tr#Steve-Nash").should("not.exist");
   });
@@ -80,7 +80,7 @@ describe("As the user that created the table visiting the edit page", () => {
     cy.get("input#title").type("Nowitzki vs. Duncan");
 
     cy.get("form.edit-table-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("h1.title-show-page").should("have.text", "Nowitzki vs. Duncan");
   });
@@ -89,7 +89,7 @@ describe("As the user that created the table visiting the edit page", () => {
     cy.get("textarea#notes").type("My Favorite Power Forwards");
 
     cy.get("form.edit-table-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get(".notes-show-page").should("have.text", "My Favorite Power Forwards");
   });
@@ -103,7 +103,7 @@ describe("As the user that created the table visiting the edit page", () => {
     cy.get("input#title").clear();
 
     cy.get("form.edit-table-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("ul.errors").find("li").first().should("have.text", "Title is a required property");
   });
@@ -113,7 +113,7 @@ describe("As the user that created the table visiting the edit page", () => {
     cy.get("tr#Tim-Duncan").find("td.remove-button").click();
 
     cy.get("form.edit-table-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("ul.errors").find("li").first().should("have.text", "Players should not be empty");
   });

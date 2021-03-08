@@ -38,7 +38,7 @@ if (user) {
 
   return (
     <div className="top-bar">
-      <Link to="/">
+      <Link to="/" className="top-bar-logo-link">
         <img src="https://i.ibb.co/r3DCrp4/logo.png" alt="Website Logo" className="top-bar-logo" />
       </Link>
       <div className="top-bar-left">

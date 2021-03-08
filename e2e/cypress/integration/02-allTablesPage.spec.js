@@ -23,13 +23,13 @@ describe("As a user visiting the 'all tables' page", () => {
     cy.get("input#season").type("2004");
 
     cy.get("form.add-player-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("input#name").type("Dirk Nowitzki");
     cy.get("input#season").type("2010");
 
     cy.get("form.add-player-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("select").select("Points");
     cy.get("select").select("Free Throws Made");
@@ -37,10 +37,10 @@ describe("As a user visiting the 'all tables' page", () => {
     cy.get("input#title").type("Dirk and Steve");
 
     cy.get("form.save-table-form").submit();
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.get("li#sign-out").click();
-    cy.wait(2000);
+    cy.wait(10000);
   });
 
   beforeEach(() => {

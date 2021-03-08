@@ -23,13 +23,13 @@ describe("As a user visiting a table's show page", () => {
     cy.get("input#season").type("2004");
 
     cy.get("form.add-player-form").submit();
-    cy.wait(2000);
+    cy.wait(7000);
 
     cy.get("input#name").type("Dirk Nowitzki");
     cy.get("input#season").type("2010");
 
     cy.get("form.add-player-form").submit();
-    cy.wait(2000);
+    cy.wait(7000);
 
     cy.get("select").select("Field Goals Made");
     cy.get("select").select("Turnovers");
@@ -38,10 +38,10 @@ describe("As a user visiting a table's show page", () => {
     cy.get("textarea#notes").type("The Best Duo");
 
     cy.get("form.save-table-form").submit();
-    cy.wait(2000);
+    cy.wait(4000);
 
     cy.get("li#sign-out").click();
-    cy.wait(2000);
+    cy.wait(10000);
   });
 
   beforeEach(() => {
@@ -81,38 +81,31 @@ describe("As a user visiting a table's show page", () => {
   it("does not allow an unauthenticated user to delete the table", () => {
     cy.get("input.delete-button").should("not.exist");
   });
+  describe("for a signed in user", () => {
+    beforeEach(() => {
+      cy.visit("/user-sessions/new");
+      cy.get("#email").type("user@example.com");
+      cy.get("#password").type("password");
 
-  it("allows the user that created the table to edit it", () => {
-    cy.visit("/user-sessions/new");
-    cy.get("#email").type("user@example.com");
-    cy.get("#password").type("password");
+      cy.get("form").submit();
+      cy.wait(3000);
 
-    cy.get("form").submit();
-    cy.wait(2000);
+      cy.get("a#all-tables").click();
+      cy.get(".table-title").find("a").click();
+    });
 
-    cy.get("a#all-tables").click();
-    cy.get(".table-title").find("a").click();
+    it("allows the user that created the table to edit it", () => {
+      cy.get("button.edit-button").click();
 
-    cy.get("button.edit-button").click();
+      cy.url().should("include", "/edit");
+    });
 
-    cy.url().should("include", "/edit");
-  });
+    it("allows the user that created the table to delete it", () => {
+      cy.get("input.delete-button").click();
 
-  it("allows the user that created the table to delete it", () => {
-    cy.visit("/user-sessions/new");
-    cy.get("#email").type("user@example.com");
-    cy.get("#password").type("password");
-
-    cy.get("form").submit();
-    cy.wait(2000);
-
-    cy.get("a#all-tables").click();
-    cy.get(".table-title").find("a").click();
-
-    cy.get("input.delete-button").click();
-
-    cy.url().should("include", "/my-tables");
-    cy.get(".table-tile").should("not.exist");
+      cy.url().should("include", "/my-tables");
+      cy.get(".table-tile").should("not.exist");
+    });
   });
 
   after(() => {
