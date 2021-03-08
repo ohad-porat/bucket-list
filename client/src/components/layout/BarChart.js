@@ -16,9 +16,9 @@ const BarChart = ({selectedPlayers, selectedStats}) => {
     });
 
   return (
-    <div className="chart">
+    <div className="chart medium-12 cell">
       <Chart
-        width="900px"
+        width="980px"
         height="392px"
         chartType="BarChart"
         loader={<img src="https://i.ibb.co/X2V5Fb0/loader.gif" alt="loading" className="chart-loader" />}
