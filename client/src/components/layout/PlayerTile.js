@@ -34,11 +34,11 @@ const PlayerTile = ({ player, selectedStats }) => {
   })
 
   return (
-    <tr>
-      <td>
+    <tr id={`${player.first_name}-${player.last_name}`}>
+      <td id="player-name">
         {player.first_name} {player.last_name}
       </td>
-      <td>{fullSeasonName}</td>
+      <td id="season">{fullSeasonName}</td>
       {playerStatsTiles}
     </tr>
   )

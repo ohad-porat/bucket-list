@@ -73,6 +73,7 @@ const SignInForm = () => {
             <input
               type="text"
               name="email"
+              id="email"
               className="form-field"
               value={userPayload.email}
               onChange={onInputChange}
@@ -86,6 +87,7 @@ const SignInForm = () => {
             <input
               type="password"
               name="password"
+              id="password"
               className="form-field"
               value={userPayload.password}
               onChange={onInputChange}
