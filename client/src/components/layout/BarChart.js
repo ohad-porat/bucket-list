@@ -24,19 +24,19 @@ const BarChart = ({selectedPlayers, selectedStats}) => {
         loader={<img src="https://i.ibb.co/X2V5Fb0/loader.gif" alt="loading" className="chart-loader" />}
         data={data}
         options={{
-          backgroundColor: { fill:'#2F2F2F', 'fillOpacity': 0.50 },
+          backgroundColor: { fill:'transparent' },
           textStyle:{color: '#eae7e2'},
           chartArea: { width: "65%", height: "75%" },
           hAxis: {
             textStyle:{color: '#eae7e2'},
             titleTextStyle:{color: '#eae7e2'},
-            title: "Players",
+            title: "Stats",
             minValue: 0,
           },
           vAxis: {
             textStyle:{color: '#eae7e2'},
             titleTextStyle:{color: '#eae7e2'},
-            title: "Stats",
+            title: "Players",
           },
           legend: {
             textStyle:{color: '#eae7e2'},
