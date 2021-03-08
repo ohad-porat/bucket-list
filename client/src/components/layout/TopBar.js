@@ -29,7 +29,7 @@ if (user) {
   if (user) {
     authenticatedLeftNavbar = (
       <li>
-        <Link to={`/${user.id}/my-tables`} className="top-bar-link">My Tables</Link>
+        <Link to={`/${user.id}/my-tables`} className="top-bar-link" id="my-tables">My Tables</Link>
       </li>
     )
   }
