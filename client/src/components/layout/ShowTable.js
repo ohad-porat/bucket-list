@@ -120,7 +120,7 @@ const ShowTable = ({ user }) => {
     <input
       type="submit"
       value="Show Bar Chart"
-      className="button"
+      className="button chart-button"
       onClick={handleShowBarChart}
     />
   )
@@ -131,7 +131,7 @@ const ShowTable = ({ user }) => {
         <input
           type="submit"
           value="Hide Bar Chart"
-          className="button"
+          className="button chart-button"
           onClick={handleShowBarChart}
         />
         <BarChart

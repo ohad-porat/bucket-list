@@ -12,7 +12,6 @@ import StatTile from "./StatTile.js"
 import SaveTableForm from "./SaveTableForm.js"
 import PlayerCombobox from "./PlayerCombobox.js"
 import SeasonCombobox from "./SeasonCombobox.js"
-import BarChart from "./BarChart.js"
 
 const LandingPage = ({ user }) => {
   const [player, setPlayer] = useState({
@@ -24,7 +23,6 @@ const LandingPage = ({ user }) => {
   const [selectedStats, setSelectedStats] = useState([])
   const [statsList, setStatsList] = useState([])
   const [errors, setErrors] = useState({})
-  const [showBarChart, setShowBarChart] = useState(false)
 
   const fetchStatsList = async () => {
     const fetchedStatsList = await getStatsList()
@@ -109,43 +107,6 @@ const LandingPage = ({ user }) => {
     return <StatTile key={stat.id} abbreviation={stat.abbreviation} />
   })
 
-  const handleShowBarChart = (event) => {
-    event.preventDefault()
-    let visibility
-    if (showBarChart === false) {
-      visibility = true
-    } else {
-      visibility = false
-    }
-    setShowBarChart(visibility)
-  }
-
-  let chart = (
-    <input
-      type="submit"
-      value="Show Bar Chart"
-      className="button"
-      onClick={handleShowBarChart}
-    />
-  )
-
-  if (showBarChart === true) {
-    chart = (
-      <>
-        <input
-          type="submit"
-          value="Hide Bar Chart"
-          className="button"
-          onClick={handleShowBarChart}
-        />
-        <BarChart
-          selectedPlayers={selectedPlayers}
-          selectedStats={selectedStats}
-        />
-      </>
-    )
-  }
-
   let showTable = ""
   if (selectedPlayers.length > 0 || selectedStats.length > 0) {
     showTable = (
@@ -160,7 +121,6 @@ const LandingPage = ({ user }) => {
           </thead>
           <tbody>{playerTiles}</tbody>
         </table>
-        {chart}
       </>
     )
   } else if (

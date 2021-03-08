@@ -28,7 +28,6 @@ $textColor: #eae7e2;
 @import "./editPage";
 @import "./formsAndButtons";
 @import "./welcomeMessage";
-@import "./charts";
 
 body {
   background-color: #898989;
@@ -63,4 +62,8 @@ input.button.delete-button {
 .chart {
   display: block;
   margin: 0 auto;
+}
+
+.chart-loader {
+  width: 60px;
 }
