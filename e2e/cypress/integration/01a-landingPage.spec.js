@@ -33,8 +33,8 @@ describe("As an unauthenticated user visiting the landing page", () => {
     cy.get("form.add-player-form").submit();
     cy.wait(2000);
 
-    cy.get("td#player-name").should("have.text", "Steve Nash");
-    cy.get("td#season").should("have.text", "2004-05");
+    cy.get("tr#Steve-Nash").find("td#player-name").should("have.text", "Steve Nash");
+    cy.get("tr#Steve-Nash").find("td#season").should("have.text", "2004-05");
 
     cy.get(".welcome-box").should("not.exist");
   });

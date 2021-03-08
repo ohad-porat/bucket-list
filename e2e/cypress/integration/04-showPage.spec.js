@@ -114,4 +114,13 @@ describe("As a user visiting a table's show page", () => {
     cy.url().should("include", "/my-tables");
     cy.get(".table-tile").should("not.exist");
   });
+
+  after(() => {
+    cy.task("db:truncate", "SeasonOfTable");
+    cy.task("db:truncate", "StatOfTable");
+    cy.task("db:truncate", "Table");
+    cy.task("db:truncate", "SeasonAverage");
+    cy.task("db:truncate", "Player");
+    cy.task("db:truncate", "User");
+  });
 });
