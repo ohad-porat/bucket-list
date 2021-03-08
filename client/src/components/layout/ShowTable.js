@@ -6,6 +6,7 @@ import nestSeasonUnderPlayer from "../../services/nestSeasonUnderPlayer.js"
 
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
+import BarChart from "./BarChart.js"
 
 const ShowTable = ({ user }) => {
   const [table, setTable] = useState({
@@ -18,6 +19,7 @@ const ShowTable = ({ user }) => {
       userName: "",
     },
   })
+  const [showBarChart, setShowBarChart] = useState(false)
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const { tableId } = useParams()
@@ -103,6 +105,43 @@ const ShowTable = ({ user }) => {
     }
   }
 
+  const handleShowBarChart = (event) => {
+    event.preventDefault()
+    let visibility
+    if (showBarChart === false) {
+      visibility = true
+    } else {
+      visibility = false
+    }
+    setShowBarChart(visibility)
+  }
+
+  let chart = (
+    <input
+      type="submit"
+      value="Show Bar Chart"
+      className="button"
+      onClick={handleShowBarChart}
+    />
+  )
+
+  if (showBarChart === true) {
+    chart = (
+      <>
+        <input
+          type="submit"
+          value="Hide Bar Chart"
+          className="button"
+          onClick={handleShowBarChart}
+        />
+        <BarChart
+          selectedPlayers={table.seasons}
+          selectedStats={table.stats}
+        />
+      </>
+    )
+  }
+
   return (
     <div className="page-body">
       <div className="grid-container">
@@ -113,7 +152,9 @@ const ShowTable = ({ user }) => {
           </div>
           <div className="notes-box callout medium-4">
             <div className="notes-header-show-page">Notes:</div>
-            <div className="notes-show-page">{table.notes ? table.notes : <i>Not Provided</i>}</div>
+            <div className="notes-show-page">
+              {table.notes ? table.notes : <i>Not Provided</i>}
+            </div>
           </div>
           <table className="hover unstriped table-scroll">
             <thead>
@@ -126,6 +167,7 @@ const ShowTable = ({ user }) => {
             <tbody>{playerTiles}</tbody>
           </table>
           {editDeleteButtons}
+          {chart}
         </div>
       </div>
     </div>

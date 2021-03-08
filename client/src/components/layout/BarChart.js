@@ -2,18 +2,29 @@ import React from "react"
 import Chart from "react-google-charts"
 
 const BarChart = ({selectedPlayers, selectedStats}) => {
+  debugger
   let data = [["Stats"]]
   selectedStats.forEach((stat) => {
     data[0].push(stat.abbreviation)
   });
   
-  selectedPlayers.forEach((player, stats = selectedStats) => {
-    let playerArray =[`${player.first_name} ${player.last_name}, ${player.stats.season}`]
-    for (let i = 0; i < selectedStats.length; i++) {
-      playerArray.push(player.stats[selectedStats[i].value])
-    }
-    data.push(playerArray)
-  });
+  if (selectedPlayers[0].first_name !== undefined) {
+    selectedPlayers.forEach((player, stats = selectedStats) => {
+      let playerArray =[`${player.first_name} ${player.last_name}, ${player.stats.season}`]
+      for (let i = 0; i < selectedStats.length; i++) {
+        playerArray.push(player.stats[selectedStats[i].value])
+      }
+      data.push(playerArray)
+    });
+  } else {
+    selectedPlayers.forEach((player, stats = selectedStats) => {
+      let playerArray =[`${player.player.first_name} ${player.player.last_name}, ${player.season}`]
+      for (let i = 0; i < selectedStats.length; i++) {
+        playerArray.push(player[selectedStats[i].value])
+      }
+      data.push(playerArray)
+    });
+  }
 
   return (
     <div className="chart">
