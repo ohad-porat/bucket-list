@@ -58,3 +58,16 @@ input.button.delete-button {
     margin: 0 5rem;
   }
 }
+
+.chart {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  background-color: rgba(47, 47, 47, 0.75);
+  border-radius: 30px;
+  box-shadow: rgba(47, 47, 47, 0.75) 0 0 6px;
+}
+
+.chart-loader {
+  width: 60px;
+}
