@@ -7,6 +7,7 @@ import nestSeasonUnderPlayer from "../../services/nestSeasonUnderPlayer.js"
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
 import BarChart from "./BarChart.js"
+import ColumnChart from "./ColumnChart.js"
 
 const ShowTable = ({ user }) => {
   const [table, setTable] = useState({
@@ -20,6 +21,7 @@ const ShowTable = ({ user }) => {
     },
   })
   const [showBarChart, setShowBarChart] = useState(false)
+  const [showColumnChart, setShowColumnChart] = useState(false)
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const { tableId } = useParams()
@@ -107,22 +109,40 @@ const ShowTable = ({ user }) => {
 
   const handleShowBarChart = (event) => {
     event.preventDefault()
-    let visibility
     if (showBarChart === false) {
-      visibility = true
+      setShowBarChart(true)
+      setShowColumnChart(false)
     } else {
-      visibility = false
+      setShowBarChart(false)
     }
-    setShowBarChart(visibility)
+  }
+
+  const handleShowColumnChart = (event) => {
+    event.preventDefault()
+    if (showColumnChart === false) {
+      setShowColumnChart(true)
+      setShowBarChart(false)
+    } else {
+      setShowColumnChart(false)
+    }
   }
 
   let chart = (
-    <input
-      type="submit"
-      value="Show Bar Chart"
-      className="button chart-button"
-      onClick={handleShowBarChart}
-    />
+    <div>
+      <input
+        type="submit"
+        value="Show Bar Chart"
+        className="button chart-button bar-chart-button"
+        onClick={handleShowBarChart}
+      />
+
+      <input
+        type="submit"
+        value="Show Column Chart"
+        className="button chart-button"
+        onClick={handleShowColumnChart}
+      />
+    </div>
   )
 
   if (showBarChart === true) {
@@ -131,13 +151,34 @@ const ShowTable = ({ user }) => {
         <input
           type="submit"
           value="Hide Bar Chart"
-          className="button chart-button"
+          className="button chart-button bar-chart-button"
           onClick={handleShowBarChart}
         />
-        <BarChart
-          selectedPlayers={table.seasons}
-          selectedStats={table.stats}
+        <input
+          type="submit"
+          value="Show Column Chart"
+          className="button chart-button"
+          onClick={handleShowColumnChart}
         />
+        <BarChart selectedPlayers={table.seasons} selectedStats={table.stats} />
+      </>
+    )
+  } else if (showColumnChart === true) {
+    chart = (
+      <>
+        <input
+          type="submit"
+          value="Show Bar Chart"
+          className="button chart-button bar-chart-button"
+          onClick={handleShowBarChart}
+        />
+        <input
+          type="submit"
+          value="Hide Column Chart"
+          className="button chart-button"
+          onClick={handleShowColumnChart}
+        />
+        <ColumnChart selectedPlayers={table.seasons} selectedStats={table.stats} />
       </>
     )
   }
