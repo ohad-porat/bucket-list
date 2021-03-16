@@ -4,11 +4,11 @@ import { Link } from "react-router-dom"
 import SignOutButton from "../authentication/SignOutButton"
 
 const TopBar = ({ user }) => {
-  const unauthenticatedListItems = [
-    <li key="sign-in" id="sign-in">
+  const unauthenticatedRightNavBar = [
+    <li key="sign-in" id="sign-in" className="top-bar-user">
       <Link to="/user-sessions/new"className="top-bar-link">Sign In</Link>
     </li>,
-    <li key="sign-up">
+    <li key="sign-up" className="top-bar-user">
       <Link to="/users/new" className="button sign-up-button">Sign Up</Link>
     </li>,
   ]
@@ -17,10 +17,10 @@ const TopBar = ({ user }) => {
 if (user) {
   username = user.userName
 }
-  const authenticatedListItems = [
-    <li key="hello-user" className="hello-user">Hello, {username}
+  const authenticatedRightNavBar = [
+    <li key="hello-user" className="hello-user top-bar-user">Hello, {username}
     </li>,
-    <li key="sign-out" id="sign-out">
+    <li key="sign-out" id="sign-out" className="top-bar-user">
       <SignOutButton />
     </li>,
   ]
@@ -51,7 +51,8 @@ if (user) {
       </div>
       <div className="top-bar-right">
         <ul className="menu">
-          {user ? authenticatedListItems : unauthenticatedListItems}
+          {user ? authenticatedRightNavBar : unauthenticatedRightNavBar}
+          <li><i className="fas fa-bars"></i></li>
         </ul>
       </div>
     </div>

@@ -178,7 +178,10 @@ const ShowTable = ({ user }) => {
           className="button chart-button"
           onClick={handleShowColumnChart}
         />
-        <ColumnChart selectedPlayers={table.seasons} selectedStats={table.stats} />
+        <ColumnChart
+          selectedPlayers={table.seasons}
+          selectedStats={table.stats}
+        />
       </>
     )
   }
@@ -197,16 +200,18 @@ const ShowTable = ({ user }) => {
               {table.notes ? table.notes : <i>Not Provided</i>}
             </div>
           </div>
-          <table className="hover unstriped table-scroll">
-            <thead>
-              <tr>
-                <th width="200">Player</th>
-                <th width="100">Season</th>
-                {statsTiles}
-              </tr>
-            </thead>
-            <tbody>{playerTiles}</tbody>
-          </table>
+          <div className="table">
+            <table className="hover unstriped table-scroll">
+              <thead>
+                <tr>
+                  <th width="200">Player</th>
+                  <th width="100">Season</th>
+                  {statsTiles}
+                </tr>
+              </thead>
+              <tbody>{playerTiles}</tbody>
+            </table>
+          </div>
           {editDeleteButtons}
           {chart}
         </div>

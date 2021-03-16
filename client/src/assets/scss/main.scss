@@ -31,10 +31,10 @@ $textColor: #eae7e2;
 
 body {
   background-color: #898989;
-  background-image: url("https://i.imgur.com/msjO6dE.jpg");
+  background-image: url("https://i.imgur.com/BLa7YRZ.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center top;
+  background-position: center 50px;
 }
 
 .page-body {
@@ -53,12 +53,6 @@ input.button.delete-button {
   margin-left: 20px;
 }
 
-@media only screen and (max-width: 780px) {
-  .page-body {
-    margin: 0 5rem;
-  }
-}
-
 .chart {
   display: block;
   margin: 0 auto;
@@ -72,21 +66,22 @@ input.button.delete-button {
   width: 60px;
 }
 
+.table {
+  overflow-x: auto;
+}
+
+@media only screen and (max-width: 780px) {
+  .page-body {
+    margin: 0 5rem;
+  }
+}
+
 @media only screen and (max-width: 480px) {
   .page-body {
     margin: 0 1rem;
   }
 
-  .stat-form-field {
-    margin-top: 1rem;
-  }
-
-  .stats-div {
-    margin: 0 auto;
-  }
-
-  .add-clear-buttons {
-    display: flex;
-    justify-content: center;
+  .chart {
+    overflow-x: auto;
   }
 }

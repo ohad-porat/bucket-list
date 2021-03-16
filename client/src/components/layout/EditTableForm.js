@@ -234,17 +234,19 @@ const EditTableForm = (props) => {
       </Link>
       <form className="edit-table-form" onSubmit={handleSubmit}>
         <ErrorList errors={errors} />
-        <table className="hover unstriped table-scroll">
-          <thead>
-            <tr>
-              <th width="30"> </th>
-              <th width="200">Player</th>
-              <th width="60">Season</th>
-              {statsTiles}
-            </tr>
-          </thead>
-          <tbody>{playerTiles}</tbody>
-        </table>
+        <div className="table">
+          <table className="hover unstriped table-scroll">
+            <thead>
+              <tr>
+                <th width="30"> </th>
+                <th width="200">Player</th>
+                <th width="60">Season</th>
+                {statsTiles}
+              </tr>
+            </thead>
+            <tbody>{playerTiles}</tbody>
+          </table>
+        </div>
         <label htmlFor="title">
           <input
             id="title"

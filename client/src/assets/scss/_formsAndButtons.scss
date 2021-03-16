@@ -44,7 +44,7 @@ input.loading {
   background: url(https://i.ibb.co/X2V5Fb0/loader.gif);
   background-color: #ffffff;
   background-size: 60px;
-  background-position:right center;
+  background-position: right center;
   background-repeat: no-repeat;
 }
 
@@ -55,4 +55,19 @@ input.loading {
 
 input.button.chart-button {
   height: 41.4px;
+}
+
+@media only screen and (max-width: 480px) {
+  .stat-form-field {
+    margin-top: 1rem;
+  }
+
+  .stats-div {
+    margin: 0 auto;
+  }
+
+  .add-clear-buttons {
+    display: flex;
+    justify-content: center;
+  }
 }
