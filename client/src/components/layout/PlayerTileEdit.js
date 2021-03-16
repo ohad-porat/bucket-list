@@ -23,7 +23,7 @@ const PlayerTileEdit = ({ player, selectedStats, removePlayer }) => {
       playerStats.push(statObject)
     }
   })
-  let playerIdToRemove 
+  let playerIdToRemove
   if (player.apiPlayerId) {
     playerIdToRemove = player.apiPlayerId
   } else {
@@ -40,12 +40,14 @@ const PlayerTileEdit = ({ player, selectedStats, removePlayer }) => {
   })
 
   return (
-    <tr>
-      <td onClick={handleRemove} className="remove-button"><i className="fas fa-times"></i></td>
-      <td>
+    <tr id={`${player.first_name}-${player.last_name}`}>
+      <td onClick={handleRemove} className="remove-button">
+        <i className="fas fa-times"></i>
+      </td>
+      <td id="player-name">
         {player.first_name} {player.last_name}
       </td>
-      <td>{fullSeasonName}</td>
+      <td id="season">{fullSeasonName}</td>
       {playerStatsTiles}
     </tr>
   )

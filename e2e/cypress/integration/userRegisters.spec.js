@@ -9,11 +9,11 @@ describe("As a user visiting the sign in page", () => {
     cy.task("db:truncate", "User");
   });
 
-  it("If I provide a valid email, password, and password confirmation, I will be signed in", () => {
+  it("If I provide a valid email, userName, password, and password confirmation, I will be signed in", () => {
     visitRegistrationPage();
     cy.get("form").within(() => {
       cy.findByLabelText("Email").type("user@example.com");
-
+      cy.findByLabelText("User Name").type("user");
       cy.findByLabelText("Password").type("password");
       cy.findByLabelText("Password Confirmation").type("password");
 
@@ -24,7 +24,7 @@ describe("As a user visiting the sign in page", () => {
     cy.contains("Sign Out");
   });
 
-  it("If I provide an invalid email and password, I will remain on the same page", () => {
+  it("If I provide an invalid email, and password, I will remain on the same page", () => {
     visitRegistrationPage();
     cy.get("form").within(() => {
       cy.findByLabelText("Email").type("just@a.joke");

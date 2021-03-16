@@ -8,9 +8,18 @@ On Bucket List you can also save your tables to show your friends or come back t
 ## Setup 
 - Clone this repository
 - Run ```yarn install```
-- ```cd server```
 - ```createdb bucket-list_development```
+- ```cd server```
 - ```yarn run migrate:latest```
 - ```yarn run db:seed```
 - ```yarn run dev```
 - navigate to ```localhost:3000``` in your web browser
+
+## To Run Cypress Tests
+- Run ```createdb bucket-list_e2e```
+- ```cd server```
+- ```yarn run db:e2e:migrate```
+- ```yarn run db:e2e:seed```
+- ```yarn run dev:e2e```
+- Open a second terminal tab
+- In the second terminal tab run ```yarn run e2e:open```

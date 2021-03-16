@@ -10,7 +10,7 @@ import "@reach/combobox/styles.css"
 
 const SeasonCombobox = ({ handleSeasonInputChange, player }) => {
   let seasons = useSeasonSearch(player.id)
-    seasons.sort(function (a, b) {
+  seasons.sort(function (a, b) {
     return b - a
   })
 
@@ -33,6 +33,7 @@ const SeasonCombobox = ({ handleSeasonInputChange, player }) => {
   return (
     <Combobox aria-label="name" onSelect={handleSeasonInputChange}>
       <ComboboxInput
+        id="season"
         className={`search-input medium-12 cell form-field ${loadingClass}`}
         placeholder="Choose a Season"
         onChange={handleSeasonChange}

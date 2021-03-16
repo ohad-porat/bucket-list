@@ -6,6 +6,8 @@ import nestSeasonUnderPlayer from "../../services/nestSeasonUnderPlayer.js"
 
 import PlayerTile from "./PlayerTile.js"
 import StatTile from "./StatTile.js"
+import BarChart from "./BarChart.js"
+import ColumnChart from "./ColumnChart.js"
 
 const ShowTable = ({ user }) => {
   const [table, setTable] = useState({
@@ -18,6 +20,8 @@ const ShowTable = ({ user }) => {
       userName: "",
     },
   })
+  const [showBarChart, setShowBarChart] = useState(false)
+  const [showColumnChart, setShowColumnChart] = useState(false)
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const { tableId } = useParams()
@@ -90,7 +94,7 @@ const ShowTable = ({ user }) => {
       editDeleteButtons = (
         <div className="button-group">
           <Link to={`/tables/${tableId}/edit`}>
-            <button className="button">Edit</button>
+            <button className="button edit-button">Edit</button>
           </Link>
           <input
             type="button"
@@ -103,6 +107,82 @@ const ShowTable = ({ user }) => {
     }
   }
 
+  const handleShowBarChart = (event) => {
+    event.preventDefault()
+    if (showBarChart === false) {
+      setShowBarChart(true)
+      setShowColumnChart(false)
+    } else {
+      setShowBarChart(false)
+    }
+  }
+
+  const handleShowColumnChart = (event) => {
+    event.preventDefault()
+    if (showColumnChart === false) {
+      setShowColumnChart(true)
+      setShowBarChart(false)
+    } else {
+      setShowColumnChart(false)
+    }
+  }
+
+  let chart = (
+    <div>
+      <input
+        type="submit"
+        value="Show Bar Chart"
+        className="button chart-button bar-chart-button"
+        onClick={handleShowBarChart}
+      />
+
+      <input
+        type="submit"
+        value="Show Column Chart"
+        className="button chart-button"
+        onClick={handleShowColumnChart}
+      />
+    </div>
+  )
+
+  if (showBarChart === true) {
+    chart = (
+      <>
+        <input
+          type="submit"
+          value="Hide Bar Chart"
+          className="button chart-button bar-chart-button"
+          onClick={handleShowBarChart}
+        />
+        <input
+          type="submit"
+          value="Show Column Chart"
+          className="button chart-button"
+          onClick={handleShowColumnChart}
+        />
+        <BarChart selectedPlayers={table.seasons} selectedStats={table.stats} />
+      </>
+    )
+  } else if (showColumnChart === true) {
+    chart = (
+      <>
+        <input
+          type="submit"
+          value="Show Bar Chart"
+          className="button chart-button bar-chart-button"
+          onClick={handleShowBarChart}
+        />
+        <input
+          type="submit"
+          value="Hide Column Chart"
+          className="button chart-button"
+          onClick={handleShowColumnChart}
+        />
+        <ColumnChart selectedPlayers={table.seasons} selectedStats={table.stats} />
+      </>
+    )
+  }
+
   return (
     <div className="page-body">
       <div className="grid-container">
@@ -113,7 +193,9 @@ const ShowTable = ({ user }) => {
           </div>
           <div className="notes-box callout medium-4">
             <div className="notes-header-show-page">Notes:</div>
-            <div className="notes-show-page">{table.notes ? table.notes : <i>Not Provided</i>}</div>
+            <div className="notes-show-page">
+              {table.notes ? table.notes : <i>Not Provided</i>}
+            </div>
           </div>
           <table className="hover unstriped table-scroll">
             <thead>
@@ -126,6 +208,7 @@ const ShowTable = ({ user }) => {
             <tbody>{playerTiles}</tbody>
           </table>
           {editDeleteButtons}
+          {chart}
         </div>
       </div>
     </div>
