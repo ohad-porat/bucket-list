@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom"
 import _ from "lodash"
 
 import translateServerErrors from "../../services/translateServerErrors.js"
+import saveTableValidation from "../../services/saveTableValidation.js"
+
 import ErrorList from "./ErrorList.js"
 
 const SaveTableForm = ({ selectedPlayers, selectedStats }) => {
@@ -15,27 +17,7 @@ const SaveTableForm = ({ selectedPlayers, selectedStats }) => {
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const validateTable = () => {
-    let submitErrors = {}
-    if (selectedPlayers.length < 1) {
-      submitErrors = {
-        ...submitErrors,
-        ["players"]: "should not be empty",
-      }
-    }
-
-    if (selectedStats.length < 1) {
-      submitErrors = {
-        ...submitErrors,
-        ["stats"]: "should not be empty",
-      }
-    }
-
-    if (form.title.trim() === "") {
-      submitErrors = {
-        ...submitErrors,
-        ["title"]: "is a required property",
-      }
-    }
+    let submitErrors = saveTableValidation(selectedPlayers, selectedStats, form.title)
 
     setErrors(submitErrors)
     return _.isEmpty(submitErrors)
