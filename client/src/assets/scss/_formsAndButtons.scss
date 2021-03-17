@@ -40,6 +40,10 @@ input.search-input {
   font-weight: 600;
 }
 
+input.button.delete-button {
+  margin-left: 20px;
+}
+
 input.loading {
   background: url(https://i.ibb.co/X2V5Fb0/loader.gif);
   background-color: #ffffff;
@@ -65,9 +69,32 @@ input.button.chart-button {
   .stats-div {
     margin: 0 auto;
   }
+  
+    .add-clear-buttons {
+      display: flex;
+      justify-content: center;
+    }
 
-  .add-clear-buttons {
+  .edit-delete-buttons {
     display: flex;
     justify-content: center;
+    margin-bottom: 0;
+  }
+
+  .show-chart-buttons {
+    margin: 0 auto;
+  }
+
+  input.search-input, .form-field {
+    height: 2rem;
+    font-size: 14px;
+  }
+
+  input.button.chart-button {
+    height: 40.2px;
+  }
+
+  .button, input.button.add-player, input.button.clear-button, button.button.edit-button, input.button.delete-button {
+    font-size: 13.5px;
   }
 }

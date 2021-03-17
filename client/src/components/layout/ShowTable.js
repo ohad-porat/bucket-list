@@ -92,7 +92,7 @@ const ShowTable = ({ user }) => {
       editDeleteButtons = ""
     } else {
       editDeleteButtons = (
-        <div className="button-group">
+        <div className="button-group edit-delete-buttons">
           <Link to={`/tables/${tableId}/edit`}>
             <button className="button edit-button">Edit</button>
           </Link>
@@ -128,7 +128,7 @@ const ShowTable = ({ user }) => {
   }
 
   let chart = (
-    <div>
+    <div className="show-chart-buttons">
       <input
         type="submit"
         value="Show Bar Chart"
@@ -139,7 +139,7 @@ const ShowTable = ({ user }) => {
       <input
         type="submit"
         value="Show Column Chart"
-        className="button chart-button"
+        className="button chart-button column-chart-button"
         onClick={handleShowColumnChart}
       />
     </div>
@@ -148,36 +148,40 @@ const ShowTable = ({ user }) => {
   if (showBarChart === true) {
     chart = (
       <>
-        <input
-          type="submit"
-          value="Hide Bar Chart"
-          className="button chart-button bar-chart-button"
-          onClick={handleShowBarChart}
-        />
-        <input
-          type="submit"
-          value="Show Column Chart"
-          className="button chart-button"
-          onClick={handleShowColumnChart}
-        />
+        <div className="show-chart-buttons">
+          <input
+            type="submit"
+            value="Hide Bar Chart"
+            className="button chart-button bar-chart-button"
+            onClick={handleShowBarChart}
+          />
+          <input
+            type="submit"
+            value="Show Column Chart"
+            className="button chart-button column-chart-button"
+            onClick={handleShowColumnChart}
+          />
+        </div>
         <BarChart selectedPlayers={table.seasons} selectedStats={table.stats} />
       </>
     )
   } else if (showColumnChart === true) {
     chart = (
       <>
-        <input
-          type="submit"
-          value="Show Bar Chart"
-          className="button chart-button bar-chart-button"
-          onClick={handleShowBarChart}
-        />
-        <input
-          type="submit"
-          value="Hide Column Chart"
-          className="button chart-button"
-          onClick={handleShowColumnChart}
-        />
+        <div className="show-chart-buttons">
+          <input
+            type="submit"
+            value="Show Bar Chart"
+            className="button chart-button bar-chart-button"
+            onClick={handleShowBarChart}
+          />
+          <input
+            type="submit"
+            value="Hide Column Chart"
+            className="button chart-button column-chart-button"
+            onClick={handleShowColumnChart}
+          />
+        </div>
         <ColumnChart
           selectedPlayers={table.seasons}
           selectedStats={table.stats}
@@ -190,11 +194,11 @@ const ShowTable = ({ user }) => {
     <div className="page-body">
       <div className="grid-container">
         <div className="grid-x grid-margin-x">
-          <div className="title-box medium-8">
+          <div className="title-box small-12 medium-8">
             <h1 className="title-show-page">{table.title}</h1>
             <p className="userName-show-page">By {table.user.userName}</p>
           </div>
-          <div className="notes-box callout medium-4">
+          <div className="notes-box callout small-12 medium-4">
             <div className="notes-header-show-page">Notes:</div>
             <div className="notes-show-page">
               {table.notes ? table.notes : <i>Not Provided</i>}

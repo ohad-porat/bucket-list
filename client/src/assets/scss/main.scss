@@ -41,29 +41,8 @@ body {
   margin: 0 10rem;
 }
 
-.list-body {
-  margin: 0 3rem;
-}
-
 .save-table-form {
   padding: 2.5rem 0;
-}
-
-input.button.delete-button {
-  margin-left: 20px;
-}
-
-.chart {
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  background-color: rgba(47, 47, 47, 0.75);
-  border-radius: 30px;
-  box-shadow: rgba(47, 47, 47, 0.75) 0 0 6px;
-}
-
-.chart-loader {
-  width: 60px;
 }
 
 .table {
@@ -79,9 +58,5 @@ input.button.delete-button {
 @media only screen and (max-width: 480px) {
   .page-body {
     margin: 0 1rem;
-  }
-
-  .chart {
-    overflow-x: auto;
   }
 }

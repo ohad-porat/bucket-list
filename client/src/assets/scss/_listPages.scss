@@ -1,3 +1,7 @@
+.list-body {
+  margin: 0 3rem;
+}
+
 .table-tile {
   margin: 1rem;
   background-color: rgba(47, 47, 47, 0.75);
@@ -26,4 +30,24 @@
   font-family: "Source Sans Pro", sans-serif;
   color: $textColor;
   font-size: 17px;
+}
+
+@media only screen and (max-width: 480px) { 
+  .list-body {
+    margin: 0 1rem;
+  }
+
+  .table-title {
+    font-size: 24px;
+    margin-bottom: 0.2rem;
+  }
+
+  .table-players {
+    font-size: 18px;
+  }
+
+  .table-userName {
+    font-size: 16px;
+    margin-bottom: 0.4rem;
+  }
 }

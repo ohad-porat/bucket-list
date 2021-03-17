@@ -208,7 +208,7 @@ const EditTableForm = (props) => {
       >
         <div className="grid-container">
           <div className="grid-x grid-padding-x edit-add-player">
-            <div className="medium-4 cell">
+            <div className="small-6 medium-4 cell">
               <label htmlFor="name">
                 <PlayerCombobox
                   handlePlayerInputChange={handlePlayerInputChange}
@@ -217,7 +217,7 @@ const EditTableForm = (props) => {
               </label>
             </div>
 
-            <div className="medium-4 cell">
+            <div className="small-6 medium-4 cell">
               <label htmlFor="season">
                 <SeasonCombobox
                   handleSeasonInputChange={handleSeasonInputChange}
@@ -225,13 +225,17 @@ const EditTableForm = (props) => {
                 />
               </label>
             </div>
-            <input type="submit" value="Add Player" className="button" />
+            <input
+              type="submit"
+              value="Add Player"
+              className="button edit-add-player-button"
+            />
+            <Link to={`/tables/${tableId}`} className="back-to-table small-8 medium-12 cell">
+              Back To Table
+            </Link>
           </div>
         </div>
       </form>
-      <Link to={`/tables/${tableId}`} className="back-to-table">
-        Back To Table
-      </Link>
       <form className="edit-table-form" onSubmit={handleSubmit}>
         <ErrorList errors={errors} />
         <div className="table">

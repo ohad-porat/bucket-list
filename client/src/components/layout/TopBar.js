@@ -52,7 +52,7 @@ if (user) {
       <div className="top-bar-right">
         <ul className="menu">
           {user ? authenticatedRightNavBar : unauthenticatedRightNavBar}
-          <li><i className="fas fa-bars"></i></li>
+          <li><i className="fas fa-bars" /></li>
         </ul>
       </div>
     </div>
