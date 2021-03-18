@@ -21,10 +21,30 @@ a.back-to-table {
   color: $black;
 }
 
+a.back-to-table.medium-12.cell {
+  padding: 0;
+}
+
 a.back-to-table:hover {
   color: scale-color($orange, $lightness: 0%);
 }
 
 .edit-add-player {
   margin-top: 1rem;
+}
+
+@media only screen and (max-width: 480px) {
+  .edit-add-player-button {
+    margin: 0.7rem 0 0.3rem 0.7rem;
+  }
+
+  a.back-to-table.small-8.cell {
+    font-size: 17px;
+    margin-top: 1rem;
+    padding-right: 0.5rem;
+  }
+
+  .edit-table-form {
+    padding: 1rem 0;
+  }
 }

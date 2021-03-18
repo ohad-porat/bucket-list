@@ -110,7 +110,7 @@ const LandingPage = ({ user }) => {
   let showTable = ""
   if (selectedPlayers.length > 0 || selectedStats.length > 0) {
     showTable = (
-      <>
+      <div className="table">
         <table className="hover unstriped table-scroll">
           <thead>
             <tr>
@@ -121,7 +121,7 @@ const LandingPage = ({ user }) => {
           </thead>
           <tbody>{playerTiles}</tbody>
         </table>
-      </>
+      </div>
     )
   } else if (
     (user === null || user === undefined) &&
@@ -155,7 +155,7 @@ const LandingPage = ({ user }) => {
       >
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
-            <div className="medium-4 cell">
+            <div className="small-6 medium-4 cell">
               <label htmlFor="name">
                 <PlayerCombobox
                   handlePlayerInputChange={handlePlayerInputChange}
@@ -165,7 +165,7 @@ const LandingPage = ({ user }) => {
               </label>
             </div>
 
-            <div className="medium-4 cell">
+            <div className="small-6 medium-4 cell">
               <label htmlFor="season">
                 <SeasonCombobox
                   handleSeasonInputChange={handleSeasonInputChange}
@@ -175,7 +175,7 @@ const LandingPage = ({ user }) => {
               </label>
             </div>
 
-            <div className="medium-4 cell">
+            <div className="small-6 medium-4 cell stats-div">
               <label htmlFor="stat">
                 <select
                   id="stat"
@@ -190,8 +190,12 @@ const LandingPage = ({ user }) => {
               </label>
             </div>
           </div>
-          <div className="button-group">
-            <input type="submit" value="Add Player" className="button add-player" />
+          <div className="button-group add-clear-buttons">
+            <input
+              type="submit"
+              value="Add Player"
+              className="button add-player"
+            />
             <input
               type="button"
               value="Clear Table"

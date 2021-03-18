@@ -3,6 +3,7 @@
   font-family: "Hammersmith One", sans-serif;
   background-image: url("https://i.ibb.co/6vXnNFY/top-Bar-Background.png");
   margin-bottom: 1rem;
+  box-shadow: #2f2f2f 0 0 6px;
 }
 
 a.top-bar-link {
@@ -56,6 +57,10 @@ button:hover {
   font-size: 130%;
 }
 
+.dropdown-close {
+  display: flex;
+}
+
 .hello-user {
   font-size: 17px;
   text-align: center;
@@ -65,12 +70,101 @@ button:hover {
   right: 160%;
 }
 
-@media only screen and (max-width: 780px) {
+.fa-bars {
+  display: none;
+}
+
+@media only screen and (max-width: 480px) {
   .top-bar-left {
-    font-size: 100%;
+    font-size: 110%;
   }
 
+  .top-bar {
+    height: 3rem;
+  }
+
+  .top-bar-logo {
+    width: 40%;
+  }
+
+  .menu,
+  .top-bar-logo {
+    margin-top: 0.25rem;
+  }
+
+  .fa-bars {
+    display: block;
+    margin-right: 0.6rem;
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+  }
+
+  .fa-bars:hover {
+    color: $black;
+  }
+
+  .dropdown-close {
+    display: none;
+  }
+
+  .dropdown-open {
+    position: absolute;
+    right: 0.3rem;
+    top: 2rem;
+    background-color: rgba(47, 47, 47, 1);
+    min-width: 160px;
+    box-shadow: rgba(47, 47, 47, 0.75) 0 0 6px;
+    z-index: 1;
+  }
+
+  #sign-out,
+  .hello-user,
   .top-bar-right {
-    font-size: 100%;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 0.3rem;
+  }
+
+  #sign-out,
+  a.button.sign-up-button {
+    margin-bottom: 0.3rem;
+  }
+
+  button {
+    padding-bottom: 0.7rem;
+  }
+
+  .hello-user {
+    position: relative;
+    transform: translateY(0%);
+    top: 0%;
+    right: 0%;
+    padding-bottom: 0.3rem;
+  }
+
+  .top-bar-left .menu {
+    margin-left: 37%;
+  }
+
+  a#all-tables,
+  a#my-tables {
+    padding-right: 0;
+    margin-bottom: 0.3rem;
+  }
+
+  .dropdown-text,
+  a.dropdown-text,
+  button {
+    color: $white;
+  }
+
+  a.button.sign-up-button {
+    font-size: 14px;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  li.hello-user.top-bar-user.dropdown-text {
+    color: $orange;
   }
 }

@@ -40,11 +40,15 @@ input.search-input {
   font-weight: 600;
 }
 
+input.button.delete-button {
+  margin-left: 20px;
+}
+
 input.loading {
   background: url(https://i.ibb.co/X2V5Fb0/loader.gif);
   background-color: #ffffff;
   background-size: 60px;
-  background-position:right center;
+  background-position: right center;
   background-repeat: no-repeat;
 }
 
@@ -55,4 +59,46 @@ input.loading {
 
 input.button.chart-button {
   height: 41.4px;
+}
+
+@media only screen and (max-width: 740px) { 
+
+}
+
+@media only screen and (max-width: 480px) {
+  .stat-form-field {
+    margin-top: 1rem;
+  }
+
+  .stats-div {
+    margin: 0 auto;
+  }
+  
+    .add-clear-buttons {
+      display: flex;
+      justify-content: center;
+    }
+
+  .edit-delete-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+
+  .show-chart-buttons {
+    margin: 0 auto;
+  }
+
+  input.search-input, .form-field {
+    height: 2rem;
+    font-size: 14px;
+  }
+
+  input.button.chart-button {
+    height: 40.2px;
+  }
+
+  .button, input.button.add-player, input.button.clear-button, button.button.edit-button, input.button.delete-button {
+    font-size: 13.5px;
+  }
 }

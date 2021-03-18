@@ -10,7 +10,7 @@ const welcomeMessage =  <div className="callout welcome-box">
   stats to be displayed. You can also save your tables by signing up for
   our website!
 </p>
-<ul className="fa-ul">
+<ul className="fa-ul welcome-list">
   <li>
     <span className="fa-li">
       <i className="fas fa-basketball-ball"></i>
@@ -31,7 +31,6 @@ const welcomeMessage =  <div className="callout welcome-box">
     Data is available from seasons 1979-present.
   </li>
 </ul>
-<br />
 <p className="welcome-footer">
   Thank you to{" "}
   <a href="http://balldontlie.io/" className="api-link" target="_blank">

@@ -26,9 +26,14 @@
   font-size: 1.2rem;
 }
 
+.welcome-list {
+  font-size: 1rem;
+}
+
 .welcome-footer {
   font-size: 0.93rem;
   padding: 0 1rem;
+  padding-top: 25px;
 }
 
 a.api-link {
@@ -41,4 +46,32 @@ a.api-link {
 a.api-link:hover {
   color: $orange;
   color: scale-color($orange, $lightness: -10%);
+}
+
+@media only screen and (max-width: 480px) {
+  .welcome-header {
+    font-size: 1.8rem;
+  }
+
+  .welcome-subheader {
+    font-size: 1.2rem;
+    padding: 0;
+  }
+
+  .welcome-body {
+    font-size: 1rem;
+  }
+
+  .welcome-list {
+    font-size: 0.85rem;
+  }
+
+  .welcome-footer {
+  font-size: 0.8rem;
+  padding-top: 15px;
+  }
+
+  a.api-link {
+    font-size: 0.9rem;
+  }
 }

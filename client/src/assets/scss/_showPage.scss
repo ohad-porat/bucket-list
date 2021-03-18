@@ -24,7 +24,7 @@ input.button.chart-button.bar-chart-button {
   font-weight: 600;
 }
 
-.notes-box.callout.medium-4 {
+.notes-box.callout {
   font-family: "Source Sans Pro", sans-serif;
   color: $textColor;
   font-size: 20px;
@@ -37,15 +37,56 @@ input.button.chart-button.bar-chart-button {
   padding-top: 0.5rem;
   margin-top: 0.6rem;
   overflow: hidden;
-  transition: height .3s;
-  
+  transition: height 0.3s;
 }
 
-.notes-box.callout.medium-4:hover {
+.notes-box.callout:hover {
   height: 6.5rem;
   overflow: scroll;
 }
 
 .notes-show-page {
   font-weight: 400;
+}
+
+.chart {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  background-color: rgba(47, 47, 47, 0.75);
+  border-radius: 30px;
+  box-shadow: rgba(47, 47, 47, 0.75) 0 0 6px;
+  overflow-x: auto;
+}
+
+.chart-loader {
+  width: 60px;
+}
+
+@media only screen and (max-width: 480px) {
+  .title-show-page {
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .userName-show-page {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+
+  .notes-box.callout {
+    font-size: 15px;
+    height: 2.3rem;
+    width: 20rem;
+    margin-top: 0.5rem;
+  }
+
+  .notes-box.callout:hover {
+    height: 4rem;
+    overflow: scroll;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
 }
