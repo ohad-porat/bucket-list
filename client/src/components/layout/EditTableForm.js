@@ -230,7 +230,7 @@ const EditTableForm = (props) => {
               value="Add Player"
               className="button edit-add-player-button"
             />
-            <Link to={`/tables/${tableId}`} className="back-to-table small-8 medium-12 cell">
+            <Link to={`/tables/${tableId}`} className="back-to-table">
               Back To Table
             </Link>
           </div>
