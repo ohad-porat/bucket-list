@@ -110,7 +110,7 @@ const LandingPage = ({ user }) => {
   let showTable = ""
   if (selectedPlayers.length > 0 || selectedStats.length > 0) {
     showTable = (
-      <div className="table">
+      <div className="table small-12">
         <table className="hover unstriped table-scroll">
           <thead>
             <tr>

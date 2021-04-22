@@ -204,7 +204,7 @@ const ShowTable = ({ user }) => {
               {table.notes ? table.notes : <i>Not Provided</i>}
             </div>
           </div>
-          <div className="table">
+          <div className="table small-12">
             <table className="hover unstriped table-scroll">
               <thead>
                 <tr>

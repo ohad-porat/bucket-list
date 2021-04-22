@@ -238,7 +238,7 @@ const EditTableForm = (props) => {
       </form>
       <form className="edit-table-form" onSubmit={handleSubmit}>
         <ErrorList errors={errors} />
-        <div className="table">
+        <div className="table small-12">
           <table className="hover unstriped table-scroll">
             <thead>
               <tr>
