@@ -23,3 +23,6 @@ On Bucket List you can also save your tables to show your friends or come back t
 - ```yarn run dev:e2e```
 - Open a second terminal tab
 - In the second terminal tab run ```yarn run e2e:open```
+
+## Try It Out
+https://bucket-list-stats.herokuapp.com/
