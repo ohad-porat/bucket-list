@@ -18,7 +18,7 @@
   },
   "engines": {
     "node": "^14.15",
-    "yarn": "1.22.10"
+    "yarn": "1.22.18"
   },
   "dependencies": {
     "cypress": "6.6.0"
